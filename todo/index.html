@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<p>select day and enter task</p>
+<form>
+    
+<input list="days" id="day" placeholder="pick day" >
+<datalist id="days">
+    <option value="mon"></option>
+    <option value="tue"></option>
+    <option value="wed"></option>
+    <option value="thur"></option>
+    <option value="fri"></option>
+     <option value="sat"></option>
+    <option value="sun"></option>
+
+</datalist>
+<input type="text" id="task" placeholder="add new task">
+<button type="submit" onclick="addtask()">send</button>
+</form>
+
+<p>select day to delete or Mark your status status </p>
+<form >
+
+    <input list="days" id="ShowSingleDayList" placeholder="pick day">
+    <datalist id="days">
+    <option value="mon"></option>
+    <option value="tue"></option>
+    <option value="wed"></option>
+    <option value="thur"></option>
+    <option value="fri"></option>
+     <option value="sat"></option>
+    <option value="sun"></option>
+    </datalist>
+    <button type="button" onclick="loadtasks()" >send</button>
+    <button type="reset" onclick="reload()" >clear</button>
+
+</form>
+<div id="errorday"></div>
+ <div>
+    <ul  id="daytasks">
+
+    </ul>
+ </div>
+
+<div id="showlist">
+   <table>
+    <thead>
+    </thead>
+    <tbody id="table">
+     
+    </tbody>
+   </table>
+</div>
+<style>
+   li, td {
+        border: 1px solid rgb(79, 14, 232);
+        padding:5px;
+        list-style: none;
+    }
+    li:hover {
+        background-color: beige;
+    }
+    input {
+        padding:2px;
+        border: 1px solid #9a58c7;
+        margin: 3px;
+
+    }
+    .menu {
+        border: 1px solid #9a58c7;
+        border-radius: 30%;
+        text-align: center;
+        
+    }
+    .menu:hover{
+        background-color: rgb(120, 121, 121);
+    }
+    .deletetask {
+        color: red;
+        border: 2px solid gainsboro;
+        padding: 3px;
+        margin-top: 3px;
+        width: fit-content;
+    }
+    .deletetask:hover {
+        color: white;
+    }
+
+</style>
+<script src="./toindex.js" ></script>
