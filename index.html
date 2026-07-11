@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>learning-log</title>
+<meta name="description" content="Learning mathematics, physics, and JavaScript through algorithms, projects, and HTML5 game development.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">~/learning-log <span class="path-sep">·</span> main</p>
+  <h1>Building skills together,<br>one commit at a time.</h1>
+  <p class="sub type-cursor" id="typed"></p>
+
+  <hr class="rule">
+
+  <p class="eyebrow">repo structure</p>
+  <nav class="tree" aria-label="Repository folders">
+<span class="root">learning-log/</span>
+<span class="branch">├─ </span><a href="math/" class="math-c">math/</a>
+<span class="branch">├─ </span><a href="physics/" class="physics-c">physics/</a>
+<span class="branch">└─ </span><a href="games/" class="games-c">games/</a>
+  </nav>
+
+  <div class="cards">
+    <a class="card" href="math/" style="--card-accent: var(--math)">
+      <span class="tag">01 · math</span>
+      <h3>Math</h3>
+      <p>Algorithms, proofs, and problem sets.</p>
+    </a>
+    <a class="card" href="physics/" style="--card-accent: var(--physics)">
+      <span class="tag">02 · physics</span>
+      <h3>Physics</h3>
+      <p>Mechanics, simulations, and notes.</p>
+    </a>
+    <a class="card" href="games/" style="--card-accent: var(--games)">
+      <span class="tag">03 · games</span>
+      <h3>Games</h3>
+      <p>HTML5 games built with JavaScript.</p>
+    </a>
+  </div>
+
+  <footer>
+    <span class="commit"><span class="hash">a1b2c3d</span> — initial commit: repo scaffold</span>
+    <span class="commit"><span class="hash">e4f5a6b</span> — docs: add project description</span>
+    <span class="commit"><span class="hash">c7d8e9f</span> — chore: set up math/, physics/, games/</span>
+    <p style="margin-top:1rem;">Maintained by Lewis &amp; Einstein.</p>
+  </footer>
+
+</div>
+
+<script>
+  const text = "Learning mathematics, physics, and JavaScript through algorithms, projects, and HTML5 game development.";
+  const el = document.getElementById('typed');
+  let i = 0;
+  function type(){
+    if(i <= text.length){
+      el.textContent = text.slice(0, i);
+      i++;
+      setTimeout(type, 18);
+    }
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = text;
+  } else {
+    type();
+  }
+</script>
+</body>
+</html>
