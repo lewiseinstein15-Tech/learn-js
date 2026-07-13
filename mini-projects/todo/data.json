@@ -1,0 +1,27 @@
+{
+  "mon": {
+    "activities": [
+      {
+        "programming": "done"
+      }
+    ]
+  },
+  "tue": {
+    "activities": []
+  },
+  "wed": {
+    "activities": []
+  },
+  "thur": {
+    "activities": []
+  },
+  "fri": {
+    "activities": []
+  },
+  "sat": {
+    "activities": []
+  },
+  "sun": {
+    "activities": []
+  }
+}
