@@ -142,4 +142,251 @@
 
         .section-card a:hover {
             transform: scale(1.05);
+        }        .section-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid #00d4ff;
+            margin-top: 4rem;
+            color: #808080;
+        }
+
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #00ff88;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .commit-history {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #00ff88;
+        }
+
+        .commit-history h2 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .commit {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid #00d4ff;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .commit-hash {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .commit-message {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#math">Math</a></li>
+        <li><a href="#physics">Physics</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#mini-projects">Mini-Projects</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+
+<header>
+    <h1>Building Skills Together</h1>
+    <p class="tagline">
+        Master mathematics, physics, and JavaScript through algorithms,
+        projects, and interactive simulations — one commit at a time.
+    </p>
+</header>
+
+<div class="container">
+
+<section class="repo-structure">
+    <h2>Repository Structure</h2>
+    <pre>learning-log/
+├── math/
+│   ├── index.html
+│   ├── algorithms/
+│   └── problem-sets/
+├── physics/
+│   ├── index.html
+│   ├── simulations/
+│   └── circuits/
+├── games/
+│   ├── index.html
+│   ├── pong/
+│   └── snake/
+├── mini-projects/
+│   ├── todo/
+│   ├── calculator/
+│   └── weather-app/
+├── assets/
+├── index.html
+└── README.md</pre>
+</section>
+
+<section class="sections-grid" id="main-sections">    <!-- Math Section -->
+    <div class="section-card" id="math">
+        <div class="section-number">01</div>
+        <h3>Math</h3>
+        <p>
+            Discrete structures, linear algebra, and algorithmic
+            problem-solving — worked through step by step, with the
+            reasoning kept alongside the answer.
+        </p>
+        <a href="./math/">Explore Math →</a>
+    </div>
+
+    <!-- Physics Section -->
+    <div class="section-card" id="physics">
+        <div class="section-number">02</div>
+        <h3>Physics</h3>
+        <p>
+            Digital electronics and core physics concepts,
+            explored through notes, diagrams,
+            and small interactive simulations.
+        </p>
+        <a href="./physics/">Explore Physics →</a>
+    </div>
+
+    <!-- Games Section -->
+    <div class="section-card" id="games">
+        <div class="section-number">03</div>
+        <h3>Games</h3>
+        <p>
+            HTML5 games built with vanilla JavaScript —
+            a hands-on way to practice programming logic
+            while shipping something playable.
+        </p>
+        <a href="./games/">Play Games →</a>
+    </div>
+
+    <!-- Mini Projects -->
+    <div class="section-card" id="mini-projects">
+        <div class="section-number">04</div>
+        <h3>Mini-Projects</h3>
+        <p>
+            Small, focused projects to build practical skills —
+            from todo lists to calculators to real-world utilities.
+        </p>
+        <a href="./mini-projects/">View Projects →</a>
+    </div>
+</section>
+
+<section class="commit-history">
+    <h2>Recent Updates</h2>
+
+    <div class="commit">
+        <span class="commit-hash">a1b2c3d</span> —
+        <span class="commit-message">initial commit: repo scaffold</span>
+    </div>
+
+    <div class="commit">
+        <span class="commit-hash">e4f5a6b</span> —
+        <span class="commit-message">docs: add project description</span>
+    </div>
+
+    <div class="commit">
+        <span class="commit-hash">c7d8e9f</span> —
+        <span class="commit-message">
+            chore: set up math/, physics/, games/
+        </span>
+    </div>
+
+    <div class="commit">
+        <span class="commit-hash">f9g0h1i</span> —
+        <span class="commit-message">
+            feat: add calculator mini-project
+        </span>
+    </div>
+
+    <div class="commit">
+        <span class="commit-hash">j2k3l4m</span> —
+        <span class="commit-message">
+            feat: add physics simulation
+        </span>
+    </div>
+</section><section id="about" style="background: rgba(0, 0, 0, 0.4); padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 4px solid #00ff88;">
+    <h2 style="color: #00ff88; margin-bottom: 1rem;">About This Project</h2>
+
+    <p style="color: #b0b0b0; margin-bottom: 1rem;">
+        This is a comprehensive learning platform designed to teach
+        mathematics, physics, and JavaScript through hands-on projects,
+        interactive simulations, and real-world applications. Whether
+        you're a beginner or looking to deepen your understanding, this
+        repository provides structured learning paths with code examples,
+        visualizations, and practical exercises.
+    </p>
+
+    <p style="color: #b0b0b0;">
+        Each section builds upon the previous, progressing from
+        foundational concepts to complex applications. All code is
+        written in vanilla JavaScript, making it accessible and easy
+        to understand.
+    </p>
+</section>
+
+</div>
+
+<footer>
+    <p>
+        Maintained by Lewis & Einstein |
+        <a href="https://github.com/lewiseinstein15-Tech/learn-js">
+            GitHub Repository
+        </a>
+    </p>
+
+    <p style="margin-top: 1rem; font-size: 0.9rem;">
+        © 2024 Learning Log. All rights reserved.
+    </p>
+</footer>
+
+</body>
+</html>
