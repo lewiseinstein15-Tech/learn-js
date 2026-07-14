@@ -1,78 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>learning-log</title>
-<meta name="description" content="Learning mathematics, physics, and JavaScript through algorithms, projects, and HTML5 game development.">
-<link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<div class="wrap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Log - Master Math, Physics & JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <p class="eyebrow">~/learning-log <span class="path-sep">·</span> main</p>
-  <h1>Building skills together,<br>one commit at a time.</h1>
-  <p class="sub type-cursor" id="typed"></p>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
 
-  <hr class="rule">
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
 
-  <p class="eyebrow">repo structure</p>
-  <nav class="tree" aria-label="Repository folders">
-<span class="root">learning-log/</span>
-<span class="branch">├─ </span><a href="math/" class="math-c">math/</a>
-<span class="branch">├─ </span><a href="physics/" class="physics-c">physics/</a>
-<span class="branch">└─ </span><a href="games/" class="games-c">games/</a>
-<span class="branch">└─ </span><a href="mini-projects/" class="projects-c">mini-projects/</a>
-  </nav>
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
 
-  <div class="cards">
-    <a class="card" href="math/" style="--card-accent: var(--math)">
-      <span class="tag">01 · math</span>
-      <h3>Math</h3>
-      <p>Algorithms, proofs, and problem sets.</p>
-    </a>
-    <a class="card" href="physics/" style="--card-accent: var(--physics)">
-      <span class="tag">02 · physics</span>
-      <h3>Physics</h3>
-      <p>Mechanics, simulations, and notes.</p>
-    </a>
-    <a class="card" href="games/" style="--card-accent: var(--games)">
-      <span class="tag">03 · games</span>
-      <h3>Games</h3>
-      <p>HTML5 games built with JavaScript.</p>
-    </a>
-    <a class="card" href="mini-projects/" style="--card-accent: var(--projects)">
-      <span class="tag">04 · mini-projects</span>
-      <h3>Mini-Projects</h3>
-      <p>Small, focused projects to build practical skills.</p>
-    </a>
-  </div>
+        nav a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-  <footer>
-    <span class="commit"><span class="hash">a1b2c3d</span> — initial commit: repo scaffold</span>
-    <span class="commit"><span class="hash">e4f5a6b</span> — docs: add project description</span>
-    <span class="commit"><span class="hash">c7d8e9f</span> — chore: set up math/, physics/, games/</span>
-    <p style="margin-top:1rem;">Maintained by Lewis &amp; Einstein.</p>
-  </footer>
+        nav a:hover {
+            color: #00ff88;
+        }
 
-</div>
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.1) 100%);
+            border-bottom: 2px solid #00d4ff;
+        }
 
-<script>
-  const text = "Learning mathematics, physics, and JavaScript through algorithms, projects, and HTML5 game development.";
-  const el = document.getElementById('typed');
-  let i = 0;
-  function type(){
-    if(i <= text.length){
-      el.textContent = text.slice(0, i);
-      i++;
-      setTimeout(type, 18);
-    }
-  }
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    el.textContent = text;
-  } else {
-    type();
-  }
-</script>
-</body>
-</html>
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .repo-structure {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .repo-structure h2 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .repo-structure pre {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #00d4ff;
+            font-size: 0.9rem;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .section-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .section-card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section-card p {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #1a1a2e;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card a:hover {
+            transform: scale(1.05);
+        }
