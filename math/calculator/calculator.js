@@ -1,5 +1,5 @@
 // calculator vanilla js program
-const math = require('../datatypes/math');
+const math = require('./math');
 const readline = require("node:readline");
 const { stdin: input,stdout:output} = require("node:process");
 const r1 = readline.createInterface({ input,output});
