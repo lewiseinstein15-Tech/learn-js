@@ -1,87 +1,93 @@
-# 👋 Hello there, hacker!
+# 👋 CS Hub — Learn JS
 
-Welcome to the JavaScript Learning Project! Whether you're fixing a bug, building a new simulation, creating a game, or improving an existing example, we're excited to have you contribute.
+A group project for learning JavaScript by building things. Everything here is vanilla
+HTML, CSS and JS (plus one small Node/Express backend for the todo app) — no frameworks,
+no build step, no magic.
 
-Before you dive into the code, go through these quick checks.
-
----
-
-# ✅ Quick Checks
-
-## 1. How do I contribute to this project?
-
-The project follows the standard GitHub contribution workflow.
-
-### Step 1: Fork the repository
-
-Click the **Fork** button on GitHub to create your own copy of this repository.
-
-### Step 2: Clone your fork
-
-Clone your fork to your computer.
-
-```bash
-git clone https://github.com/Newton-oyweri/learn-js.git
-```
-
-Move into the project directory.
-
-```bash
-cd learn-js
-```
-
-### Step 3: Create a branch
-
-Always create a new branch before making changes.
-
-```bash
-git checkout -b my-awesome-feature
-```
-
-### Step 4: Make your changes
-
-Add your feature, fix bugs, improve documentation, or build something awesome.
-
-### Step 5: Keep your fork up to date
-
-Before opening a Pull Request, make sure your branch contains the latest changes from the main repository. Pull the newest updates from the main branch and resolve any merge conflicts if necessary.
-
-This helps avoid conflicts and keeps everyone's work synchronized.
-
-### Step 6: Commit and push
-
-```bash
-git add .
-git commit -m "Added physics pendulum simulation"
-git push origin my-awesome-feature
-```
-
-### Step 7: Open a Pull Request
-
-Go to your GitHub fork and click **Open Pull Request**.
-
-Describe what you changed, then submit it for review.
+> **Status:** work in progress. Some pages are finished, some tools still live in the
+> terminal, and the todo app needs its server running. That's the point — it's a living
+> record of what we're learning.
 
 ---
 
-## 2. How do I run the project on my PC?
+## What's inside
 
-After cloning the repository, install all project dependencies.
-
-```bash
-npm install
+```
+learn-js/
+├── index.html               # landing page (the hub)
+├── assets/style.css         # one shared stylesheet for the whole site
+├── math/                    # CLI calculator + distinct-permutations counter
+│   ├── calculator/          #   node math/calculator/calculator.js
+│   └── permutation/         #   node math/permutation/permutation.js
+├── physics/                 # projectile motion simulator (browser)
+├── games/                   # "guess it" — playable in the browser and in the terminal
+│   └── guessgame/
+├── mini-projects/
+│   ├── calculator/          # browser calculator
+│   └── todo/                # full-stack todo list (Express + data.json)
+└── utilities/               # scratchpad / snippets
 ```
 
-This command downloads every package listed in **package.json** and recreates the **node_modules** folder automatically.
+## Running the site
 
-Once installation finishes, start the project using the appropriate command.
-
-For web:
+The site is static — no build step needed.
 
 ```bash
-live-server
+npm install        # installs express (used by the todo backend)
+npm start          # serves the whole site at http://localhost:8080
 ```
 
-Happy hacking! 🚀
+### Todo app (needs its backend)
 
-Build something fun. Learn something new.
+The todo list is the one full-stack piece. From a separate terminal:
+
+```bash
+cd mini-projects/todo
+node server.js     # backend on http://localhost:5000
+```
+
+Then open `mini-projects/todo/` in a browser. Tasks are stored in `mini-projects/todo/data.json`.
+
+### CLI tools
+
+```bash
+node math/calculator/calculator.js   # terminal calculator
+node math/permutation/permutation.js # distinct permutations of "banana"
+node games/guessgame/guessgame.js    # guess it, terminal edition
+```
+
+## Contributing (group project)
+
+We use the standard GitHub workflow — fork, branch, PR, review.
+
+1. **Fork** this repo and clone your fork.
+2. Create a branch: `git checkout -b my-awesome-feature`
+3. Make your changes. If it's a new page, add it to the right section folder and link it
+   from that section's `index.html`. If it's a new section, add a card on the landing page too.
+4. Keep your branch up to date with `main` before opening the PR (avoids merge conflicts).
+5. Commit, push, and open a Pull Request. Someone on the team reviews it, then it gets merged.
+
+**House rules:**
+
+- Every page uses `assets/style.css` — don't drop a second stylesheet or inline theme.
+- Keep the copy in first person; this site should read like students made it, because we did.
+- Add a `status-pill` to new pages so visitors know if something is broken or unfinished.
+- Comment your code the way you'd want someone to explain it to you in a group chat.
+
+## Roadmap / known gaps
+
+- [ ] Operator precedence in the calculator (it currently evaluates left to right)
+- [ ] Auto-scaling canvas in the projectile simulator (long trajectories clip off the edge)
+- [ ] A second game (hangman? nobody has volunteered yet)
+- [ ] Host the todo backend somewhere so it works outside localhost
+- [ ] Web version of the CLI calculator
+
+## Team
+
+_(add group member names here — one line each, first PR gets their name in)_
+
+- …
+
+---
+
+Built by students, for students. Explore. Learn. Innovate. 🚀

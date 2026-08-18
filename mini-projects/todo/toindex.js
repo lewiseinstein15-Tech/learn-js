@@ -28,7 +28,6 @@ async function fetchtasks (){
         data2.forEach((item,index)=> {
             
         const  li = document.createElement('li');
-        li.style.color = "blue";
 
             console.log(item);
             const key = Object.keys(item);

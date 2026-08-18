@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator — CS Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* calculator-specific bits */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.55rem;
+  }
+
+  .calc-grid button {
+    padding: 0.85rem;
+    font-size: 1.05rem;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: border-color 0.12s ease, transform 0.12s ease;
+  }
+
+  .calc-grid button:hover { border-color: var(--teal); transform: translateY(-1px); }
+  .calc-grid button:active { transform: scale(0.96); }
+
+  .calc-grid .op { color: var(--cyan); }
+  .calc-grid .danger { color: var(--red); }
+  .calc-grid .equals {
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+    border: none;
+    color: #fff;
+    font-weight: 700;
+  }
+  .calc-grid .span2 { grid-column: span 2; }
+
+  .calc-display {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0.9rem 1rem;
+    text-align: right;
+    margin-bottom: 0.9rem;
+    min-height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .calc-display .input { color: var(--cyan); font-size: 1.1rem; min-height: 26px; word-break: break-all; }
+  .calc-display .result { color: var(--text); font-size: 1.7rem; font-weight: 700; min-height: 36px; word-break: break-all; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a class="logo" href="../../">
+    <span class="logo-mark">&lt;/&gt;</span>
+    CS HUB
+  </a>
+  <nav class="nav-links">
+    <a href="../../#math">Math</a>
+    <a href="../../physics/">Physics</a>
+    <a href="../../games/">Games</a>
+    <a href="../../mini-projects/" class="active">Mini Projects</a>
+  </nav>
+</header>
+
+<main class="wrap narrow">
+
+  <a class="back-link" href="../">← back to mini projects</a>
+  <p class="eyebrow">~/learn-js/mini-projects/calculator</p>
+  <h1>Calculator</h1>
+  <p class="sub">A browser calculator with keyboard support — mostly so we could stop pulling out our phones during group sessions. The logic lives in a single script tag, which we know is not "best practice". It works, though.</p>
+  <span class="status-pill live"><span class="dot"></span> live — click or type</span>
+
+  <div class="panel teal">
+    <div class="calc-display">
+      <div class="input" id="display-input"></div>
+      <div class="result" id="display-result">0</div>
+    </div>
+
+    <div class="calc-grid">
+      <button class="danger span2" onclick="clearDisplay()">clear</button>
+      <button class="danger" onclick="deleteLastChar()">del</button>
+      <button class="op" onclick="appendOperator('/')">/</button>
+
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button class="op" onclick="appendOperator('*')">×</button>
+
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button class="op" onclick="appendOperator('-')">−</button>
+
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button class="op" onclick="appendOperator('+')">+</button>
+
+      <button class="span2" onclick="appendNumber('0')">0</button>
+      <button onclick="appendNumber('.')">.</button>
+      <button class="equals" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <p class="todo-note" style="margin-top: 1.25rem;">note: if you type something like 1+2*3, it evaluates left to right (1+2 then ×3) — we haven't implemented operator precedence yet. it's a calculator, not a compiler.</p>
+
+</main>
+
+<footer class="footer">
+  <div class="brand">
+    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
+    CS HUB
+  </div>
+  <span>calculator — evaluates left to right, like a brave little soldier</span>
+  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
+</footer>
+
+<script>
+  // (moved from mini-projects/index.html — same logic, new skin)
+  let display = '';
+  let result = '0';
+
+  function updateDisplay() {
+    document.getElementById('display-input').textContent = display;
+    document.getElementById('display-result').textContent = result;
+  }
+
+  function appendNumber(num) {
+    // prevent two dots in the same number... good enough
+    if (num === '.' && display.includes('.')) {
+      return;
+    }
+    display += num;
+    updateDisplay();
+  }
+
+  function appendOperator(op) {
+    if (display === '') {
+      return;
+    }
+    if (['+', '-', '*', '/', '%'].includes(display[display.length - 1])) {
+      display = display.slice(0, -1) + op;
+    } else {
+      display += op;
+    }
+    updateDisplay();
+  }
+
+  function deleteLastChar() {
+    display = display.slice(0, -1);
+    updateDisplay();
+  }
+
+  function clearDisplay() {
+    display = '';
+    result = '0';
+    updateDisplay();
+  }
+
+  function calculate() {
+    if (display === '') {
+      return;
+    }
+
+    try {
+      let expression = display
+        .replace(/×/g, '*')
+        .replace(/−/g, '-')
+        .replace(/÷/g, '/');
+
+      let calculatedResult = eval(expression);
+
+      // round off floating point noise like 0.30000000000000004
+      calculatedResult = Math.round(calculatedResult * 100000000) / 100000000;
+
+      result = calculatedResult;
+      display = '';
+      updateDisplay();
+    } catch (error) {
+      result = 'Error';
+      display = '';
+      updateDisplay();
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key >= '0' && event.key <= '9') {
+      appendNumber(event.key);
+    } else if (event.key === '.') {
+      appendNumber('.');
+    } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
+      appendOperator(event.key === '*' ? '*' : event.key === '/' ? '/' : event.key === '+' ? '+' : '-');
+    } else if (event.key === 'Enter' || event.key === '=') {
+      event.preventDefault();
+      calculate();
+    } else if (event.key === 'Backspace') {
+      event.preventDefault();
+      deleteLastChar();
+    } else if (event.key === 'Escape') {
+      clearDisplay();
+    }
+  });
+
+  updateDisplay();
+</script>
+
+</body>
+</html>

@@ -1,367 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator - Learn JS</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .container {
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .header h1 {
-            color: #00d4ff;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-        }
-
-        .calculator {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid #00d4ff;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .display {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff88;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: right;
-        }
-
-        .display-input {
-            color: #00d4ff;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            min-height: 30px;
-            word-wrap: break-word;
-            word-break: break-all;
-        }
-
-        .display-result {
-            color: #00ff88;
-            font-size: 2rem;
-            font-weight: bold;
-            min-height: 40px;
-        }
-
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.8rem;
-        }
-
-        button {
-            padding: 1rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .btn-number {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-            border: 1px solid #00d4ff;
-        }
-
-        .btn-number:hover {
-            background: rgba(0, 212, 255, 0.4);
-            transform: scale(1.05);
-        }
-
-        .btn-number:active {
-            transform: scale(0.95);
-        }
-
-        .btn-operator {
-            background: rgba(0, 255, 136, 0.2);
-            color: #00ff88;
-            border: 1px solid #00ff88;
-        }
-
-        .btn-operator:hover {
-            background: rgba(0, 255, 136, 0.4);
-            transform: scale(1.05);
-        }
-
-        .btn-operator:active {
-            transform: scale(0.95);
-        }
-
-        .btn-equals {
-            background: linear-gradient(135deg, #00d4ff, #00ff88);
-            color: #1a1a2e;
-            border: none;
-            grid-column: span 2;
-            font-weight: bold;
-        }
-
-        .btn-equals:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
-        }
-
-        .btn-equals:active {
-            transform: scale(0.95);
-        }
-
-        .btn-clear {
-            background: rgba(255, 100, 100, 0.3);
-            color: #ff6464;
-            border: 1px solid #ff6464;
-            grid-column: span 2;
-        }
-
-        .btn-clear:hover {
-            background: rgba(255, 100, 100, 0.5);
-            transform: scale(1.05);
-        }
-
-        .btn-clear:active {
-            transform: scale(0.95);
-        }
-
-        .btn-delete {
-            background: rgba(255, 150, 100, 0.3);
-            color: #ff9664;
-            border: 1px solid #ff9664;
-        }
-
-        .btn-delete:hover {
-            background: rgba(255, 150, 100, 0.5);
-            transform: scale(1.05);
-        }
-
-        .btn-delete:active {
-            transform: scale(0.95);
-        }
-
-        .info {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 4px solid #00d4ff;
-            border-radius: 5px;
-            color: #b0b0b0;
-            font-size: 0.9rem;
-        }
-
-        .info h3 {
-            color: #00d4ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .info p {
-            margin: 0.3rem 0;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 1.5rem;
-            color: #00d4ff;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .back-link:hover {
-            color: #00ff88;
-        }
-
-        @media (max-width: 480px) {
-            .calculator {
-                padding: 1rem;
-            }
-
-            button {
-                padding: 0.8rem;
-                font-size: 1rem;
-            }
-
-            .display-result {
-                font-size: 1.5rem;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mini projects — CS Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Calculator</h1>
-            <p>A simple yet powerful calculator built with vanilla JavaScript</p>
-        </div>
 
-        <div class="calculator">
-            <div class="display">
-                <div class="display-input" id="display-input"></div>
-                <div class="display-result" id="display-result">0</div>
-            </div>
+<header class="topnav">
+  <a class="logo" href="../">
+    <span class="logo-mark">&lt;/&gt;</span>
+    CS HUB
+  </a>
+  <nav class="nav-links">
+    <a href="../#math">Math</a>
+    <a href="../physics/">Physics</a>
+    <a href="../games/">Games</a>
+    <a href="../mini-projects/" class="active">Mini Projects</a>
+  </nav>
+</header>
 
-            <div class="buttons-grid">
-                <!-- Row 1 -->
-                <button class="btn-clear" onclick="clearDisplay()">Clear</button>
-                <button class="btn-delete" onclick="deleteLastChar()">Del</button>
-                <button class="btn-operator" onclick="appendOperator('/')">/</button>
-                <button class="btn-operator" onclick="appendOperator('*')">×</button>
+<main class="wrap narrow">
 
-                <!-- Row 2 -->
-                <button class="btn-number" onclick="appendNumber('7')">7</button>
-                <button class="btn-number" onclick="appendNumber('8')">8</button>
-                <button class="btn-number" onclick="appendNumber('9')">9</button>
-                <button class="btn-operator" onclick="appendOperator('-')">−</button>
+  <a class="back-link" href="../">← back to CS Hub</a>
+  <p class="eyebrow">~/learn-js/mini-projects</p>
+  <h1>Mini Projects</h1>
+  <p class="sub">The "slightly bigger than an exercise" folder. One pure frontend app and one full-stack app with its own Node/Express backend.</p>
+  <span class="status-pill live"><span class="dot"></span> live — 2 projects, one needs its server running</span>
 
-                <!-- Row 3 -->
-                <button class="btn-number" onclick="appendNumber('4')">4</button>
-                <button class="btn-number" onclick="appendNumber('5')">5</button>
-                <button class="btn-number" onclick="appendNumber('6')">6</button>
-                <button class="btn-operator" onclick="appendOperator('+')">+</button>
+  <hr class="rule">
 
-                <!-- Row 4 -->
-                <button class="btn-number" onclick="appendNumber('1')">1</button>
-                <button class="btn-number" onclick="appendNumber('2')">2</button>
-                <button class="btn-number" onclick="appendNumber('3')">3</button>
-                <button class="btn-operator" onclick="appendOperator('%')">%</button>
+  <div class="cards">
+    <a class="card teal" href="./calculator/">
+      <span class="tag">frontend</span>
+      <h3>Calculator</h3>
+      <p>A keyboard-friendly browser calculator. Click the buttons or just type — Enter to evaluate, Backspace to delete, Esc to clear.</p>
+      <span class="go">open calculator &rarr;</span>
+    </a>
+    <a class="card teal" href="./todo/">
+      <span class="tag">full-stack</span>
+      <h3>Todo List</h3>
+      <p>Daily tasks per weekday, stored by a real Node/Express backend in data.json. Add, mark done, delete. Requires the backend to be running.</p>
+      <span class="go">open todo app &rarr;</span>
+    </a>
+  </div>
 
-                <!-- Row 5 -->
-                <button class="btn-number" onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
-                <button class="btn-number" onclick="appendNumber('.')">.</button>
-                <button class="btn-equals" onclick="calculate()">=</button>
-            </div>
-        </div>
+  <p class="eyebrow" style="margin-top: 2.25rem;">run the todo backend</p>
+  <div class="codeblock" style="margin-top: 0.6rem;">
+<span class="dim"># from mini-projects/todo/</span>
+<span class="g">node</span> server.js
+<span class="dim"># backend listens on http://localhost:5000, then open ./todo/ in a browser</span>
+  </div>
 
-        <div class="info">
-            <h3>How to Use</h3>
-            <p>• Click number buttons to enter values</p>
-            <p>• Use operators (+, −, ×, ÷, %) for calculations</p>
-            <p>• Press = to see the result</p>
-            <p>• Use Del to remove the last digit</p>
-            <p>• Click Clear to reset everything</p>
-        </div>
+</main>
 
-        <a href="../" class="back-link">← Back to Mini-Projects</a>
-    </div>
+<footer class="footer">
+  <div class="brand">
+    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
+    CS HUB
+  </div>
+  <span>mini projects — scope creep is how we learn</span>
+  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
+</footer>
 
-    <script>
-        let display = '';
-        let result = '0';
-
-        function updateDisplay() {
-            document.getElementById('display-input').textContent = display;
-            document.getElementById('display-result').textContent = result;
-        }
-
-        function appendNumber(num) {
-            if (num === '.' && display.includes('.')) {
-                return;
-            }
-            display += num;
-            updateDisplay();
-        }
-
-        function appendOperator(op) {
-            if (display === '') {
-                return;
-            }
-            if (['+', '-', '*', '/', '%'].includes(display[display.length - 1])) {
-                display = display.slice(0, -1) + op;
-            } else {
-                display += op;
-            }
-            updateDisplay();
-        }
-
-        function deleteLastChar() {
-            display = display.slice(0, -1);
-            updateDisplay();
-        }
-
-        function clearDisplay() {
-            display = '';
-            result = '0';
-            updateDisplay();
-        }
-
-        function calculate() {
-            if (display === '') {
-                return;
-            }
-
-            try {
-                let expression = display
-                    .replace(/×/g, '*')
-                    .replace(/−/g, '-')
-                    .replace(/÷/g, '/');
-
-                let calculatedResult = eval(expression);
-
-                calculatedResult = Math.round(calculatedResult * 100000000) / 100000000;
-
-                result = calculatedResult;
-                display = '';
-                updateDisplay();
-            } catch (error) {
-                result = 'Error';
-                display = '';
-                updateDisplay();
-            }
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key >= '0' && event.key <= '9') {
-                appendNumber(event.key);
-            } else if (event.key === '.') {
-                appendNumber('.');
-            } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
-                appendOperator(event.key === '*' ? '*' : event.key === '/' ? '/' : event.key === '+' ? '+' : '-');
-            } else if (event.key === 'Enter' || event.key === '=') {
-                event.preventDefault();
-                calculate();
-            } else if (event.key === 'Backspace') {
-                event.preventDefault();
-                deleteLastChar();
-            } else if (event.key === 'Escape') {
-                clearDisplay();
-            }
-        });
-
-        updateDisplay();
-    </script>
 </body>
 </html>

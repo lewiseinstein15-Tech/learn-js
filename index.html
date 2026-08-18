@@ -5,503 +5,121 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CS Hub - Explore. Learn. Innovate.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #05070f;
-    --bg-soft: #0a0e1f;
-    --blue: #3b82f6;
-    --cyan: #22d3ee;
-    --purple: #a855f7;
-    --pink: #ec4899;
-    --teal: #14b8a6;
-    --green: #22c55e;
-    --text: #e6e9f2;
-    --text-dim: #8b93a7;
-    --border: rgba(255,255,255,0.08);
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, .logo, nav a, .btn { font-family: 'JetBrains Mono', monospace; }
-
-  a { text-decoration: none; color: inherit; }
-
-  header.topnav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 4rem;
-    position: sticky;
-    top: 0;
-    z-index: 200;
-    background: rgba(5,7,15,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.02em; }
-  .logo-mark {
-    width: 34px; height: 34px;
-    background: linear-gradient(135deg, var(--blue), var(--purple));
-    border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-  }
-
-  .nav-links { display: flex; align-items: center; gap: 2.5rem; }
-  .nav-links a {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    font-weight: 500;
-    position: relative;
-    padding-bottom: 6px;
-    transition: color 0.2s ease;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a.active { color: var(--cyan); }
-  .nav-links a.active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-  }
-
-  .typewriter-line {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.95rem;
-    color: var(--cyan);
-    min-height: 1.4rem;
-    margin-bottom: 1rem;
-  }
-  .cursor {
-    display: inline-block;
-    margin-left: 2px;
-    animation: blink 0.9s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-  .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
-
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 3rem;
-    padding: 5rem 4rem;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-
-  .eyebrow {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    background: linear-gradient(90deg, rgba(59,130,246,0.15), rgba(168,85,247,0.15));
-    border: 1px solid rgba(168,85,247,0.3);
-    color: var(--cyan);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero h1 {
-    font-size: 3.4rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.01em;
-  }
-  .hero h1 .grad {
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero p.lead {
-    color: var(--text-dim);
-    font-family: 'Inter', sans-serif;
-    font-size: 1.05rem;
-    max-width: 460px;
-    margin-bottom: 2.2rem;
-  }
-
-  .hero-actions { display: flex; gap: 1rem; }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.6rem;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary {
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-    color: #fff;
-    box-shadow: 0 10px 30px -10px rgba(99,102,241,0.6);
-  }
-
-  .hero-visual {
-    position: relative;
-    height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .laptop {
-    width: 90%;
-    max-width: 480px;
-    background: #0d1224;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.1rem;
-    box-shadow: 0 30px 80px -20px rgba(59,130,246,0.35), 0 0 0 1px rgba(59,130,246,0.1);
-    transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
-  }
-  .laptop-bar { display: flex; gap: 6px; margin-bottom: 0.8rem; }
-  .laptop-bar span { width: 9px; height: 9px; border-radius: 50%; background: #2a3150; }
-  .laptop code {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    line-height: 1.7;
-    white-space: pre;
-    color: var(--text-dim);
-  }
-  .laptop code .kw { color: var(--purple); }
-  .laptop code .fn { color: var(--cyan); }
-  .laptop code .str { color: var(--green); }
-
-  .float-chip {
-    position: absolute;
-    padding: 0.5rem 0.8rem;
-    background: rgba(13,18,36,0.9);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--cyan);
-    backdrop-filter: blur(6px);
-  }
-  .chip-1 { top: 4%; right: 6%; }
-  .chip-2 { bottom: 10%; left: 2%; color: var(--purple); }
-  .chip-3 { top: 46%; left: -4%; color: var(--teal); font-size: 1.3rem; }
-
-  .section-head { padding: 0 4rem; max-width: 1500px; margin: 0 auto; }
-  .section-head h2 {
-    font-size: 1.7rem;
-    font-weight: 700;
-    display: inline-block;
-    position: relative;
-  }
-  .section-head .underline {
-    width: 44px; height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-    border-radius: 3px;
-    margin-top: 0.6rem;
-  }
-
-  .categories {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.25rem;
-    padding: 2.5rem 4rem 5rem;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-
-  .cat-card {
-    position: relative;
-    border-radius: 16px;
-    padding: 1.6rem 1.4rem 4rem;
-    border: 1px solid var(--border);
-    background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
-    transition: transform 0.25s ease, border-color 0.25s ease;
-    min-height: 220px;
-  }
-  .cat-card:hover { transform: translateY(-6px); }
-
-  .cat-card.blue { border-color: rgba(59,130,246,0.35); }
-  .cat-card.purple { border-color: rgba(168,85,247,0.35); }
-  .cat-card.pink { border-color: rgba(236,72,153,0.35); }
-  .cat-card.teal { border-color: rgba(20,184,166,0.35); }
-  .cat-card.green { border-color: rgba(34,197,94,0.35); }
-
-  .cat-icon {
-    width: 46px; height: 46px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    margin-bottom: 1.1rem;
-  }
-  .blue .cat-icon { background: rgba(59,130,246,0.15); color: var(--blue); }
-  .purple .cat-icon { background: rgba(168,85,247,0.15); color: var(--purple); }
-  .pink .cat-icon { background: rgba(236,72,153,0.15); color: var(--pink); }
-  .teal .cat-icon { background: rgba(20,184,166,0.15); color: var(--teal); }
-  .green .cat-icon { background: rgba(34,197,94,0.15); color: var(--green); }
-
-  .cat-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
-  .cat-card p { color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.85rem; }
-
-  .cat-arrow {
-    position: absolute;
-    bottom: 1.4rem; right: 1.4rem;
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    color: #fff;
-  }
-  .blue .cat-arrow { background: var(--blue); }
-  .purple .cat-arrow { background: var(--purple); }
-  .pink .cat-arrow { background: var(--pink); }
-  .teal .cat-arrow { background: var(--teal); }
-  .green .cat-arrow { background: var(--green); }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2.2rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
-  .footer-brand small { display: block; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.78rem; }
-  footer .copyright { color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.85rem; }
-  .footer-social { display: flex; gap: 1.1rem; color: var(--text-dim); font-size: 1.05rem; }
-  .footer-social a:hover { color: var(--cyan); }
-
-  .mobile-list { display: none; }
-
-  @media (max-width: 900px) {
-    header.topnav { padding: 1rem 1.25rem; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-
-    .hero {
-      grid-template-columns: 1fr;
-      padding: 2.5rem 1.25rem 1.5rem;
-      gap: 2rem;
-      text-align: left;
-    }
-    .hero h1 { font-size: 2.1rem; }
-    .hero p.lead { font-size: 0.95rem; }
-    .hero-visual { height: 230px; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-    .laptop {
-      width: 100%;
-      max-width: 320px;
-      padding: 0.8rem;
-      transform: perspective(700px) rotateY(-4deg) rotateX(2deg) scale(0.9);
-    }
-    .laptop code { font-size: 0.5rem; line-height: 1.5; }
-    .chip-1 { top: -2%; right: 2%; font-size: 0.65rem; padding: 0.35rem 0.6rem; }
-    .chip-2 { font-size: 0.55rem; bottom: 2%; left: 0; padding: 0.35rem 0.6rem; }
-    .chip-3 { display: none; }
-
-    .section-head { padding: 0 1.25rem; }
-
-    .categories { display: none; }
-
-    .mobile-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      padding: 1.5rem 1.25rem 3rem;
-    }
-    .mobile-row {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      padding: 0.9rem 1rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
-    }
-    .mobile-row.blue { border-left: 3px solid var(--blue); }
-    .mobile-row.purple { border-left: 3px solid var(--purple); }
-    .mobile-row.pink { border-left: 3px solid var(--pink); }
-    .mobile-row.teal { border-left: 3px solid var(--teal); }
-    .mobile-row.green { border-left: 3px solid var(--green); }
-
-    .mobile-row .cat-icon { margin-bottom: 0; flex-shrink: 0; }
-    .mobile-row .row-text { flex: 1; }
-    .mobile-row h3 { font-size: 0.95rem; margin-bottom: 0.2rem; }
-    .mobile-row p { font-size: 0.78rem; }
-    .mobile-row .cat-arrow {
-      position: static;
-      width: 32px; height: 32px;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
-  }
-</style>
+<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
-  <header class="topnav">
-    <div class="logo">
-      <span class="logo-mark">&lt;/&gt;</span>
-      CS HUB
-    </div>
-    <nav class="nav-links">
-      <a href="#math" class="active">Math</a>
-      <a href="#physics">Physics</a>
-      <a href="#games">Games</a>
-      <a href="#mini-projects">Mini Projects</a>
-    </nav>
-    <button class="hamburger" onclick="document.querySelector('.mobile-list').scrollIntoView({behavior:'smooth'})">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
+<header class="topnav">
+  <a class="logo" href="./">
+    <span class="logo-mark">&lt;/&gt;</span>
+    CS HUB
+  </a>
+  <nav class="nav-links">
+    <a href="#math">Math</a>
+    <a href="#physics">Physics</a>
+    <a href="#games">Games</a>
+    <a href="#mini-projects">Mini Projects</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main class="wrap">
 
   <section class="hero">
-    <div>
-      <span class="eyebrow">WELCOME TO CS HUB</span>
-      <div class="typewriter-line"><span id="typewriter"></span><span class="cursor">|</span></div>
-      <h1>Explore.<br>Learn.<br><span class="grad">Innovate.</span></h1>
-      <p class="lead">Your all-in-one ecosystem for Computer Science learning, tools, and creativity.</p>
-      <div class="hero-actions">
-        <a href="#" class="btn btn-primary">Get Started &rarr;</a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <span class="float-chip chip-1">&lt;/&gt;</span>
-      <span class="float-chip chip-2">010101<br>101010</span>
-      <span class="float-chip chip-3">&#9749;</span>
-      <div class="laptop">
-        <div class="laptop-bar"><span></span><span></span><span></span></div>
-        <code><span class="kw">public class</span> <span class="fn">Main</span> {
-  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
-    <span class="kw">int</span> limit = 10;
-    <span class="kw">for</span> (int i = 1; i &lt;= limit; i++) {
-      System.out.println(<span class="str">"Hello, World! " + i</span>);
-    }
-  }
-}</code>
-      </div>
-    </div>
+    <p class="eyebrow">~/learn-js — a group project by students, for students</p>
+    <h1>Explore.<br>Learn.<br><span class="grad">Innovate.</span></h1>
+    <p class="sub">A growing collection of CS notes, small tools and games we built while learning JavaScript. Everything here is vanilla — no frameworks, just plain HTML, CSS and JS (plus one Node backend for the todo app).</p>
+    <p style="margin-top: 1.75rem;">
+      <a class="btn btn-primary" href="#mini-projects">Start exploring &rarr;</a>
+      <a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">view on GitHub</a>
+    </p>
   </section>
 
-  <div class="section-head">
-    <h2>Explore Categories</h2>
-    <div class="underline"></div>
-  </div>
+  <hr class="rule">
 
-  <section class="categories">
-    <div class="cat-card blue" id="math">
-      <div class="cat-icon">&#128202;</div>
-      <h3>Math</h3>
-      <p>Formulas, notes, solved problems and more.</p>
-      <a href="./math/" class="cat-arrow">&rarr;</a>
-    </div>
-    <div class="cat-card purple" id="physics">
-      <div class="cat-icon">&#9883;</div>
-      <h3>Physics</h3>
-      <p>Concepts, notes, numericals and resources.</p>
-      <a href="./physics/" class="cat-arrow">&rarr;</a>
-    </div>
-    <div class="cat-card pink" id="games">
-      <div class="cat-icon">&#127918;</div>
-      <h3>Games</h3>
-      <p>Fun games to relax and enjoy.</p>
-      <a href="./games/" class="cat-arrow">&rarr;</a>
-    </div>
-    <div class="cat-card teal" id="mini-projects">
-      <div class="cat-icon">&lt;/&gt;</div>
-      <h3>Mini Projects</h3>
-      <p>Small projects to build your skills.</p>
-      <a href="./mini-projects/" class="cat-arrow">&rarr;</a>
-    </div>
-    <div class="cat-card green" id="about">
-      <div class="cat-icon">&#128100;</div>
-      <h3>About</h3>
-      <p>Learn more about this platform and the creator.</p>
-      <a href="#about" class="cat-arrow">&rarr;</a>
-    </div>
+  <section id="math">
+    <p class="eyebrow">01 — math</p>
+    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Math</h2>
+    <p class="sub">Discrete structures, permutations and small algorithms — worked through step by step, with the reasoning kept alongside the answer.</p>
+    <a class="card blue" href="./math/" style="margin-top: 1.25rem;">
+      <span class="tag">math</span>
+      <h3>Calculator &amp; permutation tools</h3>
+      <p>A CLI calculator (add / multiply / subtract / divide / gcd) and a distinct-permutations counter.</p>
+      <span class="go">enter math/ &rarr;</span>
+    </a>
   </section>
 
-  <div class="mobile-list">
-    <a href="./math/" class="mobile-row blue">
-      <div class="cat-icon">&#128202;</div>
-      <div class="row-text"><h3>Math</h3><p>Formulas, notes, solved problems and more.</p></div>
-      <span class="cat-arrow">&rarr;</span>
+  <hr class="rule">
+
+  <section id="physics">
+    <p class="eyebrow">02 — physics</p>
+    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Physics</h2>
+    <p class="sub">Interactive simulations so the formulas actually make sense.</p>
+    <a class="card purple" href="./physics/" style="margin-top: 1.25rem;">
+      <span class="tag">physics</span>
+      <h3>Projectile motion simulator</h3>
+      <p>Tweak the launch angle, velocity and gravity, then watch the trajectory — with max height, range and flight time computed live.</p>
+      <span class="go">launch physics/ &rarr;</span>
     </a>
-    <a href="./physics/" class="mobile-row purple">
-      <div class="cat-icon">&#9883;</div>
-      <div class="row-text"><h3>Physics</h3><p>Concepts, notes, numericals and resources.</p></div>
-      <span class="cat-arrow">&rarr;</span>
+  </section>
+
+  <hr class="rule">
+
+  <section id="games">
+    <p class="eyebrow">03 — games</p>
+    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Games</h2>
+    <p class="sub">Small games to relax and practice programming logic at the same time.</p>
+    <a class="card pink" href="./games/" style="margin-top: 1.25rem;">
+      <span class="tag">games</span>
+      <h3>Guess It</h3>
+      <p>Guess a number hidden among eight random digits. Sounds easy. It is not.</p>
+      <span class="go">play games/ &rarr;</span>
     </a>
-    <a href="./games/" class="mobile-row pink">
-      <div class="cat-icon">&#127918;</div>
-      <div class="row-text"><h3>Games</h3><p>Fun games to relax and enjoy.</p></div>
-      <span class="cat-arrow">&rarr;</span>
+  </section>
+
+  <hr class="rule">
+
+  <section id="mini-projects">
+    <p class="eyebrow">04 — mini projects</p>
+    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Mini Projects</h2>
+    <p class="sub">Slightly bigger things — including one full-stack app with its own backend.</p>
+    <a class="card teal" href="./mini-projects/" style="margin-top: 1.25rem;">
+      <span class="tag">mini projects</span>
+      <h3>Calculator &amp; Todo app</h3>
+      <p>A browser calculator, and a daily todo list with a Node/Express backend that actually stores your tasks.</p>
+      <span class="go">open mini-projects/ &rarr;</span>
     </a>
-    <a href="./mini-projects/" class="mobile-row teal">
-      <div class="cat-icon">&lt;/&gt;</div>
-      <div class="row-text"><h3>Mini Projects</h3><p>Small projects to build your skills.</p></div>
-      <span class="cat-arrow">&rarr;</span>
-    </a>
-    <a href="#about" class="mobile-row green">
-      <div class="cat-icon">&#128100;</div>
-      <div class="row-text"><h3>About</h3><p>Learn more about this platform and the creator.</p></div>
-      <span class="cat-arrow">&rarr;</span>
-    </a>
+  </section>
+
+  <hr class="rule">
+
+  <section id="about">
+    <p class="eyebrow">05 — about</p>
+    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">About this project</h2>
+    <p class="sub">This repo started as our way to learn JavaScript by building instead of just reading tutorials. It's a group project — everyone adds a page, a tool or a game, and we review each other's pull requests. Nothing here is perfect, and that's kind of the point: it's a living record of what we're learning.</p>
+    <div class="codeblock" style="margin-top: 1.25rem;">
+<span class="dim"># what's inside</span>
+<span class="g">learn-js/</span>
+├── <span class="g">math/</span>            <span class="dim"># calculator + permutation counter (CLI)</span>
+├── <span class="g">physics/</span>         <span class="dim"># projectile motion simulator</span>
+├── <span class="g">games/</span>           <span class="dim"># guess it (web + CLI)</span>
+└── <span class="g">mini-projects/</span>   <span class="dim"># browser calculator + todo app (Node backend)</span>
+    </div>
+    <p style="margin-top: 1.5rem;"><a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">read the readme on GitHub &rarr;</a></p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="brand">
+    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
+    CS HUB
   </div>
-
-  <footer>
-    <div class="footer-brand">
-      <span class="logo-mark">&lt;/&gt;</span>
-      <div>
-        CS HUB
-        <small>Learn. Build. Innovate.</small>
-      </div>
-    </div>
-    <div class="copyright">&copy; 2025 Computer Science Hub. All rights reserved.</div>
-    <div class="footer-social">
-      <a href="https://github.com/lewiseinstein15-Tech/cs-hub" aria-label="GitHub">&#128187;</a>
-      <a href="#" aria-label="YouTube">&#9654;</a>
-      <a href="mailto:hello@cshub.dev" aria-label="Email">&#9993;</a>
-    </div>
-  </footer>
-
-  <script>
-    const twText = "Welcome back to CS Hub";
-    const twEl = document.getElementById('typewriter');
-    let twIndex = 0;
-    function typeWriter() {
-      if (twIndex < twText.length) {
-        twEl.textContent += twText.charAt(twIndex);
-        twIndex++;
-        setTimeout(typeWriter, 65);
-      }
-    }
-    window.addEventListener('DOMContentLoaded', typeWriter);
-  </script>
+  <span>a group project — learn. build. ship.</span>
+  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
+</footer>
 
 </body>
 </html>
