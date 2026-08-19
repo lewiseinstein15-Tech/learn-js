@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CS Hub - Explore. Learn. Innovate.</title>
+<title>CS Hub — Explore. Learn. Innovate.</title>
+<meta name="description" content="A growing collection of CS notes, tools and games built by students learning JavaScript.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -20,46 +21,98 @@
     <a href="#math">Math</a>
     <a href="#physics">Physics</a>
     <a href="#games">Games</a>
-    <a href="#mini-projects">Mini Projects</a>
+    <a href="#mini-projects">Projects</a>
     <a href="#about">About</a>
   </nav>
 </header>
 
 <main class="wrap">
 
+  <!-- Hero -->
   <section class="hero">
     <p class="eyebrow">~/learn-js — a group project by students, for students</p>
     <h1>Explore.<br>Learn.<br><span class="grad">Innovate.</span></h1>
-    <p class="sub">A growing collection of CS notes, small tools and games we built while learning JavaScript. Everything here is vanilla — no frameworks, just plain HTML, CSS and JS (plus one Node backend for the todo app).</p>
-    <p style="margin-top: 1.75rem;">
-      <a class="btn btn-primary" href="#mini-projects">Start exploring &rarr;</a>
+    <p class="sub">A growing collection of CS notes, small tools and games we built while learning JavaScript. Everything here is vanilla — no frameworks, no libraries, just plain HTML, CSS and JS.</p>
+    <p style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a class="btn btn-primary" href="#math">Start exploring &rarr;</a>
       <a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">view on GitHub</a>
     </p>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-number">4</span>
+        <span class="stat-label">Sections</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">6+</span>
+        <span class="stat-label">Tools &amp; Games</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Vanilla JS</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Frameworks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Grid -->
+  <section style="margin-top: 3rem;">
+    <div class="feature-grid">
+      <a class="feature-card" href="./math/">
+        <div class="feature-icon">π</div>
+        <h3>Math</h3>
+        <p>Live permutation counter, CLI calculator, discrete structures — worked through step by step.</p>
+        <span class="go">explore &rarr;</span>
+      </a>
+      <a class="feature-card" href="./physics/">
+        <div class="feature-icon">⚡</div>
+        <h3>Physics</h3>
+        <p>Interactive projectile motion simulator. Adjust sliders, launch, and watch the physics work.</p>
+        <span class="go">launch &rarr;</span>
+      </a>
+      <a class="feature-card" href="./games/">
+        <div class="feature-icon">🎮</div>
+        <h3>Games</h3>
+        <p>Guess It — eight hidden numbers, one guess per round. Browser version with saved scores.</p>
+        <span class="go">play &rarr;</span>
+      </a>
+      <a class="feature-card" href="./mini-projects/">
+        <div class="feature-icon">📦</div>
+        <h3>Mini Projects</h3>
+        <p>Browser calculator with keyboard support, and a full-stack todo app with a Node backend.</p>
+        <span class="go">open &rarr;</span>
+      </a>
+    </div>
   </section>
 
   <hr class="rule">
 
+  <!-- Math -->
   <section id="math">
     <p class="eyebrow">01 — math</p>
-    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Math</h2>
+    <h2>Math</h2>
     <p class="sub">Discrete structures, permutations and small algorithms — worked through step by step, with the reasoning kept alongside the answer.</p>
     <a class="card" href="./math/" style="margin-top: 1.25rem;">
       <span class="tag">math</span>
-      <h3>Calculator &amp; permutation tools</h3>
-      <p>A CLI calculator (add / multiply / subtract / divide / gcd) and a distinct-permutations counter.</p>
+      <h3>Calculator &amp; Permutation Tools</h3>
+      <p>A CLI calculator (add / multiply / subtract / divide / gcd) and a distinct-permutations counter with a live browser version.</p>
       <span class="go">enter math/ &rarr;</span>
     </a>
   </section>
 
   <hr class="rule">
 
+  <!-- Physics -->
   <section id="physics">
     <p class="eyebrow">02 — physics</p>
-    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Physics</h2>
+    <h2>Physics</h2>
     <p class="sub">Interactive simulations so the formulas actually make sense.</p>
     <a class="card" href="./physics/" style="margin-top: 1.25rem;">
       <span class="tag">physics</span>
-      <h3>Projectile motion simulator</h3>
+      <h3>Projectile Motion Simulator</h3>
       <p>Tweak the launch angle, velocity and gravity, then watch the trajectory — with max height, range and flight time computed live.</p>
       <span class="go">launch physics/ &rarr;</span>
     </a>
@@ -67,38 +120,41 @@
 
   <hr class="rule">
 
+  <!-- Games -->
   <section id="games">
     <p class="eyebrow">03 — games</p>
-    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Games</h2>
+    <h2>Games</h2>
     <p class="sub">Small games to relax and practice programming logic at the same time.</p>
     <a class="card" href="./games/" style="margin-top: 1.25rem;">
       <span class="tag">games</span>
       <h3>Guess It</h3>
-      <p>Guess a number hidden among eight random digits. Sounds easy. It is not.</p>
+      <p>Guess a number hidden among eight random digits. Sounds easy. It is not. Scores saved in your browser.</p>
       <span class="go">play games/ &rarr;</span>
     </a>
   </section>
 
   <hr class="rule">
 
+  <!-- Mini Projects -->
   <section id="mini-projects">
     <p class="eyebrow">04 — mini projects</p>
-    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">Mini Projects</h2>
+    <h2>Mini Projects</h2>
     <p class="sub">Slightly bigger things — including one full-stack app with its own backend.</p>
     <a class="card" href="./mini-projects/" style="margin-top: 1.25rem;">
       <span class="tag">mini projects</span>
-      <h3>Calculator &amp; Todo app</h3>
-      <p>A browser calculator, and a daily todo list with a Node/Express backend that actually stores your tasks.</p>
+      <h3>Calculator &amp; Todo App</h3>
+      <p>A keyboard-friendly browser calculator, and a daily todo list with a Node/Express backend that actually stores your tasks.</p>
       <span class="go">open mini-projects/ &rarr;</span>
     </a>
   </section>
 
   <hr class="rule">
 
+  <!-- About -->
   <section id="about">
     <p class="eyebrow">05 — about</p>
-    <h2 style="font-size: 1.5rem; margin: 0.3rem 0 0.4rem;">About this project</h2>
-    <p class="sub">This repo started as our way to learn JavaScript by building instead of just reading tutorials. It's a group project — everyone adds a page, a tool or a game, and we review each other's pull requests. Nothing here is perfect, and that's kind of the point: it's a living record of what we're learning.</p>
+    <h2>About this project</h2>
+    <p class="sub" style="margin-top: 0.5rem;">This repo started as our way to learn JavaScript by building instead of just reading tutorials. It's a group project — everyone adds a page, a tool or a game, and we review each other's pull requests. Nothing here is perfect, and that's kind of the point: it's a living record of what we're learning.</p>
     <div class="codeblock" style="margin-top: 1.25rem;">
 <span class="dim"># what's inside</span>
 <span class="g">learn-js/</span>
@@ -107,14 +163,14 @@
 ├── <span class="g">games/</span>           <span class="dim"># guess it (web + CLI)</span>
 └── <span class="g">mini-projects/</span>   <span class="dim"># browser calculator + todo app (Node backend)</span>
     </div>
-    <p style="margin-top: 1.5rem;"><a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">read the readme on GitHub &rarr;</a></p>
+    <p style="margin-top: 1.25rem;"><a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">read the readme on GitHub &rarr;</a></p>
   </section>
 
 </main>
 
 <footer class="footer">
   <div class="brand">
-    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
+    <span class="logo-mark" style="width: 22px; height: 22px; font-size: 0.6rem;">&lt;/&gt;</span>
     CS HUB
   </div>
   <span>a group project — learn. build. ship.</span>
