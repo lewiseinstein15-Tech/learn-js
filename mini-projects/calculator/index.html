@@ -28,13 +28,13 @@
     transition: border-color 0.12s ease, transform 0.12s ease;
   }
 
-  .calc-grid button:hover { border-color: var(--teal); transform: translateY(-1px); }
+  .calc-grid button:hover { border-color: var(--accent); transform: translateY(-1px); }
   .calc-grid button:active { transform: scale(0.96); }
 
-  .calc-grid .op { color: var(--cyan); }
+  .calc-grid .op { color: var(--accent); }
   .calc-grid .danger { color: var(--red); }
   .calc-grid .equals {
-    background: linear-gradient(90deg, var(--teal), var(--blue));
+    background: var(--accent);
     border: none;
     color: #fff;
     font-weight: 700;
@@ -54,7 +54,7 @@
     justify-content: flex-end;
   }
 
-  .calc-display .input { color: var(--cyan); font-size: 1.1rem; min-height: 26px; word-break: break-all; }
+  .calc-display .input { color: var(--text-dim); font-size: 1.1rem; min-height: 26px; word-break: break-all; }
   .calc-display .result { color: var(--text); font-size: 1.7rem; font-weight: 700; min-height: 36px; word-break: break-all; }
 </style>
 </head>
@@ -81,7 +81,7 @@
   <p class="sub">A browser calculator with keyboard support — mostly so we could stop pulling out our phones during group sessions. The logic lives in a single script tag, which we know is not "best practice". It works, though.</p>
   <span class="status-pill live"><span class="dot"></span> live — click or type</span>
 
-  <div class="panel teal">
+  <div class="panel">
     <div class="calc-display">
       <div class="input" id="display-input"></div>
       <div class="result" id="display-result">0</div>

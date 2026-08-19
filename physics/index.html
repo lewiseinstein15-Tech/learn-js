@@ -20,7 +20,7 @@
   .sim-canvas {
     background: var(--bg-raised);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--purple);
+    border-top: 3px solid var(--accent);
     border-radius: var(--radius);
     padding: 1rem;
     display: flex;
@@ -28,7 +28,7 @@
   }
 
   canvas {
-    background: #0d1224;
+    background: #f1f3f5;
     border-radius: 8px;
     display: block;
     max-width: 100%;
@@ -50,9 +50,9 @@
     justify-content: space-between;
     align-items: center;
   }
-  .sim-control .val { color: var(--cyan); }
+  .sim-control .val { color: var(--accent); }
 
-  input[type="range"] { accent-color: var(--purple); width: 100%; }
+  input[type="range"] { accent-color: var(--accent); width: 100%; }
 
   .sim-buttons { display: flex; gap: 0.7rem; margin-top: 0.5rem; }
 
@@ -100,7 +100,7 @@
   <p class="sub">We got tired of memorizing the projectile formulas, so we built the simulation instead. Adjust the sliders, launch, and check whether the numbers in the textbook actually match reality.</p>
   <span class="status-pill live"><span class="dot"></span> live — formulas double-checked against the textbook</span>
 
-  <div class="panel purple sim-grid" style="margin-top: 1.75rem;">
+  <div class="panel sim-grid" style="margin-top: 1.75rem;">
     <div class="sim-canvas">
       <canvas id="canvas" width="520" height="420"></canvas>
     </div>
@@ -179,7 +179,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw ground
-    ctx.strokeStyle = '#22c55e';
+    ctx.strokeStyle = '#16a34a';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(0, canvas.height - 20);
@@ -187,7 +187,7 @@
     ctx.stroke();
 
     // Draw grid
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.08)';
+    ctx.strokeStyle = 'rgba(37, 99, 235, 0.12)';
     ctx.lineWidth = 1;
     for (let i = 0; i < canvas.width; i += 50) {
       ctx.beginPath();
@@ -204,7 +204,7 @@
 
     // Draw trajectory
     if (trajectory.length > 0) {
-      ctx.strokeStyle = '#22d3ee';
+      ctx.strokeStyle = '#2563eb';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(trajectory[0].x, trajectory[0].y);
@@ -214,14 +214,14 @@
       ctx.stroke();
 
       // Draw projectile
-      ctx.fillStyle = '#f87171';
+      ctx.fillStyle = '#dc2626';
       ctx.beginPath();
       ctx.arc(trajectory[trajectory.length - 1].x, trajectory[trajectory.length - 1].y, 6, 0, Math.PI * 2);
       ctx.fill();
     }
 
     // Draw launch point
-    ctx.fillStyle = '#22c55e';
+    ctx.fillStyle = '#16a34a';
     ctx.beginPath();
     ctx.arc(50, canvas.height - 30, 5, 0, Math.PI * 2);
     ctx.fill();
