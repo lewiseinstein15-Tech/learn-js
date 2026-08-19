@@ -34,7 +34,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; color-scheme: light; }
 
 body {
   background: var(--bg);
@@ -604,6 +604,24 @@ hr.rule {
   color: var(--text-muted);
   font-family: 'JetBrains Mono', monospace;
   line-height: 1.6;
+}
+
+/* Force light mode even when phone/browser is in dark mode */
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: light; }
+  body { background: #ffffff !important; color: #111827 !important; }
+  .topnav { background: rgba(255,255,255,0.95) !important; }
+  .footer { background: #ffffff !important; }
+  .panel, .todo-box, .codeblock, .card, .feature-card { background: #ffffff !important; color: #111827 !important; }
+  .feature-card p, .card p, .sub, .todo-note, .codeblock .dim { color: #4b5563 !important; }
+  .logo-mark { background: #2563eb !important; }
+  .btn-primary { background: #2563eb !important; color: #fff !important; }
+  .btn-ghost { border-color: #e5e7eb !important; color: #111827 !important; background: transparent !important; }
+  .nav-links a { color: #4b5563 !important; }
+  .nav-links a.active { background: #eff6ff !important; color: #2563eb !important; }
+  .game-input input, .todo-box input { background: #ffffff !important; color: #111827 !important; }
+  .game-input button, .todo-box button { background: #ffffff !important; color: #111827 !important; }
+  input[type=range] { accent-color: #2563eb; }
 }
 
 /* ---------------- responsive ---------------- */
