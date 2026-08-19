@@ -3,68 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>mini projects — CS Hub</title>
+<title>Mini Projects — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-<header class="topnav">
-  <a class="logo" href="../">
-    <span class="logo-mark">&lt;/&gt;</span>
-    CS HUB
-  </a>
-  <nav class="nav-links">
-    <a href="../#math">Math</a>
-    <a href="../physics/">Physics</a>
-    <a href="../games/">Games</a>
-    <a href="../mini-projects/" class="active">Mini Projects</a>
-  </nav>
-</header>
-
-<main class="wrap narrow">
-
-  <a class="back-link" href="../">← back to CS Hub</a>
-  <p class="eyebrow">~/learn-js/mini-projects</p>
-  <h1>Mini Projects</h1>
-  <p class="sub">The "slightly bigger than an exercise" folder. One pure frontend app and one full-stack app with its own Node/Express backend.</p>
-  <span class="status-pill live"><span class="dot"></span> live — 2 projects, one needs its server running</span>
-
-  <hr class="rule">
-
-  <div class="cards">
-    <a class="card" href="./calculator/">
-      <span class="tag">frontend</span>
-      <h3>Calculator</h3>
-      <p>A keyboard-friendly browser calculator. Click the buttons or just type — Enter to evaluate, Backspace to delete, Esc to clear.</p>
-      <span class="go">open calculator &rarr;</span>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
     </a>
-    <a class="card" href="./todo/">
-      <span class="tag">full-stack</span>
-      <h3>Todo List</h3>
-      <p>Daily tasks per weekday, stored by a real Node/Express backend in data.json. Add, mark done, delete. Requires the backend to be running.</p>
-      <span class="go">open todo app &rarr;</span>
-    </a>
+    <ul class="nav-links">
+      <li><a href="../#math">Math</a></li>
+      <li><a href="../physics/">Physics</a></li>
+      <li><a href="../games/">Games</a></li>
+      <li><a href="../mini-projects/" class="active">Projects</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
   </div>
+</nav>
 
-  <p class="eyebrow" style="margin-top: 2.25rem;">run the todo backend</p>
-  <div class="codeblock" style="margin-top: 0.6rem;">
-<span class="dim"># from mini-projects/todo/</span>
-<span class="g">node</span> server.js
-<span class="dim"># backend listens on http://localhost:5000, then open ./todo/ in a browser</span>
+<main>
+  <div class="container" style="max-width: 760px; padding-top: 3rem; padding-bottom: 4rem;">
+    <a class="back" href="../">← Back to CS Hub</a>
+
+    <div class="page-header">
+      <p class="eyebrow">~/learn-js/mini-projects</p>
+      <h1>Mini Projects</h1>
+      <p>One pure frontend app and one full-stack app with its own Node/Express backend.</p>
+      <span class="pill live"><span class="pill-dot"></span> 2 projects — one needs its server running</span>
+    </div>
+
+    <hr class="divider" style="margin: 2rem 0;">
+
+    <div class="grid grid-2" style="margin-top: 1.5rem;">
+      <a class="card" href="./calculator/">
+        <div class="card-icon">🔢</div>
+        <h3>Calculator</h3>
+        <p>Keyboard-friendly browser calculator. Enter to evaluate, Backspace to delete, Esc to clear.</p>
+        <span class="card-link">Open calculator →</span>
+      </a>
+      <a class="card" href="./todo/">
+        <div class="card-icon">✅</div>
+        <h3>Todo List</h3>
+        <p>Daily tasks per weekday, stored by a Node/Express backend. Add, mark done, delete.</p>
+        <span class="card-link">Open todo app →</span>
+      </a>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Run the todo backend</p>
+      <div class="code-block">
+<span class="comment"># from mini-projects/todo/</span>
+<span class="green">node</span> server.js
+<span class="comment"># backend listens on http://localhost:5000</span>
+      </div>
+    </div>
   </div>
-
 </main>
 
 <footer class="footer">
-  <div class="brand">
-    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
-    CS HUB
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../#math">Math</a>
+      <a href="../physics/">Physics</a>
+      <a href="../games/">Games</a>
+      <a href="../mini-projects/">Projects</a>
+    </div>
   </div>
-  <span>mini projects — scope creep is how we learn</span>
-  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
 </footer>
 
 </body>

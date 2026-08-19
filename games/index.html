@@ -3,69 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>games — CS Hub</title>
+<title>Games — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-<header class="topnav">
-  <a class="logo" href="../">
-    <span class="logo-mark">&lt;/&gt;</span>
-    CS HUB
-  </a>
-  <nav class="nav-links">
-    <a href="../#math">Math</a>
-    <a href="../physics/">Physics</a>
-    <a href="../games/" class="active">Games</a>
-    <a href="../mini-projects/">Mini Projects</a>
-  </nav>
-</header>
-
-<main class="wrap narrow">
-
-  <a class="back-link" href="../">← back to CS Hub</a>
-  <p class="eyebrow">~/learn-js/games</p>
-  <h1>Games</h1>
-  <p class="sub">Small games we wrote to practice programming logic while pretending to take a break. The original Guess It was a terminal game — we ported it to the browser so it's actually playable here.</p>
-  <span class="status-pill live"><span class="dot"></span> live — 1 game, 2 versions</span>
-
-  <hr class="rule">
-
-  <div class="cards">
-    <a class="card" href="./guessgame/">
-      <span class="tag">web game</span>
-      <h3>Guess It</h3>
-      <p>Eight random digits are hidden. Guess a number — if it's among them, you win the round. Score is saved in your browser.</p>
-      <span class="go">play now &rarr;</span>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
     </a>
-    <a class="card" href="https://github.com/lewiseinstein15-Tech/learn-js/tree/main/games/guessgame" target="_blank" rel="noopener">
-      <span class="tag">cli original</span>
-      <h3>Guess It (terminal)</h3>
-      <p>The original readline version. Scores persist to a local scores.json file. Weirdly satisfying to play in a terminal.</p>
-      <span class="go">view source &rarr;</span>
-    </a>
+    <ul class="nav-links">
+      <li><a href="../#math">Math</a></li>
+      <li><a href="../physics/">Physics</a></li>
+      <li><a href="../games/" class="active">Games</a></li>
+      <li><a href="../mini-projects/">Projects</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
   </div>
+</nav>
 
-  <p class="eyebrow" style="margin-top: 2.25rem;">run the cli version</p>
-  <div class="codeblock" style="margin-top: 0.6rem;">
-<span class="dim"># from the repo root</span>
-<span class="g">node</span> games/guessgame/guessgame.js
+<main>
+  <div class="container" style="max-width: 760px; padding-top: 3rem; padding-bottom: 4rem;">
+    <a class="back" href="../">← Back to CS Hub</a>
+
+    <div class="page-header">
+      <p class="eyebrow">~/learn-js/games</p>
+      <h1>Games</h1>
+      <p>Small games we wrote to practice programming logic while pretending to take a break. The original Guess It was a terminal game — we ported it to the browser.</p>
+      <span class="pill live"><span class="pill-dot"></span> 1 game, 2 versions</span>
+    </div>
+
+    <hr class="divider" style="margin: 2rem 0;">
+
+    <div class="grid grid-2" style="margin-top: 1.5rem;">
+      <a class="card" href="./guessgame/">
+        <div class="card-icon">🎮</div>
+        <h3>Guess It</h3>
+        <p>Eight random digits hidden. Guess one — if it's among them, you win. Scores saved in your browser.</p>
+        <span class="card-link">Play now →</span>
+      </a>
+      <a class="card" href="https://github.com/lewiseinstein15-Tech/learn-js/tree/main/games/guessgame" target="_blank" rel="noopener">
+        <div class="card-icon">💻</div>
+        <h3>Guess It (terminal)</h3>
+        <p>The original readline version. Scores persist to a local scores.json file.</p>
+        <span class="card-link">View source →</span>
+      </a>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Run the CLI version</p>
+      <div class="code-block">
+<span class="comment"># from the repo root</span>
+<span class="green">node</span> games/guessgame/guessgame.js
+      </div>
+    </div>
+
+    <p class="todo-note" style="margin-top: 1.5rem;">Roadmap: we want a hangman next, but nobody has volunteered yet. Pull requests welcome.</p>
   </div>
-
-  <p class="todo-note" style="margin-top: 1.5rem;">roadmap: we want a hangman next, but nobody has volunteered yet. pull requests welcome.</p>
-
 </main>
 
 <footer class="footer">
-  <div class="brand">
-    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
-    CS HUB
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../#math">Math</a>
+      <a href="../physics/">Physics</a>
+      <a href="../games/">Games</a>
+      <a href="../mini-projects/">Projects</a>
+    </div>
   </div>
-  <span>games — 1-0 against the computer, finally</span>
-  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
 </footer>
 
 </body>

@@ -6,84 +6,97 @@
 <title>Todo List — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 
-<header class="topnav">
-  <a class="logo" href="../../">
-    <span class="logo-mark">&lt;/&gt;</span>
-    CS HUB
-  </a>
-  <nav class="nav-links">
-    <a href="../../#math">Math</a>
-    <a href="../../physics/">Physics</a>
-    <a href="../../games/">Games</a>
-    <a href="../../mini-projects/" class="active">Mini Projects</a>
-  </nav>
-</header>
-
-<main class="wrap narrow">
-
-  <a class="back-link" href="../">← back to mini projects</a>
-  <p class="eyebrow">~/learn-js/mini-projects/todo</p>
-  <h1>Todo List</h1>
-  <p class="sub">A weekly task tracker. Tasks are stored per weekday by the Node/Express backend (<span class="mono">server.js</span>) in <span class="mono">data.json</span> — so unlike the rest of this site, this one actually has a database. Sort of.</p>
-  <span class="status-pill wip"><span class="dot"></span> works — needs the backend running on localhost:5000</span>
-
-  <div class="todo-box">
-    <p class="eyebrow" style="margin-bottom: 0.6rem;">add a task</p>
-    <form>
-      <input list="days" id="day" placeholder="pick day (mon–sun)">
-      <datalist id="days">
-        <option value="mon"></option>
-        <option value="tue"></option>
-        <option value="wed"></option>
-        <option value="thur"></option>
-        <option value="fri"></option>
-        <option value="sat"></option>
-        <option value="sun"></option>
-      </datalist>
-      <input type="text" id="task" placeholder="new task...">
-      <button type="submit" onclick="addtask()">send</button>
-    </form>
-
-    <hr class="rule" style="margin: 1rem 0;">
-
-    <p class="eyebrow" style="margin-bottom: 0.6rem;">view / manage a day</p>
-    <form>
-      <input list="days" id="ShowSingleDayList" placeholder="pick day (mon–sun)">
-      <datalist id="days">
-        <option value="mon"></option>
-        <option value="tue"></option>
-        <option value="wed"></option>
-        <option value="thur"></option>
-        <option value="fri"></option>
-        <option value="sat"></option>
-        <option value="sun"></option>
-      </datalist>
-      <button type="button" onclick="loadtasks()">load</button>
-      <button type="reset" onclick="reload()">clear</button>
-    </form>
-    <div id="errorday" style="font-size: 0.85rem; color: var(--text-dim); min-height: 1.4em; margin: 0.4rem 0;"></div>
-
-    <ul id="daytasks"></ul>
-
-    <div id="showlist" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
+    </a>
+    <ul class="nav-links">
+      <li><a href="../../#math">Math</a></li>
+      <li><a href="../../physics/">Physics</a></li>
+      <li><a href="../../games/">Games</a></li>
+      <li><a href="../../mini-projects/" class="active">Projects</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
   </div>
+</nav>
 
-  <p class="todo-note" style="margin-top: 1.25rem;">backend: <span class="mono">node server.js</span> inside mini-projects/todo/ — listens on port 5000. the frontend talks to localhost:5000 directly, which means it only works locally right now. hosting it properly is a future problem.</p>
+<main>
+  <div class="container" style="max-width: 600px; padding-top: 3rem; padding-bottom: 4rem;">
+    <a class="back" href="../">← Back to projects</a>
 
+    <div class="page-header">
+      <p class="eyebrow">~/learn-js/mini-projects/todo</p>
+      <h1>Todo List</h1>
+      <p>A weekly task tracker. Tasks are stored per weekday by the Node/Express backend in data.json — so unlike the rest of this site, this one actually has a database. Sort of.</p>
+      <span class="pill wip"><span class="pill-dot"></span> Needs the backend running on localhost:5000</span>
+    </div>
+
+    <div class="todo-box">
+      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Add a task</p>
+      <form>
+        <input list="days" id="day" placeholder="pick day (mon–sun)">
+        <datalist id="days">
+          <option value="mon"></option>
+          <option value="tue"></option>
+          <option value="wed"></option>
+          <option value="thur"></option>
+          <option value="fri"></option>
+          <option value="sat"></option>
+          <option value="sun"></option>
+        </datalist>
+        <input type="text" id="task" placeholder="new task...">
+        <button type="submit" onclick="addtask()">Send</button>
+      </form>
+
+      <hr class="divider" style="margin: 1rem 0;">
+
+      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">View / manage a day</p>
+      <form>
+        <input list="days2" id="ShowSingleDayList" placeholder="pick day (mon–sun)">
+        <datalist id="days2">
+          <option value="mon"></option>
+          <option value="tue"></option>
+          <option value="wed"></option>
+          <option value="thur"></option>
+          <option value="fri"></option>
+          <option value="sat"></option>
+          <option value="sun"></option>
+        </datalist>
+        <button type="button" onclick="loadtasks()">Load</button>
+        <button type="reset" onclick="reload()">Clear</button>
+      </form>
+      <div id="errorday" style="font-size: 0.85rem; color: var(--gray-500); min-height: 1.4em; margin: 0.4rem 0;"></div>
+
+      <ul id="daytasks"></ul>
+
+      <div id="showlist" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+    </div>
+
+    <p class="todo-note" style="margin-top: 1.25rem;">Backend: <code style="font-family: monospace; font-size: 0.85em; background: var(--gray-100); padding: 0.1rem 0.35rem; border-radius: 4px;">node server.js</code> inside mini-projects/todo/ — listens on port 5000. The frontend talks to localhost:5000 directly, so it only works locally.</p>
+  </div>
 </main>
 
 <footer class="footer">
-  <div class="brand">
-    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
-    CS HUB
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../../#math">Math</a>
+      <a href="../../physics/">Physics</a>
+      <a href="../../games/">Games</a>
+      <a href="../../mini-projects/">Projects</a>
+    </div>
   </div>
-  <span>todo — one day we'll finish this readme</span>
-  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
 </footer>
 
 <script src="./toindex.js"></script>

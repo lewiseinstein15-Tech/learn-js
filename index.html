@@ -3,178 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CS Hub — Explore. Learn. Innovate.</title>
-<meta name="description" content="A growing collection of CS notes, tools and games built by students learning JavaScript.">
+<title>CS Hub — Learn JavaScript by Building</title>
+<meta name="description" content="A student-built collection of CS tools, games and interactive projects. Learn JavaScript by building real things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
-<header class="topnav">
-  <a class="logo" href="./">
-    <span class="logo-mark">&lt;/&gt;</span>
-    CS HUB
-  </a>
-  <nav class="nav-links">
-    <a href="#math">Math</a>
-    <a href="#physics">Physics</a>
-    <a href="#games">Games</a>
-    <a href="#mini-projects">Projects</a>
-    <a href="#about">About</a>
-  </nav>
-</header>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="./">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
+    </a>
+    <ul class="nav-links">
+      <li><a href="#math">Math</a></li>
+      <li><a href="#physics">Physics</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
 
-<main class="wrap">
+<main>
 
   <!-- Hero -->
   <section class="hero">
-    <p class="eyebrow">~/learn-js — a group project by students, for students</p>
-    <h1>Explore.<br>Learn.<br><span class="grad">Innovate.</span></h1>
-    <p class="sub">A growing collection of CS notes, small tools and games we built while learning JavaScript. Everything here is vanilla — no frameworks, no libraries, just plain HTML, CSS and JS.</p>
-    <p style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-      <a class="btn btn-primary" href="#math">Start exploring &rarr;</a>
-      <a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">view on GitHub</a>
-    </p>
-
-    <div class="stats-row">
-      <div class="stat-item">
-        <span class="stat-number">4</span>
-        <span class="stat-label">Sections</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">6+</span>
-        <span class="stat-label">Tools &amp; Games</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">Vanilla JS</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Frameworks</span>
+    <div class="container">
+      <span class="label">A group project by students</span>
+      <h1>Learn JavaScript<br>by <span>building things</span></h1>
+      <p>Tools, games and interactive projects built while learning CS. No frameworks, no libraries — just HTML, CSS and JavaScript.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#math">Explore projects →</a>
+        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
   </section>
 
-  <!-- Feature Grid -->
-  <section style="margin-top: 3rem;">
-    <div class="feature-grid">
-      <a class="feature-card" href="./math/">
-        <div class="feature-icon">π</div>
-        <h3>Math</h3>
-        <p>Live permutation counter, CLI calculator, discrete structures — worked through step by step.</p>
-        <span class="go">explore &rarr;</span>
-      </a>
-      <a class="feature-card" href="./physics/">
-        <div class="feature-icon">⚡</div>
-        <h3>Physics</h3>
-        <p>Interactive projectile motion simulator. Adjust sliders, launch, and watch the physics work.</p>
-        <span class="go">launch &rarr;</span>
-      </a>
-      <a class="feature-card" href="./games/">
-        <div class="feature-icon">🎮</div>
-        <h3>Games</h3>
-        <p>Guess It — eight hidden numbers, one guess per round. Browser version with saved scores.</p>
-        <span class="go">play &rarr;</span>
-      </a>
-      <a class="feature-card" href="./mini-projects/">
-        <div class="feature-icon">📦</div>
-        <h3>Mini Projects</h3>
-        <p>Browser calculator with keyboard support, and a full-stack todo app with a Node backend.</p>
-        <span class="go">open &rarr;</span>
-      </a>
+  <!-- What's inside -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-4">
+        <a class="card" href="./math/">
+          <div class="card-icon">π</div>
+          <h3>Math</h3>
+          <p>Permutation counter, CLI calculator, discrete structures — with live browser tools.</p>
+          <span class="card-link">Explore →</span>
+        </a>
+        <a class="card" href="./physics/">
+          <div class="card-icon">⚡</div>
+          <h3>Physics</h3>
+          <p>Projectile motion simulator with adjustable angle, velocity and gravity.</p>
+          <span class="card-link">Launch →</span>
+        </a>
+        <a class="card" href="./games/">
+          <div class="card-icon">🎮</div>
+          <h3>Games</h3>
+          <p>Guess It — a number guessing game with saved scores, browser and terminal.</p>
+          <span class="card-link">Play →</span>
+        </a>
+        <a class="card" href="./mini-projects/">
+          <div class="card-icon">📦</div>
+          <h3>Projects</h3>
+          <p>Browser calculator and a full-stack todo app with a Node.js backend.</p>
+          <span class="card-link">Open →</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <hr class="rule">
+  <hr class="divider">
 
   <!-- Math -->
-  <section id="math">
-    <p class="eyebrow">01 — math</p>
-    <h2>Math</h2>
-    <p class="sub">Discrete structures, permutations and small algorithms — worked through step by step, with the reasoning kept alongside the answer.</p>
-    <a class="card" href="./math/" style="margin-top: 1.25rem;">
-      <span class="tag">math</span>
-      <h3>Calculator &amp; Permutation Tools</h3>
-      <p>A CLI calculator (add / multiply / subtract / divide / gcd) and a distinct-permutations counter with a live browser version.</p>
-      <span class="go">enter math/ &rarr;</span>
-    </a>
+  <section id="math" class="section">
+    <div class="container">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="label">01 — Math</span>
+          <h2>Discrete structures &amp; algorithms</h2>
+          <p>Permutations, factorials and a terminal calculator — built step by step while studying. A live browser version of the permutation counter is included.</p>
+          <a class="btn btn-primary" href="./math/">Explore math →</a>
+        </div>
+        <div class="feature-visual">
+          <span class="placeholder">π</span>
+        </div>
+      </div>
+    </div>
   </section>
-
-  <hr class="rule">
 
   <!-- Physics -->
-  <section id="physics">
-    <p class="eyebrow">02 — physics</p>
-    <h2>Physics</h2>
-    <p class="sub">Interactive simulations so the formulas actually make sense.</p>
-    <a class="card" href="./physics/" style="margin-top: 1.25rem;">
-      <span class="tag">physics</span>
-      <h3>Projectile Motion Simulator</h3>
-      <p>Tweak the launch angle, velocity and gravity, then watch the trajectory — with max height, range and flight time computed live.</p>
-      <span class="go">launch physics/ &rarr;</span>
-    </a>
+  <section id="physics" class="section">
+    <div class="container">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="label">02 — Physics</span>
+          <h2>Interactive simulations</h2>
+          <p>Projectile motion simulator — adjust launch angle, velocity and gravity, then watch the physics play out with computed max height, range and flight time.</p>
+          <a class="btn btn-primary" href="./physics/">Launch simulator →</a>
+        </div>
+        <div class="feature-visual">
+          <span class="placeholder">⚡</span>
+        </div>
+      </div>
+    </div>
   </section>
-
-  <hr class="rule">
 
   <!-- Games -->
-  <section id="games">
-    <p class="eyebrow">03 — games</p>
-    <h2>Games</h2>
-    <p class="sub">Small games to relax and practice programming logic at the same time.</p>
-    <a class="card" href="./games/" style="margin-top: 1.25rem;">
-      <span class="tag">games</span>
-      <h3>Guess It</h3>
-      <p>Guess a number hidden among eight random digits. Sounds easy. It is not. Scores saved in your browser.</p>
-      <span class="go">play games/ &rarr;</span>
-    </a>
+  <section id="games" class="section">
+    <div class="container">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="label">03 — Games</span>
+          <h2>Small games, real logic</h2>
+          <p>Guess It — eight random digits are hidden, you guess one number per round. Works in the browser with saved scores and as a terminal game.</p>
+          <a class="btn btn-primary" href="./games/">Play now →</a>
+        </div>
+        <div class="feature-visual">
+          <span class="placeholder">🎮</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <hr class="rule">
-
-  <!-- Mini Projects -->
-  <section id="mini-projects">
-    <p class="eyebrow">04 — mini projects</p>
-    <h2>Mini Projects</h2>
-    <p class="sub">Slightly bigger things — including one full-stack app with its own backend.</p>
-    <a class="card" href="./mini-projects/" style="margin-top: 1.25rem;">
-      <span class="tag">mini projects</span>
-      <h3>Calculator &amp; Todo App</h3>
-      <p>A keyboard-friendly browser calculator, and a daily todo list with a Node/Express backend that actually stores your tasks.</p>
-      <span class="go">open mini-projects/ &rarr;</span>
-    </a>
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="label">04 — Projects</span>
+          <h2>Bigger things</h2>
+          <p>A keyboard-friendly browser calculator and a daily todo list backed by Node.js and Express — the one part of this site that has a real backend.</p>
+          <a class="btn btn-primary" href="./mini-projects/">Open projects →</a>
+        </div>
+        <div class="feature-visual">
+          <span class="placeholder">📦</span>
+        </div>
+      </div>
+    </div>
   </section>
-
-  <hr class="rule">
 
   <!-- About -->
-  <section id="about">
-    <p class="eyebrow">05 — about</p>
-    <h2>About this project</h2>
-    <p class="sub" style="margin-top: 0.5rem;">This repo started as our way to learn JavaScript by building instead of just reading tutorials. It's a group project — everyone adds a page, a tool or a game, and we review each other's pull requests. Nothing here is perfect, and that's kind of the point: it's a living record of what we're learning.</p>
-    <div class="codeblock" style="margin-top: 1.25rem;">
-<span class="dim"># what's inside</span>
-<span class="g">learn-js/</span>
-├── <span class="g">math/</span>            <span class="dim"># calculator + permutation counter (CLI)</span>
-├── <span class="g">physics/</span>         <span class="dim"># projectile motion simulator</span>
-├── <span class="g">games/</span>           <span class="dim"># guess it (web + CLI)</span>
-└── <span class="g">mini-projects/</span>   <span class="dim"># browser calculator + todo app (Node backend)</span>
+  <section class="section" style="padding-bottom: 3rem;">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">About</span>
+        <h2>Built by students, for students</h2>
+        <p>This repo started as our way to learn JavaScript by building instead of just reading tutorials. Everyone adds a page, a tool or a game, and we review each other's pull requests.</p>
+      </div>
+      <div class="code-block" style="margin-top: 1.5rem;">
+<span class="comment"># what's inside</span>
+<span class="green">learn-js/</span>
+├── <span class="green">math/</span>            <span class="comment"># calculator + permutation counter</span>
+├── <span class="green">physics/</span>         <span class="comment"># projectile motion simulator</span>
+├── <span class="green">games/</span>           <span class="comment"># guess it (web + CLI)</span>
+└── <span class="green">mini-projects/</span>   <span class="comment"># browser calculator + todo app</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">Read the README →</a>
+      </div>
     </div>
-    <p style="margin-top: 1.25rem;"><a class="btn btn-ghost" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">read the readme on GitHub &rarr;</a></p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <div class="brand">
-    <span class="logo-mark" style="width: 22px; height: 22px; font-size: 0.6rem;">&lt;/&gt;</span>
-    CS HUB
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="#math">Math</a>
+      <a href="#physics">Physics</a>
+      <a href="#games">Games</a>
+      <a href="#projects">Projects</a>
+    </div>
   </div>
-  <span>a group project — learn. build. ship.</span>
-  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
 </footer>
 
 </body>

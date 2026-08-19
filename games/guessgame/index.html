@@ -6,78 +6,81 @@
 <title>Guess It — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 
-<header class="topnav">
-  <a class="logo" href="../../">
-    <span class="logo-mark">&lt;/&gt;</span>
-    CS HUB
-  </a>
-  <nav class="nav-links">
-    <a href="../../#math">Math</a>
-    <a href="../../physics/">Physics</a>
-    <a href="../../games/" class="active">Games</a>
-    <a href="../../mini-projects/">Mini Projects</a>
-  </nav>
-</header>
-
-<main class="wrap narrow">
-
-  <a class="back-link" href="../">← back to games</a>
-  <p class="eyebrow">~/learn-js/games/guessgame</p>
-  <h1>Guess It</h1>
-  <p class="sub">The computer picks <b>8 random digits</b> between 0 and 9. You guess one number. If it's hiding in the set, you win the round. If not… well, the revealed numbers might make you feel worse.</p>
-  <span class="status-pill live"><span class="dot"></span> live — browser port of the CLI game</span>
-
-  <div class="panel" id="game">
-    <div class="game-stats">
-      <span>rounds <b id="stat-rounds">0</b></span>
-      <span>wins <b id="stat-wins">0</b></span>
-      <span>losses <b id="stat-losses">0</b></span>
-    </div>
-
-    <div class="game-input">
-      <input type="number" id="guess" min="0" max="9" step="1" placeholder="0–9">
-      <button onclick="playRound()">guess!</button>
-      <button onclick="resetScores()" style="border-style: dashed;">reset scores</button>
-    </div>
-
-    <p id="game-feedback"></p>
-    <p id="revealed"></p>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
+    </a>
+    <ul class="nav-links">
+      <li><a href="../../#math">Math</a></li>
+      <li><a href="../../physics/">Physics</a></li>
+      <li><a href="../../games/" class="active">Games</a></li>
+      <li><a href="../../mini-projects/">Projects</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
   </div>
+</nav>
 
-  <p class="todo-note" style="margin-top: 1.25rem;">how the original worked: the CLI version kept scores in scores.json and let you play forever without closing the terminal. the browser port saves scores in localStorage instead. same odds, same frustration.</p>
+<main>
+  <div class="container" style="max-width: 600px; padding-top: 3rem; padding-bottom: 4rem;">
+    <a class="back" href="../">← Back to games</a>
 
+    <div class="page-header">
+      <p class="eyebrow">~/learn-js/games/guessgame</p>
+      <h1>Guess It</h1>
+      <p>The computer picks <strong>8 random digits</strong> between 0 and 9. You guess one number. If it's hiding in the set, you win the round.</p>
+      <span class="pill live"><span class="pill-dot"></span> Browser port of the CLI game</span>
+    </div>
+
+    <div class="todo-box" id="game" style="margin-top: 1.5rem;">
+      <div class="game-stats">
+        <span>rounds <b id="stat-rounds">0</b></span>
+        <span>wins <b id="stat-wins">0</b></span>
+        <span>losses <b id="stat-losses">0</b></span>
+      </div>
+
+      <div class="game-input">
+        <input type="number" id="guess" min="0" max="9" step="1" placeholder="0–9">
+        <button onclick="playRound()">Guess!</button>
+        <button onclick="resetScores()" style="border-style: dashed; font-size: 0.78rem;">Reset scores</button>
+      </div>
+
+      <p id="game-feedback"></p>
+      <p id="revealed"></p>
+    </div>
+
+    <p class="todo-note" style="margin-top: 1.25rem;">The CLI version kept scores in scores.json and let you play forever in the terminal. The browser port saves scores in localStorage instead. Same odds, same frustration.</p>
+  </div>
 </main>
 
 <footer class="footer">
-  <div class="brand">
-    <span class="logo-mark" style="width: 24px; height: 24px; font-size: 0.65rem;">&lt;/&gt;</span>
-    CS HUB
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../../#math">Math</a>
+      <a href="../../physics/">Physics</a>
+      <a href="../../games/">Games</a>
+      <a href="../../mini-projects/">Projects</a>
+    </div>
   </div>
-  <span>guess it — the house always wins (8 out of 10 times)</span>
-  <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">github.com/lewiseinstein15-Tech/learn-js</a>
 </footer>
 
 <script>
-  // ported from games/guessgame/guessgame.js
-  // CLI: readline + scores.json  ->  browser: input + localStorage
-
   const STORAGE_KEY = 'guess-it-scores';
-  const numbersCount = 8;
-  const digitMin = 0;
-  const digitMax = 9;
-
-  // load saved scores (same default shape as scores.json)
   let scores;
   try {
     scores = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { wins: 0, losses: 0, rounds: 0 };
-  } catch {
-    scores = { wins: 0, losses: 0, rounds: 0 };
-  }
+  } catch { scores = { wins: 0, losses: 0, rounds: 0 }; }
 
   function saveScores() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
@@ -91,11 +94,9 @@
   }
 
   function randomNumbers() {
-    const numbers = [];
-    for (let i = 0; i < numbersCount; i++) {
-      numbers.push(Math.floor(Math.random() * (digitMax - digitMin + 1)) + digitMin);
-    }
-    return numbers;
+    const nums = [];
+    for (let i = 0; i < 8; i++) nums.push(Math.floor(Math.random() * 10));
+    return nums;
   }
 
   function playRound() {
@@ -104,8 +105,8 @@
     const feedback = document.getElementById('game-feedback');
     const revealed = document.getElementById('revealed');
 
-    if (Number.isNaN(guess) || guess < digitMin || guess > digitMax || input.value === '') {
-      feedback.textContent = 'pick a number between 0 and 9 first.';
+    if (Number.isNaN(guess) || guess < 0 || guess > 9 || input.value === '') {
+      feedback.textContent = 'Pick a number between 0 and 9 first.';
       feedback.className = '';
       return;
     }
@@ -114,16 +115,15 @@
 
     if (numbers.includes(guess)) {
       scores.wins++;
-      feedback.textContent = 'you won! your number was in the set.';
+      feedback.textContent = 'You won! Your number was in the set.';
       feedback.className = 'win';
     } else {
       scores.losses++;
-      feedback.textContent = 'you lost. it happens.';
+      feedback.textContent = 'You lost. It happens.';
       feedback.className = 'lose';
     }
     scores.rounds++;
-    revealed.textContent = 'the numbers were: ' + numbers.join('  ');
-
+    revealed.textContent = 'The numbers were: ' + numbers.join('  ');
     saveScores();
     input.value = '';
     input.focus();
@@ -136,7 +136,6 @@
     document.getElementById('revealed').textContent = '';
   }
 
-  // press enter to play
   document.getElementById('guess').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') playRound();
   });
