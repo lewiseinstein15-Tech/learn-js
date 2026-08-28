@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="../../">
       <span class="nav-brand-icon">&lt;/&gt;</span>
@@ -25,12 +26,12 @@
       <li><a href="../../#physics">Physics</a></li>
       <li><a href="../../#games">Games</a></li>
       <li><a href="../../#projects">Projects</a></li>
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+      <li><button type="button" class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)" aria-label="Open search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main role="main">
   <div class="container">
     <a class="back-link" href="../">← Back to Math</a>
 
@@ -41,32 +42,32 @@
 
     <div class="app-layout">
       <div>
-        <div class="result-box" id="display">0</div>
+        <div class="result-box" id="display" aria-live="polite">0</div>
 
-        <div class="calc-grid mt-6">
-          <button class="calc-btn clear" onclick="clearCalc()">C</button>
-          <button class="calc-btn op" onclick="inputOperator('(')">(</button>
-          <button class="calc-btn op" onclick="inputOperator(')')">)</button>
-          <button class="calc-btn op" onclick="inputOperator('/')">÷</button>
+        <div class="calc-grid mt-6" role="grid" aria-label="Calculator buttons">
+          <button type="button" class="calc-btn clear" onclick="clearCalc()" aria-label="Clear">C</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator('(')" aria-label="Open parenthesis">(</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator(')')" aria-label="Close parenthesis">)</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator('/')" aria-label="Divide">÷</button>
 
-          <button class="calc-btn" onclick="inputDigit('7')">7</button>
-          <button class="calc-btn" onclick="inputDigit('8')">8</button>
-          <button class="calc-btn" onclick="inputDigit('9')">9</button>
-          <button class="calc-btn op" onclick="inputOperator('*')">×</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('7')">7</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('8')">8</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('9')">9</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator('*')" aria-label="Multiply">×</button>
 
-          <button class="calc-btn" onclick="inputDigit('4')">4</button>
-          <button class="calc-btn" onclick="inputDigit('5')">5</button>
-          <button class="calc-btn" onclick="inputDigit('6')">6</button>
-          <button class="calc-btn op" onclick="inputOperator('-')">−</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('4')">4</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('5')">5</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('6')">6</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator('-')" aria-label="Subtract">−</button>
 
-          <button class="calc-btn" onclick="inputDigit('1')">1</button>
-          <button class="calc-btn" onclick="inputDigit('2')">2</button>
-          <button class="calc-btn" onclick="inputDigit('3')">3</button>
-          <button class="calc-btn op" onclick="inputOperator('+')">+</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('1')">1</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('2')">2</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('3')">3</button>
+          <button type="button" class="calc-btn op" onclick="inputOperator('+')" aria-label="Add">+</button>
 
-          <button class="calc-btn wide" onclick="inputDigit('0')">0</button>
-          <button class="calc-btn" onclick="inputDigit('.')">.</button>
-          <button class="calc-btn equals" onclick="calculate()">=</button>
+          <button type="button" class="calc-btn wide" onclick="inputDigit('0')">0</button>
+          <button type="button" class="calc-btn" onclick="inputDigit('.')">.</button>
+          <button type="button" class="calc-btn equals" onclick="calculate()" aria-label="Equals">=</button>
         </div>
 
         <p class="mt-4" style="font-size:.8rem; color:var(--text-dim);">
@@ -84,7 +85,7 @@
   </div>
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
       <span>&lt;/&gt;</span>
@@ -179,8 +180,13 @@
     }).join('');
   }
 
-  // Keyboard support
+  // Keyboard support — only when search is not open and no input is focused
   document.addEventListener('keydown', function(e) {
+    // Don't intercept if search is open or an input is focused
+    var searchOpen = document.getElementById('search-overlay') && document.getElementById('search-overlay').classList.contains('open');
+    var activeTag = document.activeElement && document.activeElement.tagName;
+    if (searchOpen || activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+
     if (e.key >= '0' && e.key <= '9') { inputDigit(e.key); return; }
     if (e.key === '.') { inputDigit('.'); return; }
     if (e.key === '+') { inputOperator('+'); return; }
@@ -191,6 +197,7 @@
     if (e.key === 'Enter' || e.key === '=') { calculate(); return; }
     if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') { clearCalc(); return; }
     if (e.key === 'Backspace') {
+      e.preventDefault();
       if (justCalculated) { justCalculated = false; }
       current = current.length > 1 ? current.slice(0, -1) : '0';
       updateDisplay();

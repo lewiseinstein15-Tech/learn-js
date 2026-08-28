@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="../">
       <span class="nav-brand-icon">&lt;/&gt;</span>
@@ -25,12 +26,12 @@
       <li><a href="../#physics">Physics</a></li>
       <li><a href="../#games">Games</a></li>
       <li><a href="../#projects">Projects</a></li>
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+      <li><button type="button" class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)" aria-label="Open search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main role="main">
   <div class="container">
     <a class="back-link" href="../">← Back to CS Hub</a>
 
@@ -46,26 +47,26 @@
       <div class="sim-controls">
         <label>
           <span>Angle: <span class="sim-value" id="angle-val">45°</span></span>
-          <input type="range" id="angle" min="5" max="85" value="45" oninput="updateLabels()">
+          <input type="range" id="angle" min="5" aria-label="Launch angle in degrees" max="85" value="45" oninput="updateLabels()">
         </label>
         <label>
           <span>Velocity: <span class="sim-value" id="vel-val">50 m/s</span></span>
-          <input type="range" id="velocity" min="10" max="100" value="50" oninput="updateLabels()">
+          <input type="range" id="velocity" min="10" aria-label="Initial velocity in meters per second" max="100" value="50" oninput="updateLabels()">
         </label>
         <label>
           <span>Gravity: <span class="sim-value" id="grav-val">9.8 m/s²</span></span>
-          <input type="range" id="gravity" min="1" max="25" value="9.8" step="0.1" oninput="updateLabels()">
+          <input type="range" id="gravity" min="1" aria-label="Gravitational acceleration in meters per second squared" max="25" value="9.8" step="0.1" oninput="updateLabels()">
         </label>
         <div style="display:flex; align-items:flex-end; gap:.75rem;">
-          <button class="btn btn-primary" onclick="launch()" style="white-space:nowrap;">Launch 🚀</button>
-          <button class="btn btn-outline" onclick="resetSim()" style="white-space:nowrap;">Reset</button>
+          <button type="button" class="btn btn-primary" onclick="launch()" style="white-space:nowrap;" aria-label="Launch projectile">Launch 🚀</button>
+          <button type="button" class="btn btn-outline" onclick="resetSim()" style="white-space:nowrap;" aria-label="Reset simulation">Reset</button>
         </div>
       </div>
     </div>
 
     <!-- Canvas -->
     <div class="sim-canvas-wrap">
-      <canvas id="sim" width="800" height="400"></canvas>
+      <canvas id="sim" width="800" height="400" role="img" aria-label="Projectile motion simulation canvas showing trajectory"></canvas>
     </div>
 
     <!-- Stats -->
@@ -73,19 +74,19 @@
       <div class="stats-row">
         <div class="stat">
           <div class="stat-label">Max Height</div>
-          <div class="stat-value" id="stat-height">—</div>
+          <div class="stat-value" id="stat-height" aria-live="polite">—</div>
         </div>
         <div class="stat">
           <div class="stat-label">Range</div>
-          <div class="stat-value" id="stat-range">—</div>
+          <div class="stat-value" id="stat-range" aria-live="polite">—</div>
         </div>
         <div class="stat">
           <div class="stat-label">Flight Time</div>
-          <div class="stat-value" id="stat-time">—</div>
+          <div class="stat-value" id="stat-time" aria-live="polite">—</div>
         </div>
         <div class="stat">
           <div class="stat-label">Status</div>
-          <div class="stat-value" id="stat-status" style="font-size:1rem;">Ready</div>
+          <div class="stat-value" id="stat-status" aria-live="polite" style="font-size:1rem;">Ready</div>
         </div>
       </div>
     </div>
@@ -110,7 +111,7 @@
   </div>
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
       <span>&lt;/&gt;</span>

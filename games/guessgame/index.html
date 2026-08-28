@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="../../">
       <span class="nav-brand-icon">&lt;/&gt;</span>
@@ -25,12 +26,12 @@
       <li><a href="../../#physics">Physics</a></li>
       <li><a href="../../#games">Games</a></li>
       <li><a href="../../#projects">Projects</a></li>
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+      <li><button type="button" class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)" aria-label="Open search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main role="main">
   <div class="container">
     <a class="back-link" href="../../">← Back to CS Hub</a>
 
@@ -45,37 +46,37 @@
       <div>
         <!-- Game board -->
         <div class="panel text-center">
-          <div class="game-board" id="game-board">
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
-            <div class="digit-cell">?</div>
+          <div class="game-board" id="game-board" role="grid" aria-label="Game board with 8 hidden digits">
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
+            <div class="digit-cell" role="gridcell" aria-label="Hidden digit">?</div>
           </div>
 
           <!-- Guess input -->
           <div id="guess-area" style="margin-top:1.5rem;">
             <p style="font-size:.9rem; color:var(--text-dim); margin-bottom:.75rem;">Pick a digit (0–9):</p>
             <div style="display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap;">
-              <button class="calc-btn" onclick="guess(0)">0</button>
-              <button class="calc-btn" onclick="guess(1)">1</button>
-              <button class="calc-btn" onclick="guess(2)">2</button>
-              <button class="calc-btn" onclick="guess(3)">3</button>
-              <button class="calc-btn" onclick="guess(4)">4</button>
-              <button class="calc-btn" onclick="guess(5)">5</button>
-              <button class="calc-btn" onclick="guess(6)">6</button>
-              <button class="calc-btn" onclick="guess(7)">7</button>
-              <button class="calc-btn" onclick="guess(8)">8</button>
-              <button class="calc-btn" onclick="guess(9)">9</button>
+              <button type="button" class="calc-btn" onclick="guess(0)" aria-label="Guess 0">0</button>
+              <button type="button" class="calc-btn" onclick="guess(1)" aria-label="Guess 1">1</button>
+              <button type="button" class="calc-btn" onclick="guess(2)" aria-label="Guess 2">2</button>
+              <button type="button" class="calc-btn" onclick="guess(3)" aria-label="Guess 3">3</button>
+              <button type="button" class="calc-btn" onclick="guess(4)" aria-label="Guess 4">4</button>
+              <button type="button" class="calc-btn" onclick="guess(5)" aria-label="Guess 5">5</button>
+              <button type="button" class="calc-btn" onclick="guess(6)" aria-label="Guess 6">6</button>
+              <button type="button" class="calc-btn" onclick="guess(7)" aria-label="Guess 7">7</button>
+              <button type="button" class="calc-btn" onclick="guess(8)" aria-label="Guess 8">8</button>
+              <button type="button" class="calc-btn" onclick="guess(9)" aria-label="Guess 9">9</button>
             </div>
           </div>
 
-          <div id="round-result" style="margin-top:1.5rem; font-size:1.1rem; font-weight:600; min-height:1.5rem;"></div>
+          <div id="round-result" style="margin-top:1.5rem; font-size:1.1rem; font-weight:600; min-height:1.5rem;" aria-live="polite"></div>
 
-          <button class="btn btn-primary mt-4" id="new-round-btn" onclick="newRound()" style="display:none;">New round →</button>
+          <button type="button" class="btn btn-primary mt-4" id="new-round-btn" onclick="newRound()" style="display:none;" aria-label="Start new round">New round →</button>
         </div>
       </div>
 
@@ -100,7 +101,7 @@
           </div>
         </div>
 
-        <button class="btn btn-outline btn-sm mt-6" onclick="resetScores()" style="width:100%;">Reset scores</button>
+        <button type="button" class="btn btn-outline btn-sm mt-6" onclick="resetScores()" style="width:100%;" aria-label="Reset game scores">Reset scores</button>
 
         <p class="mt-6" style="font-size:.8rem; color:var(--text-dim); line-height:1.6;">
           Scores are saved to your browser's localStorage. They'll still be here when you come back.
@@ -110,7 +111,7 @@
   </div>
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
       <span>&lt;/&gt;</span>

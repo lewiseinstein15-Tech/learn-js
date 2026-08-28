@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="../../">
       <span class="nav-brand-icon">&lt;/&gt;</span>
@@ -24,12 +25,12 @@
       <li><a href="../">Projects</a></li>
       <li><a href="../../#math">Math</a></li>
       <li><a href="../../#physics">Physics</a></li>
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+      <li><button type="button" class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)" aria-label="Open search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main role="main">
   <div class="container">
     <a class="back-link" href="../">← Back to Projects</a>
 
@@ -43,13 +44,11 @@
       <div>
         <div class="panel">
           <div class="todo-input-row">
-            <input type="text" id="todo-input" placeholder="What do you need to do?" autocomplete="off">
-            <button class="btn btn-primary" onclick="addTodo()">Add</button>
+            <input type="text" id="todo-input" aria-label="New task description" placeholder="What do you need to do?" autocomplete="off">
+            <button type="button" class="btn btn-primary" onclick="addTodo()" aria-label="Add new task">Add</button>
           </div>
 
-          <div class="todo-count" id="todo-count"></div>
-
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+          <div class="todo-count" id="todo-count" aria-live="polite"></div>
           <ul class="todo-list" id="todo-list"></ul>
 
           <div class="todo-empty" id="todo-empty">
@@ -79,7 +78,7 @@
   </div>
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
       <span>&lt;/&gt;</span>
@@ -147,11 +146,11 @@
 
     list.innerHTML = todos.map(function(todo, i) {
       return '<li class="todo-item' + (todo.done ? ' done' : '') + '">' +
-        '<div class="todo-check' + (todo.done ? ' checked' : '') + '" onclick="toggleTodo(' + i + ')">' +
+        '<div class="todo-check' + (todo.done ? ' checked' : '') + '" onclick="toggleTodo(' + i + ')" role="checkbox" aria-checked="' + (todo.done ? 'true' : 'false') + '" tabindex="0">' +
           (todo.done ? '✓' : '') +
         '</div>' +
         '<span class="todo-text">' + escapeHtml(todo.text) + '</span>' +
-        '<button class="todo-delete" onclick="deleteTodo(' + i + ')" title="Delete">×</button>' +
+        '<button type="button" class="todo-delete" onclick="deleteTodo(' + i + ')" title="Delete" aria-label="Delete task">×</button>' +
       '</li>';
     }).join('');
   }
@@ -228,6 +227,14 @@
   // Enter key to add
   document.getElementById('todo-input').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') addTodo();
+  });
+
+  // Keyboard support for todo check (Enter/Space to toggle)
+  document.addEventListener('keydown', function(e) {
+    if (e.target.classList.contains('todo-check') && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      e.target.click();
+    }
   });
 
   render();

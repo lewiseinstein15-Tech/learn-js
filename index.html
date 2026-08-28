@@ -10,6 +10,12 @@
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
 <meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<meta property="og:title" content="CS Hub — Learn JavaScript by Building">
+<meta property="og:description" content="A student-built collection of CS tools, games and interactive projects.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://learn-js-lewiseinstein15-tech.vercel.app/">
+<meta name="theme-color" content="#1a1820">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,13 +23,13 @@
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="./">
       <span class="nav-brand-icon">&lt;/&gt;</span>
       CS Hub
     </a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
@@ -32,12 +38,12 @@
       <li><a href="#games">Games</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
+      <li><button type="button" class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)" aria-label="Open search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main role="main">
 
   <!-- Hero — asymmetric, left-aligned, not centered -->
   <section class="hero">
@@ -193,7 +199,7 @@
 
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
       <span>&lt;/&gt;</span>
