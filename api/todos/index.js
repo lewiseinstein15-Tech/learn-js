@@ -14,11 +14,13 @@ function runMiddleware(req, res) {
   });
 }
 
-// In-memory storage (shared via globalThis within same instance)
-if (!globalThis.__todos) globalThis.__todos = [];
-if (!globalThis.__nextId) globalThis.__nextId = 1;
-const todos = globalThis.__todos;
-const nextIdRef = { get val() { return globalThis.__nextId; }, set val(v) { globalThis.__nextId = v; } };
+// Try to use Vercel KV for persistent storage
+let kv = null;
+try {
+  kv = require('@vercel/kv').kv;
+} catch (e) {
+  // KV not available — will fall back to in-memory
+}
 
 module.exports = async function handler(req, res) {
   await runMiddleware(req, res);
@@ -28,7 +30,12 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    return res.status(200).json(todos);
+    try {
+      const todos = kv ? (await kv.get('todos')) || [] : (globalThis.__todos || []);
+      return res.status(200).json(todos);
+    } catch (e) {
+      return res.status(200).json(globalThis.__todos || []);
+    }
   }
 
   if (req.method === 'POST') {
@@ -36,8 +43,22 @@ module.exports = async function handler(req, res) {
     if (!text) {
       return res.status(400).json({ error: 'text is required' });
     }
-    const todo = { id: nextIdRef.val++, text, done: done || false };
-    todos.push(todo);
+    const todo = { id: Date.now(), text, done: done || false };
+
+    try {
+      if (kv) {
+        const todos = (await kv.get('todos')) || [];
+        todos.push(todo);
+        await kv.set('todos', todos);
+      } else {
+        if (!globalThis.__todos) globalThis.__todos = [];
+        globalThis.__todos.push(todo);
+      }
+    } catch (e) {
+      if (!globalThis.__todos) globalThis.__todos = [];
+      globalThis.__todos.push(todo);
+    }
+
     return res.status(201).json(todo);
   }
 
