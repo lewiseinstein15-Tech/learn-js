@@ -14,13 +14,9 @@ function runMiddleware(req, res) {
   });
 }
 
-// In-memory reference (shared with index.js via global in production)
-// Note: Each serverless function instance has its own memory.
-// For persistent storage, use Vercel KV or a database.
-if (!globalThis.__todos) {
-  globalThis.__todos = [];
-  globalThis.__nextId = 1;
-}
+// In-memory storage (shared via globalThis within same instance)
+if (!globalThis.__todos) globalThis.__todos = [];
+if (!globalThis.__nextId) globalThis.__nextId = 1;
 
 module.exports = async function handler(req, res) {
   await runMiddleware(req, res);

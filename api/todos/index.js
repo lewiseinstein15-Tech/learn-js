@@ -14,9 +14,11 @@ function runMiddleware(req, res) {
   });
 }
 
-// In-memory fallback (resets on cold start)
-let todos = [];
-let nextId = 1;
+// In-memory storage (shared via globalThis within same instance)
+if (!globalThis.__todos) globalThis.__todos = [];
+if (!globalThis.__nextId) globalThis.__nextId = 1;
+const todos = globalThis.__todos;
+const nextIdRef = { get val() { return globalThis.__nextId; }, set val(v) { globalThis.__nextId = v; } };
 
 module.exports = async function handler(req, res) {
   await runMiddleware(req, res);
@@ -34,7 +36,7 @@ module.exports = async function handler(req, res) {
     if (!text) {
       return res.status(400).json({ error: 'text is required' });
     }
-    const todo = { id: nextId++, text, done: done || false };
+    const todo = { id: nextIdRef.val++, text, done: done || false };
     todos.push(todo);
     return res.status(201).json(todo);
   }

@@ -37,7 +37,7 @@
     <div class="page-header">
       <h1>Todo List</h1>
       <p>A simple task manager. Add what you need to do, check it off when it's done. Right now it saves to your browser — when the backend is live it'll sync across devices.</p>
-      <span class="status-pill mt-4">backend offline</span>
+      <span class="status-pill mt-4" id="backend-status">checking...</span>
     </div>
 
     <div class="app-layout">
@@ -63,15 +63,15 @@
           This is our first full-stack project. The frontend is vanilla JS talking to a Node.js/Express API. Tasks are stored in a JSON file on the server.
         </p>
         <p style="font-size:.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:1rem;">
-          Right now the backend runs on <span class="inline-code">localhost:5000</span>. We're working on deploying it to Vercel so it works everywhere.
+          The backend is deployed on Vercel. Tasks sync across devices when the API is reachable. If it's down, the app falls back to your browser's localStorage.
         </p>
         <div class="code-block" style="font-size:.75rem; padding:1rem;">
-<span class="comment"># to run locally</span>
-<span class="green">cd mini-projects/todo</span>
-<span class="blue">node server.js</span>
+<span class="comment"># backend deployed on Vercel</span>
+<span class="green">api/todos/index.js</span>  <span class="comment"># GET, POST</span>
+<span class="green">api/todos/[id].js</span>   <span class="comment"># PUT, DELETE</span>
         </div>
         <p class="mt-4" style="font-size:.8rem; color:var(--text-dim);">
-          Without the backend, the app uses localStorage so you can still use it right now.
+          The backend uses Vercel serverless functions. Data persists during active sessions but resets on cold starts. For permanent storage, add Vercel KV.
         </p>
       </div>
     </div>
@@ -93,17 +93,21 @@
 
 <script>
 (function() {
-  var API_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:5000'
-    : window.location.origin;
+  // API URL: try same origin first (Vercel), fall back to localhost for dev
+  var API_URL = window.location.origin;
   var todos = [];
-  var useLocalStorage = true; // default until backend is confirmed
+  var useLocalStorage = true;
+  var statusEl = document.getElementById('backend-status');
 
   // Try to reach the backend
   fetch(API_URL + '/api/todos', { method: 'GET' })
     .then(function(res) {
       if (res.ok) {
         useLocalStorage = false;
+        if (statusEl) {
+          statusEl.textContent = 'backend online';
+          statusEl.className = 'status-pill ok mt-4';
+        }
         return res.json();
       }
       throw new Error('not ok');
@@ -113,10 +117,39 @@
       render();
     })
     .catch(function() {
-      // Backend not available — use localStorage
-      todos = loadLocal();
-      render();
+      // Backend not available — try localhost for local dev
+      if (window.location.hostname === 'localhost') {
+        API_URL = 'http://localhost:5000';
+        return fetch(API_URL + '/api/todos', { method: 'GET' })
+          .then(function(res) {
+            if (res.ok) {
+              useLocalStorage = false;
+              if (statusEl) {
+                statusEl.textContent = 'backend online';
+                statusEl.className = 'status-pill ok mt-4';
+              }
+              return res.json();
+            }
+            throw new Error('not ok');
+          })
+          .then(function(data) {
+            todos = data || [];
+            render();
+          })
+          .catch(fallbackToLocal);
+      }
+      fallbackToLocal();
     });
+
+  function fallbackToLocal() {
+    useLocalStorage = true;
+    if (statusEl) {
+      statusEl.textContent = 'backend offline';
+      statusEl.className = 'status-pill mt-4';
+    }
+    todos = loadLocal();
+    render();
+  }
 
   function loadLocal() {
     try {
