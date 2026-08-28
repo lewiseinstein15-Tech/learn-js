@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Math — CS Hub</title>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -22,6 +25,7 @@
       <li><a href="../#physics">Physics</a></li>
       <li><a href="../#games">Games</a></li>
       <li><a href="../#projects">Projects</a></li>
+      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
@@ -37,24 +41,23 @@
       <span class="status-pill ok mt-4">working</span>
     </div>
 
-    <div class="grid grid-2 mt-8">
-      <a class="card" href="./calculator/">
-        <div class="card-icon">🧮</div>
-        <h3>Web Calculator</h3>
+    <div class="grid grid-2 mt-10 reveal">
+      <a class="card" href="./calculator/" style="padding: var(--sp-8);">
+        <div class="card-icon" style="width:44px; height:44px; font-size:.85rem;">#+</div>
+        <h3 style="font-size:1.1rem;">Web Calculator</h3>
         <p>A clean, keyboard-friendly calculator that does basic arithmetic. Built because we needed one that actually worked in the browser.</p>
-        <span class="card-meta">Try it →</span>
+        <span class="card-link">Try it</span>
       </a>
-      <a class="card" href="./permutation/">
-        <div class="card-icon">🔑</div>
-        <h3>Permutation Counter</h3>
+      <a class="card" href="./permutation/" style="padding: var(--sp-8);">
+        <div class="card-icon" style="width:44px; height:44px; font-size:.85rem;">n!</div>
+        <h3 style="font-size:1.1rem;">Permutation Counter</h3>
         <p>Type any word and see how many distinct permutations exist. Uses factorials under the hood — the same formula from the textbook.</p>
-        <span class="card-meta">Try it →</span>
+        <span class="card-link">Try it</span>
       </a>
     </div>
 
-    <!-- Background section -->
     <section class="section">
-      <div class="feature">
+      <div class="feature reveal">
         <div class="feature-text">
           <span class="section-tag">Why this exists</span>
           <h2>Homework turned into code</h2>
@@ -62,7 +65,7 @@
           <p class="mt-4">The calculator started as a quick exercise but we ended up adding keyboard support, proper operator handling, and a history display. It's not fancy, but it works exactly how you'd expect a calculator to work.</p>
         </div>
         <div class="feature-visual">
-          <span class="placeholder">π</span>
+          <span class="placeholder">∫</span>
         </div>
       </div>
     </section>
@@ -85,5 +88,19 @@
   </div>
 </footer>
 
+<script>
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  if (!reveals.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+<script src="../assets/security.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -5,9 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CS Hub — Learn JavaScript by Building</title>
 <meta name="description" content="A student-built collection of CS tools, games and interactive projects. Learn JavaScript by building real things.">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -26,145 +31,153 @@
       <li><a href="#physics">Physics</a></li>
       <li><a href="#games">Games</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+      <li><button class="search-trigger" onclick="csHub.openSearch()" title="Search (Ctrl+K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Search</button></li>
     </ul>
   </div>
 </nav>
 
 <main>
 
-  <!-- Hero -->
+  <!-- Hero — asymmetric, left-aligned, not centered -->
   <section class="hero">
-    <div class="container">
-      <span class="eyebrow">student project · open source</span>
+    <div class="container" style="position:relative;">
+      <div class="hero-deco"></div>
+      <span class="hero-eyebrow">student project · open source</span>
       <h1>We learned JavaScript<br>by <em>building stuff</em></h1>
-      <p class="subtitle">No frameworks, no libraries, no tutorials that hold your hand. Just vanilla HTML, CSS and JavaScript — built step by step while actually studying CS.</p>
-      <div class="hero-buttons">
-        <a class="btn btn-primary" href="#projects">See what we built →</a>
-        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub repo</a>
+      <p class="hero-sub">No frameworks, no libraries, no tutorials that hold your hand. Just vanilla HTML, CSS and JavaScript — built step by step while actually studying CS.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See what we made</a>
+        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
   </section>
 
-  <!-- Overview cards -->
-  <section class="section">
+  <!-- Overview — asymmetric card layout -->
+  <section class="section" style="padding-top: var(--sp-12);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" style="margin-bottom: var(--sp-10);">
         <span class="section-tag">What's here</span>
         <h2>Four sections, all built from scratch</h2>
         <p>Each one started as homework and turned into something we actually wanted to finish.</p>
       </div>
-      <div class="grid grid-4 mt-6">
-        <a class="card" href="./math/">
-          <div class="card-icon">π</div>
-          <h3>Math</h3>
+      <div class="grid grid-2" style="gap: var(--sp-5);">
+        <!-- Two bigger cards on top -->
+        <a class="card" href="./math/" style="padding: var(--sp-8);">
+          <div class="card-icon" style="width:44px; height:44px; font-size:.9rem;">∫</div>
+          <h3 style="font-size:1.1rem;">Math</h3>
           <p>Factorials, permutations, and a web calculator. The kind of stuff that makes more sense when you code it yourself.</p>
-          <span class="card-meta">Explore →</span>
+          <span class="card-link">Explore</span>
         </a>
-        <a class="card" href="./physics/">
-          <div class="card-icon">⚡</div>
-          <h3>Physics</h3>
+        <a class="card" href="./physics/" style="padding: var(--sp-8);">
+          <div class="card-icon" style="width:44px; height:44px; font-size:.9rem;">→</div>
+          <h3 style="font-size:1.1rem;">Physics</h3>
           <p>A projectile motion simulator — adjust angle, velocity and gravity, then watch it fly across a canvas.</p>
-          <span class="card-meta">Launch →</span>
+          <span class="card-link">Launch</span>
         </a>
-        <a class="card" href="./games/guessgame/">
-          <div class="card-icon">🎲</div>
+        <!-- Two smaller cards below, offset -->
+        <a class="card" href="./games/guessgame/" style="padding: var(--sp-6);">
+          <div class="card-icon" style="width:36px; height:36px; font-size:.8rem;">??</div>
           <h3>Games</h3>
           <p>Guess It — eight random digits, one guess per round. Sounds easy until you play five rounds in a row.</p>
-          <span class="card-meta">Play →</span>
+          <span class="card-link">Play</span>
         </a>
-        <a class="card" href="./mini-projects/">
-          <div class="card-icon">📦</div>
+        <a class="card" href="./mini-projects/" style="padding: var(--sp-6);">
+          <div class="card-icon" style="width:36px; height:36px; font-size:.8rem;">{ }</div>
           <h3>Projects</h3>
-          <p>A keyboard calculator and a full-stack todo list with a Node.js backend. The real deal.</p>
-          <span class="card-meta">Open →</span>
+          <p>A keyboard calculator and a full-stack todo list with a Node.js backend.</p>
+          <span class="card-link">Open</span>
         </a>
       </div>
     </div>
   </section>
 
-  <hr class="divider">
+  <hr class="divider" style="margin: 0 var(--sp-6); max-width: 1100px; margin-left: auto; margin-right: auto;">
 
-  <!-- Math -->
+  <!-- Math — offset layout -->
   <section id="math" class="section">
     <div class="container">
-      <div class="feature">
+      <div class="feature reveal">
         <div class="feature-text">
           <span class="section-tag">01 — Math</span>
           <h2>Discrete structures &amp; algorithms</h2>
           <p>We had to compute permutations for a homework assignment, so we wrote the whole thing ourselves — factorial function, distinct-permutation counter, the works. Then we put a browser version on top so you don't need the terminal.</p>
-          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
-            <a class="btn btn-primary" href="./math/">Math section →</a>
-            <a class="btn btn-outline" href="./math/calculator/">Try the calculator</a>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: var(--sp-2);">
+            <a class="btn btn-primary" href="./math/">Math section</a>
+            <a class="btn btn-ghost" href="./math/calculator/">Try the calculator →</a>
           </div>
         </div>
         <div class="feature-visual">
-          <span class="placeholder">π</span>
+          <span class="placeholder">∫</span>
+          <span class="annotation" style="position:absolute; bottom:16px; right:20px; font-size:.8rem;">homework, but fun</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Physics -->
-  <section id="physics" class="section">
+  <!-- Physics — reversed -->
+  <section id="physics" class="section" style="background: var(--bg-warm);">
     <div class="container">
-      <div class="feature" style="direction: rtl;">
-        <div class="feature-text" style="direction: ltr;">
+      <div class="feature feature--reverse reveal">
+        <div class="feature-text">
           <span class="section-tag">02 — Physics</span>
           <h2>Interactive simulations</h2>
           <p>Projectile motion — the classic. You set the angle, the velocity, and gravity, then hit launch. The math runs in real time and you can see max height, range, and flight time update. Checked against the textbook.</p>
-          <a class="btn btn-primary" href="./physics/">Launch simulator →</a>
+          <a class="btn btn-primary" href="./physics/" style="margin-top: var(--sp-2);">Launch simulator</a>
         </div>
-        <div class="feature-visual" style="direction: ltr;">
-          <span class="placeholder">⚡</span>
+        <div class="feature-visual" style="background: var(--bg-card);">
+          <span class="placeholder">→</span>
+          <span class="annotation" style="position:absolute; bottom:16px; left:20px; font-size:.8rem;">v₀ sin θ</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Games -->
+  <!-- Games — offset left -->
   <section id="games" class="section">
     <div class="container">
-      <div class="feature">
+      <div class="feature reveal">
         <div class="feature-text">
           <span class="section-tag">03 — Games</span>
           <h2>Small games, real logic</h2>
           <p>Guess It is simple — eight random digits between 0 and 9, you guess one number. If it's hiding in the set, you win the round. Sounds easy until you play five rounds in a row and lose most of them. Scores save to localStorage.</p>
-          <a class="btn btn-primary" href="./games/guessgame/">Play now →</a>
+          <a class="btn btn-primary" href="./games/guessgame/" style="margin-top: var(--sp-2);">Play now</a>
         </div>
         <div class="feature-visual">
-          <span class="placeholder">🎲</span>
+          <span class="placeholder">??</span>
+          <span class="annotation" style="position:absolute; top:16px; right:20px; font-size:.8rem;">good luck</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="section">
+  <!-- Projects — reversed, dark bg -->
+  <section id="projects" class="section" style="background: var(--text); color: var(--text-inv);">
     <div class="container">
-      <div class="feature" style="direction: rtl;">
-        <div class="feature-text" style="direction: ltr;">
-          <span class="section-tag">04 — Projects</span>
-          <h2>Bigger things</h2>
-          <p>A proper keyboard-friendly calculator — just like the one on your phone but built from scratch. And a daily todo list backed by Node.js and Express, the one part of this site that has a real backend.</p>
-          <a class="btn btn-primary" href="./mini-projects/">Open projects →</a>
+      <div class="feature feature--reverse reveal">
+        <div class="feature-text" style="color: var(--text-inv);">
+          <span class="section-tag" style="color: var(--accent-2);">04 — Projects</span>
+          <h2 style="color: var(--text-inv);">Bigger things</h2>
+          <p style="color: rgba(245,240,235,.7);">A proper keyboard-friendly calculator — just like the one on your phone but built from scratch. And a daily todo list backed by Node.js and Express, the one part of this site that has a real backend.</p>
+          <a class="btn btn-primary" href="./mini-projects/" style="margin-top: var(--sp-2); background: var(--accent-2); border-color: var(--accent-2);">Open projects</a>
         </div>
-        <div class="feature-visual" style="direction: ltr;">
-          <span class="placeholder">📦</span>
+        <div class="feature-visual" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1);">
+          <span class="placeholder" style="color: rgba(245,240,235,.3);">{ }</span>
+          <span class="annotation" style="position:absolute; bottom:16px; right:20px; font-size:.8rem; color: var(--accent-2);">the real deal</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- About -->
-  <section class="section" style="padding-bottom: 3rem;">
+  <section class="section" style="padding-bottom: var(--sp-12);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header--center reveal" style="margin-bottom: var(--sp-8);">
         <span class="section-tag">About</span>
-        <h2>Built by students, for students</h2>
+        <h2 style="font-family: var(--display);">Built by students, for students</h2>
         <p>This repo started as our way to learn JavaScript by building instead of just reading tutorials. Everyone picks a page, a tool or a game, builds it, and we review each other's pull requests. That's basically it.</p>
       </div>
-      <div class="code-block mt-6">
+      <div class="code-block reveal" style="max-width: 560px; margin: 0 auto;">
 <span class="comment"># what's inside</span>
 <span class="green">learn-js/</span>
 ├── <span class="green">math/</span>            <span class="comment"># calculator + permutation counter</span>
@@ -172,8 +185,8 @@
 ├── <span class="green">games/</span>           <span class="comment"># guess it (web + CLI)</span>
 └── <span class="green">mini-projects/</span>   <span class="comment"># browser calculator + todo app</span>
       </div>
-      <div class="mt-6" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
-        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">Read the README →</a>
+      <div class="mt-8 text-center reveal">
+        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">Read the README on GitHub</a>
       </div>
     </div>
   </section>
@@ -195,6 +208,43 @@
     </div>
   </div>
 </footer>
+
+<!-- Security + Search -->
+<script src="./assets/security.js"></script>
+<script src="./assets/search.js"></script>
+
+<!-- Scroll reveal + interaction script -->
+<script>
+(function() {
+  // Scroll reveal — elements fade in as they enter viewport
+  var reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (!reveals.length) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // Smooth hover tilt on cards (subtle, not cheesy)
+  document.querySelectorAll('.card').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = 'translateY(-3px) perspective(600px) rotateX(' + (-y * 2) + 'deg) rotateY(' + (x * 2) + 'deg)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
