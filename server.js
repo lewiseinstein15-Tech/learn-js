@@ -1,17 +1,16 @@
-const express = require("express");
-const path = require("path");
+var express = require('express');
+var cors = require('cors');
+var path = require('path');
 
-const app = express();
-const HOST = "0.0.0.0";
-const PORT = process.env.PORT || 8080;
+var app = express();
+var PORT = process.env.PORT || 8080;
 
-// Serve the static site (landing page + math/physics/games/mini-projects folders).
-app.use(express.static(__dirname));
+app.use(cors());
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// Serve the static site from the project root
+app.use(express.static(path.join(__dirname)));
 
-app.listen(PORT, HOST, () => {
-  console.log(`CS Hub running at http://${HOST}:${PORT}`);
+app.listen(PORT, '0.0.0.0', function() {
+  console.log('CS Hub running at http://localhost:' + PORT);
 });

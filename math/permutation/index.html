@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permutation Counter — Math — CS Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
+    </a>
+    <ul class="nav-links">
+      <li><a href="../">Math</a></li>
+      <li><a href="../../#physics">Physics</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <a class="back-link" href="../">← Back to Math</a>
+
+    <div class="page-header">
+      <h1>Permutation Counter</h1>
+      <p>Type a word and see how many distinct permutations exist. The math: divide the total factorial by the factorial of each repeated letter's count.</p>
+    </div>
+
+    <div class="app-layout">
+      <div>
+        <label for="word-input" style="font-size:.85rem; font-weight:600; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.5rem; display:block;">
+          Enter a word
+        </label>
+        <div style="display:flex; gap:.75rem;">
+          <input type="text" id="word-input" placeholder="e.g. banana" maxlength="20" autocomplete="off" style="flex:1;">
+          <button class="btn btn-primary" onclick="compute()">Count</button>
+        </div>
+
+        <div class="result-box mt-6" id="perm-count">—</div>
+
+        <div class="mt-6" id="breakdown-box" style="display:none;">
+          <h3 style="font-size:.85rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em; margin-bottom:1rem;">Breakdown</h3>
+          <div id="breakdown" class="perm-result"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>How it works</h3>
+        <p style="font-size:.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:1rem;">
+          For a word with <strong>n</strong> letters where letter <strong>a</strong> repeats <strong>r₁</strong> times, <strong>b</strong> repeats <strong>r₂</strong> times, etc:
+        </p>
+        <div class="code-block" style="font-size:.8rem; padding:1rem;">
+n! / (r₁! × r₂! × ... × rₖ!)
+        </div>
+        <p style="font-size:.85rem; color:var(--text-dim); line-height:1.7; margin-top:1rem;">
+          For example, "BANANA" has 6 letters with A appearing 3 times and N appearing 2 times.
+        </p>
+        <div class="code-block mt-4" style="font-size:.8rem; padding:1rem;">
+6! / (3! × 2!)
+= 720 / (6 × 2)
+= <span class="green">60</span></div>
+
+        <p style="font-size:.85rem; color:var(--text-dim); line-height:1.7; margin-top:1rem;">
+          We built this because computing it by hand for our homework was taking forever. Now we can check our work in seconds.
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="../../">Home</a>
+      <a href="../">Math</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// factorial — returns BigInt for large numbers
+function factorial(n) {
+  if (n <= 1) return 1n;
+  let result = 1n;
+  for (let i = 2n; i <= BigInt(n); i++) {
+    result *= i;
+  }
+  return result;
+}
+
+function compute() {
+  var input = document.getElementById('word-input').value.trim().toUpperCase();
+  var countEl = document.getElementById('perm-count');
+  var breakdownBox = document.getElementById('breakdown-box');
+  var breakdownEl = document.getElementById('breakdown');
+
+  if (!input || !/^[A-Z]+$/.test(input)) {
+    countEl.textContent = 'Please enter letters only';
+    breakdownBox.style.display = 'none';
+    return;
+  }
+
+  var n = input.length;
+
+  // count letter frequencies
+  var freq = {};
+  for (var i = 0; i < n; i++) {
+    var ch = input[i];
+    freq[ch] = (freq[ch] || 0) + 1;
+  }
+
+  // compute n! / (r1! * r2! * ... * rk!)
+  var numerator = factorial(n);
+  var denominator = 1n;
+  var parts = [];
+
+  var letters = Object.keys(freq).sort();
+  for (var j = 0; j < letters.length; j++) {
+    var letter = letters[j];
+    var count = freq[letter];
+    var f = factorial(count);
+    denominator *= f;
+    parts.push(count + '! (' + letter + '=' + count + ')');
+  }
+
+  var result = numerator / denominator;
+
+  countEl.textContent = result.toLocaleString();
+
+  // show breakdown
+  breakdownBox.style.display = 'block';
+  var lines = [];
+  lines.push(n + '! = ' + numerator.toLocaleString());
+  lines.push('');
+  lines.push('Divided by:');
+  for (var k = 0; k < parts.length; k++) {
+    lines.push('  ' + parts[k]);
+  }
+  lines.push('');
+  lines.push('Result: ' + result.toLocaleString() + ' distinct permutations');
+  breakdownEl.textContent = lines.join('\n');
+}
+
+// Also compute on Enter
+document.getElementById('word-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') compute();
+});
+</script>
+
+</body>
+</html>

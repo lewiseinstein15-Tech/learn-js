@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guess It — CS Hub</title>
+<title>Guess It — Games — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
@@ -19,43 +19,90 @@
     </a>
     <ul class="nav-links">
       <li><a href="../../#math">Math</a></li>
-      <li><a href="../../physics/">Physics</a></li>
-      <li><a href="../../games/" class="active">Games</a></li>
-      <li><a href="../../mini-projects/">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../../#physics">Physics</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#projects">Projects</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 600px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to games</a>
+  <div class="container">
+    <a class="back-link" href="../../">← Back to CS Hub</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/games/guessgame</p>
+      <span class="section-tag">Section 03</span>
       <h1>Guess It</h1>
-      <p>The computer picks <strong>8 random digits</strong> between 0 and 9. You guess one number. If it's hiding in the set, you win the round.</p>
-      <span class="pill live"><span class="pill-dot"></span> Browser port of the CLI game</span>
+      <p>Eight random digits appear. Pick one number. If it's in the set, you score. Simple rules, but it's harder than it looks.</p>
+      <span class="status-pill ok mt-4">working</span>
     </div>
 
-    <div class="todo-box" id="game" style="margin-top: 1.5rem;">
-      <div class="game-stats">
-        <span>rounds <b id="stat-rounds">0</b></span>
-        <span>wins <b id="stat-wins">0</b></span>
-        <span>losses <b id="stat-losses">0</b></span>
+    <div class="app-layout">
+      <div>
+        <!-- Game board -->
+        <div class="panel text-center">
+          <div class="game-board" id="game-board">
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+            <div class="digit-cell">?</div>
+          </div>
+
+          <!-- Guess input -->
+          <div id="guess-area" style="margin-top:1.5rem;">
+            <p style="font-size:.9rem; color:var(--text-dim); margin-bottom:.75rem;">Pick a digit (0–9):</p>
+            <div style="display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap;">
+              <button class="calc-btn" onclick="guess(0)">0</button>
+              <button class="calc-btn" onclick="guess(1)">1</button>
+              <button class="calc-btn" onclick="guess(2)">2</button>
+              <button class="calc-btn" onclick="guess(3)">3</button>
+              <button class="calc-btn" onclick="guess(4)">4</button>
+              <button class="calc-btn" onclick="guess(5)">5</button>
+              <button class="calc-btn" onclick="guess(6)">6</button>
+              <button class="calc-btn" onclick="guess(7)">7</button>
+              <button class="calc-btn" onclick="guess(8)">8</button>
+              <button class="calc-btn" onclick="guess(9)">9</button>
+            </div>
+          </div>
+
+          <div id="round-result" style="margin-top:1.5rem; font-size:1.1rem; font-weight:600; min-height:1.5rem;"></div>
+
+          <button class="btn btn-primary mt-4" id="new-round-btn" onclick="newRound()" style="display:none;">New round →</button>
+        </div>
       </div>
 
-      <div class="game-input">
-        <input type="number" id="guess" min="0" max="9" step="1" placeholder="0–9">
-        <button onclick="playRound()">Guess!</button>
-        <button onclick="resetScores()" style="border-style: dashed; font-size: 0.78rem;">Reset scores</button>
-      </div>
+      <div class="panel">
+        <h3>Scoreboard</h3>
+        <div class="stats-row" style="flex-direction:column; gap:1rem;">
+          <div class="stat">
+            <div class="stat-label">Wins</div>
+            <div class="stat-value" id="score-wins">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Losses</div>
+            <div class="stat-value" id="score-losses">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Win Rate</div>
+            <div class="stat-value" id="score-rate">—</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Rounds</div>
+            <div class="stat-value" id="score-rounds">0</div>
+          </div>
+        </div>
 
-      <p id="game-feedback"></p>
-      <p id="revealed"></p>
+        <button class="btn btn-outline btn-sm mt-6" onclick="resetScores()" style="width:100%;">Reset scores</button>
+
+        <p class="mt-6" style="font-size:.8rem; color:var(--text-dim); line-height:1.6;">
+          Scores are saved to your browser's localStorage. They'll still be here when you come back.
+        </p>
+      </div>
     </div>
-
-    <p class="todo-note" style="margin-top: 1.25rem;">The CLI version kept scores in scores.json and let you play forever in the terminal. The browser port saves scores in localStorage instead. Same odds, same frustration.</p>
   </div>
 </main>
 
@@ -66,81 +113,111 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
-      <a href="../../#math">Math</a>
-      <a href="../../physics/">Physics</a>
-      <a href="../../games/">Games</a>
-      <a href="../../mini-projects/">Projects</a>
+      <a href="../../">Home</a>
+      <a href="../../#games">Games</a>
     </div>
   </div>
 </footer>
 
 <script>
-  const STORAGE_KEY = 'guess-it-scores';
-  let scores;
-  try {
-    scores = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { wins: 0, losses: 0, rounds: 0 };
-  } catch { scores = { wins: 0, losses: 0, rounds: 0 }; }
+(function() {
+  var digits = [];
+  var roundActive = false;
+  var scores = loadScores();
+
+  function loadScores() {
+    try {
+      var data = JSON.parse(localStorage.getItem('cs-hub-guessit'));
+      if (data && typeof data.wins === 'number') return data;
+    } catch(e) {}
+    return { wins: 0, losses: 0 };
+  }
 
   function saveScores() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
-    updateStats();
+    localStorage.setItem('cs-hub-guessit', JSON.stringify(scores));
   }
 
-  function updateStats() {
-    document.getElementById('stat-rounds').textContent = scores.rounds;
-    document.getElementById('stat-wins').textContent = scores.wins;
-    document.getElementById('stat-losses').textContent = scores.losses;
+  function updateScoreboard() {
+    var total = scores.wins + scores.losses;
+    document.getElementById('score-wins').textContent = scores.wins;
+    document.getElementById('score-losses').textContent = scores.losses;
+    document.getElementById('score-rounds').textContent = total;
+    document.getElementById('score-rate').textContent = total > 0
+      ? Math.round((scores.wins / total) * 100) + '%'
+      : '—';
   }
 
-  function randomNumbers() {
-    const nums = [];
-    for (let i = 0; i < 8; i++) nums.push(Math.floor(Math.random() * 10));
-    return nums;
+  function generateDigits() {
+    var result = [];
+    for (var i = 0; i < 8; i++) {
+      result.push(Math.floor(Math.random() * 10));
+    }
+    return result;
   }
 
-  function playRound() {
-    const input = document.getElementById('guess');
-    const guess = Number(input.value);
-    const feedback = document.getElementById('game-feedback');
-    const revealed = document.getElementById('revealed');
+  window.newRound = function() {
+    digits = generateDigits();
+    roundActive = true;
 
-    if (Number.isNaN(guess) || guess < 0 || guess > 9 || input.value === '') {
-      feedback.textContent = 'Pick a number between 0 and 9 first.';
-      feedback.className = '';
-      return;
+    // Reset board
+    var cells = document.querySelectorAll('.digit-cell');
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].textContent = '?';
+      cells[i].className = 'digit-cell';
     }
 
-    const numbers = randomNumbers();
+    document.getElementById('round-result').textContent = '';
+    document.getElementById('round-result').style.color = '';
+    document.getElementById('new-round-btn').style.display = 'none';
+    document.getElementById('guess-area').style.display = '';
+  };
 
-    if (numbers.includes(guess)) {
+  window.guess = function(num) {
+    if (!roundActive) return;
+    roundActive = false;
+
+    var cells = document.querySelectorAll('.digit-cell');
+    var found = false;
+
+    // Reveal digits
+    for (var i = 0; i < digits.length; i++) {
+      cells[i].textContent = digits[i];
+      if (digits[i] === num) {
+        cells[i].className = 'digit-cell hit';
+        found = true;
+      } else {
+        cells[i].className = 'digit-cell revealed';
+      }
+    }
+
+    var resultEl = document.getElementById('round-result');
+    if (found) {
       scores.wins++;
-      feedback.textContent = 'You won! Your number was in the set.';
-      feedback.className = 'win';
+      resultEl.textContent = '🎉 Got it! ' + num + ' was in there.';
+      resultEl.style.color = 'var(--accent)';
     } else {
       scores.losses++;
-      feedback.textContent = 'You lost. It happens.';
-      feedback.className = 'lose';
+      resultEl.textContent = 'Nope — ' + num + ' wasn\'t hiding anywhere.';
+      resultEl.style.color = 'var(--warm)';
     }
-    scores.rounds++;
-    revealed.textContent = 'The numbers were: ' + numbers.join('  ');
+
     saveScores();
-    input.value = '';
-    input.focus();
-  }
+    updateScoreboard();
 
-  function resetScores() {
-    scores = { wins: 0, losses: 0, rounds: 0 };
+    document.getElementById('guess-area').style.display = 'none';
+    document.getElementById('new-round-btn').style.display = '';
+  };
+
+  window.resetScores = function() {
+    scores = { wins: 0, losses: 0 };
     saveScores();
-    document.getElementById('game-feedback').textContent = '';
-    document.getElementById('revealed').textContent = '';
-  }
+    updateScoreboard();
+  };
 
-  document.getElementById('guess').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') playRound();
-  });
-
-  updateStats();
+  // Start first round
+  updateScoreboard();
+  newRound();
+})();
 </script>
 
 </body>

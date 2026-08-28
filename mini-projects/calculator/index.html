@@ -3,60 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator — CS Hub</title>
+<title>Calculator — Mini Projects — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 <style>
-  .calc-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+  /* Overrides for this app's specific layout */
+  .calc-app {
+    max-width: 340px;
   }
-
-  .calc-grid button {
-    padding: 0.9rem;
-    font-size: 1.05rem;
-    border-radius: 10px;
-    border: 1px solid var(--gray-200);
-    background: var(--white);
-    color: var(--gray-900);
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.12s ease;
+  .calc-app .result-box {
+    font-size: 1.8rem;
+    min-height: 70px;
   }
-
-  .calc-grid button:hover { border-color: var(--gray-400); transform: translateY(-1px); }
-  .calc-grid button:active { transform: scale(0.97); }
-
-  .calc-grid .op { color: var(--blue-600); font-weight: 600; }
-  .calc-grid .danger { color: var(--red-500); }
-  .calc-grid .equals {
-    background: var(--blue-600);
-    border: none;
-    color: white;
-    font-weight: 700;
-  }
-  .calc-grid .equals:hover { background: var(--blue-700); }
-  .calc-grid .span2 { grid-column: span 2; }
-
-  .calc-display {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    text-align: right;
-    margin-bottom: 1rem;
-    min-height: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .calc-display .input { color: var(--gray-500); font-size: 1rem; min-height: 24px; word-break: break-all; }
-  .calc-display .result { color: var(--gray-900); font-size: 1.75rem; font-weight: 700; min-height: 36px; word-break: break-all; }
 </style>
 </head>
 <body>
@@ -68,59 +28,58 @@
       CS Hub
     </a>
     <ul class="nav-links">
+      <li><a href="../">Projects</a></li>
       <li><a href="../../#math">Math</a></li>
-      <li><a href="../../physics/">Physics</a></li>
-      <li><a href="../../games/">Games</a></li>
-      <li><a href="../../mini-projects/" class="active">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../../#physics">Physics</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 420px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to projects</a>
+  <div class="container">
+    <a class="back-link" href="../">← Back to Projects</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/mini-projects/calculator</p>
       <h1>Calculator</h1>
-      <p>A browser calculator with keyboard support — mostly so we could stop pulling out our phones during group sessions.</p>
-      <span class="pill live"><span class="pill-dot"></span> Click or type</span>
+      <p>Works with clicks and your keyboard. Use your numpad, number row, or the buttons below.</p>
     </div>
 
-    <div class="todo-box" style="margin-top: 1.5rem;">
-      <div class="calc-display">
-        <div class="input" id="display-input"></div>
-        <div class="result" id="display-result">0</div>
+    <div class="calc-app mx-auto" style="margin: 0 auto;">
+      <div class="result-box" id="display">0</div>
+
+      <div class="calc-grid mt-4">
+        <button class="calc-btn clear" onclick="clearCalc()">C</button>
+        <button class="calc-btn op" onclick="inputOp('(')">(</button>
+        <button class="calc-btn op" onclick="inputOp(')')">)</button>
+        <button class="calc-btn op" onclick="inputOp('/')">÷</button>
+
+        <button class="calc-btn" onclick="inputDig('7')">7</button>
+        <button class="calc-btn" onclick="inputDig('8')">8</button>
+        <button class="calc-btn" onclick="inputDig('9')">9</button>
+        <button class="calc-btn op" onclick="inputOp('*')">×</button>
+
+        <button class="calc-btn" onclick="inputDig('4')">4</button>
+        <button class="calc-btn" onclick="inputDig('5')">5</button>
+        <button class="calc-btn" onclick="inputDig('6')">6</button>
+        <button class="calc-btn op" onclick="inputOp('-')">−</button>
+
+        <button class="calc-btn" onclick="inputDig('1')">1</button>
+        <button class="calc-btn" onclick="inputDig('2')">2</button>
+        <button class="calc-btn" onclick="inputDig('3')">3</button>
+        <button class="calc-btn op" onclick="inputOp('+')">+</button>
+
+        <button class="calc-btn wide" onclick="inputDig('0')">0</button>
+        <button class="calc-btn" onclick="inputDig('.')">.</button>
+        <button class="calc-btn equals" onclick="doCalc()">=</button>
       </div>
 
-      <div class="calc-grid">
-        <button class="danger span2" onclick="clearDisplay()">clear</button>
-        <button class="danger" onclick="deleteLastChar()">del</button>
-        <button class="op" onclick="appendOperator('/')">÷</button>
-
-        <button onclick="appendNumber('7')">7</button>
-        <button onclick="appendNumber('8')">8</button>
-        <button onclick="appendNumber('9')">9</button>
-        <button class="op" onclick="appendOperator('*')">×</button>
-
-        <button onclick="appendNumber('4')">4</button>
-        <button onclick="appendNumber('5')">5</button>
-        <button onclick="appendNumber('6')">6</button>
-        <button class="op" onclick="appendOperator('-')">−</button>
-
-        <button onclick="appendNumber('1')">1</button>
-        <button onclick="appendNumber('2')">2</button>
-        <button onclick="appendNumber('3')">3</button>
-        <button class="op" onclick="appendOperator('+')">+</button>
-
-        <button class="span2" onclick="appendNumber('0')">0</button>
-        <button onclick="appendNumber('.')">.</button>
-        <button class="equals" onclick="calculate()">=</button>
+      <div class="mt-6">
+        <h3 style="font-size:.85rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em; margin-bottom:1rem;">History</h3>
+        <div id="history" style="font-family:var(--mono); font-size:.85rem; line-height:2; color:var(--text-dim);">
+          No calculations yet.
+        </div>
       </div>
     </div>
-
-    <p class="todo-note" style="margin-top: 1.25rem;">Note: if you type 1+2*3, it evaluates left to right (1+2 then ×3) — we haven't implemented operator precedence yet. It's a calculator, not a compiler.</p>
   </div>
 </main>
 
@@ -131,77 +90,74 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
-      <a href="../../#math">Math</a>
-      <a href="../../physics/">Physics</a>
-      <a href="../../games/">Games</a>
-      <a href="../../mini-projects/">Projects</a>
+      <a href="../../">Home</a>
+      <a href="../">Projects</a>
     </div>
   </div>
 </footer>
 
 <script>
-  let display = '';
-  let result = '0';
+(function() {
+  var current = '0';
+  var justCalc = false;
+  var display = document.getElementById('display');
+  var hist = [];
+  var histEl = document.getElementById('history');
 
-  function updateDisplay() {
-    document.getElementById('display-input').textContent = display;
-    document.getElementById('display-result').textContent = result;
-  }
+  function show() { display.textContent = current || '0'; }
 
-  function appendNumber(num) {
-    if (num === '.' && display.includes('.')) return;
-    display += num;
-    updateDisplay();
-  }
+  window.inputDig = function(d) {
+    if (justCalc) { current = ''; justCalc = false; }
+    if (current === '0' && d !== '.') current = d;
+    else current += d;
+    show();
+  };
 
-  function appendOperator(op) {
-    if (display === '') return;
-    if (['+', '-', '*', '/', '%'].includes(display[display.length - 1])) {
-      display = display.slice(0, -1) + op;
-    } else {
-      display += op;
-    }
-    updateDisplay();
-  }
+  window.inputOp = function(op) {
+    justCalc = false;
+    current += op;
+    show();
+  };
 
-  function deleteLastChar() {
-    display = display.slice(0, -1);
-    updateDisplay();
-  }
+  window.clearCalc = function() {
+    current = '0'; justCalc = false; show();
+  };
 
-  function clearDisplay() {
-    display = '';
-    result = '0';
-    updateDisplay();
-  }
-
-  function calculate() {
-    if (display === '') return;
+  window.doCalc = function() {
     try {
-      let expression = display.replace(/×/g, '*').replace(/−/g, '-').replace(/÷/g, '/');
-      let calculatedResult = eval(expression);
-      calculatedResult = Math.round(calculatedResult * 100000000) / 100000000;
-      result = calculatedResult;
-      display = '';
-      updateDisplay();
-    } catch {
-      result = 'Error';
-      display = '';
-      updateDisplay();
+      var expr = current.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+      if (!/^[\d+\-*/.() ]+$/.test(expr)) return;
+      var r = Function('"use strict"; return (' + expr + ')')();
+      if (!isFinite(r)) { display.textContent = 'Error'; current = '0'; return; }
+      r = Math.round(r * 1e10) / 1e10;
+      hist.unshift(current + ' = ' + r);
+      if (hist.length > 20) hist.pop();
+      histEl.innerHTML = hist.map(function(h) { return '<div>' + h + '</div>'; }).join('');
+      current = String(r);
+      justCalc = true;
+      show();
+    } catch(e) {
+      display.textContent = 'Error'; current = '0';
     }
-  }
+  };
 
-  document.addEventListener('keydown', function(event) {
-    if (event.key >= '0' && event.key <= '9') appendNumber(event.key);
-    else if (event.key === '.') appendNumber('.');
-    else if (['+', '-', '*', '/'].includes(event.key)) appendOperator(event.key);
-    else if (event.key === 'Enter' || event.key === '=') { event.preventDefault(); calculate(); }
-    else if (event.key === 'Backspace') { event.preventDefault(); deleteLastChar(); }
-    else if (event.key === 'Escape') clearDisplay();
+  document.addEventListener('keydown', function(e) {
+    if (e.key >= '0' && e.key <= '9') { inputDig(e.key); return; }
+    if (e.key === '.') { inputDig('.'); return; }
+    if (e.key === '+') { inputOp('+'); return; }
+    if (e.key === '-') { inputOp('-'); return; }
+    if (e.key === '*') { inputOp('*'); return; }
+    if (e.key === '/') { e.preventDefault(); inputOp('/'); return; }
+    if (e.key === '(' || e.key === ')') { inputOp(e.key); return; }
+    if (e.key === 'Enter' || e.key === '=') { doCalc(); return; }
+    if (e.key === 'Escape') { clearCalc(); return; }
+    if (e.key === 'Backspace') {
+      if (justCalc) justCalc = false;
+      current = current.length > 1 ? current.slice(0, -1) : '0';
+      show();
+    }
   });
-
-  updateDisplay();
+})();
 </script>
 
 </body>

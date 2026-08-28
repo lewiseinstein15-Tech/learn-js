@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator — Math — CS Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">
+      <span class="nav-brand-icon">&lt;/&gt;</span>
+      CS Hub
+    </a>
+    <ul class="nav-links">
+      <li><a href="../">Math</a></li>
+      <li><a href="../../#physics">Physics</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <a class="back-link" href="../">← Back to Math</a>
+
+    <div class="page-header">
+      <h1>Calculator</h1>
+      <p>A basic calculator that works with your keyboard. Nothing fancy — just does what a calculator should do.</p>
+    </div>
+
+    <div class="app-layout">
+      <div>
+        <div class="result-box" id="display">0</div>
+
+        <div class="calc-grid mt-6">
+          <button class="calc-btn clear" onclick="clearCalc()">C</button>
+          <button class="calc-btn op" onclick="inputOperator('(')">(</button>
+          <button class="calc-btn op" onclick="inputOperator(')')">)</button>
+          <button class="calc-btn op" onclick="inputOperator('/')">÷</button>
+
+          <button class="calc-btn" onclick="inputDigit('7')">7</button>
+          <button class="calc-btn" onclick="inputDigit('8')">8</button>
+          <button class="calc-btn" onclick="inputDigit('9')">9</button>
+          <button class="calc-btn op" onclick="inputOperator('*')">×</button>
+
+          <button class="calc-btn" onclick="inputDigit('4')">4</button>
+          <button class="calc-btn" onclick="inputDigit('5')">5</button>
+          <button class="calc-btn" onclick="inputDigit('6')">6</button>
+          <button class="calc-btn op" onclick="inputOperator('-')">−</button>
+
+          <button class="calc-btn" onclick="inputDigit('1')">1</button>
+          <button class="calc-btn" onclick="inputDigit('2')">2</button>
+          <button class="calc-btn" onclick="inputDigit('3')">3</button>
+          <button class="calc-btn op" onclick="inputOperator('+')">+</button>
+
+          <button class="calc-btn wide" onclick="inputDigit('0')">0</button>
+          <button class="calc-btn" onclick="inputDigit('.')">.</button>
+          <button class="calc-btn equals" onclick="calculate()">=</button>
+        </div>
+
+        <p class="mt-4" style="font-size:.8rem; color:var(--text-dim);">
+          Type numbers and operators on your keyboard, or click the buttons. Press Enter or = to evaluate.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>History</h3>
+        <div id="history" style="font-family:var(--mono); font-size:.85rem; line-height:2;">
+          <span style="color:var(--text-dim)">No calculations yet.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>&lt;/&gt;</span>
+      CS Hub
+    </div>
+    <div class="footer-links">
+      <a href="../../">Home</a>
+      <a href="../">Math</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  let current = '0';
+  let justCalculated = false;
+  const display = document.getElementById('display');
+  const historyEl = document.getElementById('history');
+  let history = [];
+
+  function updateDisplay() {
+    display.textContent = current || '0';
+  }
+
+  window.inputDigit = function(d) {
+    if (justCalculated) {
+      current = '';
+      justCalculated = false;
+    }
+    if (current === '0' && d !== '.') {
+      current = d;
+    } else {
+      current += d;
+    }
+    updateDisplay();
+  };
+
+  window.inputOperator = function(op) {
+    justCalculated = false;
+    current += op;
+    updateDisplay();
+  };
+
+  window.clearCalc = function() {
+    current = '0';
+    justCalculated = false;
+    updateDisplay();
+  };
+
+  window.calculate = function() {
+    try {
+      // Replace display symbols with JS operators
+      let expr = current
+        .replace(/×/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/−/g, '-');
+
+      // Basic validation — only allow numbers, operators, parens, dots
+      if (!/^[\d+\-*/.() ]+$/.test(expr)) return;
+
+      let result = Function('"use strict"; return (' + expr + ')')();
+
+      if (!isFinite(result)) {
+        display.textContent = 'Error';
+        current = '0';
+        return;
+      }
+
+      // Round to avoid floating point nonsense
+      result = Math.round(result * 1e10) / 1e10;
+
+      history.unshift(current + ' = ' + result);
+      if (history.length > 20) history.pop();
+      renderHistory();
+
+      current = String(result);
+      justCalculated = true;
+      updateDisplay();
+    } catch (e) {
+      display.textContent = 'Error';
+      current = '0';
+    }
+  };
+
+  function renderHistory() {
+    if (history.length === 0) {
+      historyEl.innerHTML = '<span style="color:var(--text-dim)">No calculations yet.</span>';
+      return;
+    }
+    historyEl.innerHTML = history.map(function(h) {
+      return '<div style="color:var(--text-dim)">' + h + '</div>';
+    }).join('');
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', function(e) {
+    if (e.key >= '0' && e.key <= '9') { inputDigit(e.key); return; }
+    if (e.key === '.') { inputDigit('.'); return; }
+    if (e.key === '+') { inputOperator('+'); return; }
+    if (e.key === '-') { inputOperator('-'); return; }
+    if (e.key === '*') { inputOperator('*'); return; }
+    if (e.key === '/') { e.preventDefault(); inputOperator('/'); return; }
+    if (e.key === '(' || e.key === ')') { inputOperator(e.key); return; }
+    if (e.key === 'Enter' || e.key === '=') { calculate(); return; }
+    if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') { clearCalc(); return; }
+    if (e.key === 'Backspace') {
+      if (justCalculated) { justCalculated = false; }
+      current = current.length > 1 ? current.slice(0, -1) : '0';
+      updateDisplay();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

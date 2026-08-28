@@ -3,73 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projectile Motion Simulator — CS Hub</title>
+<title>Projectile Motion Simulator — Physics — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
-<style>
-  .sim-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    margin-top: 1.5rem;
-  }
-
-  .sim-canvas {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  canvas {
-    background: var(--gray-50);
-    border-radius: 8px;
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .sim-controls { display: flex; flex-direction: column; gap: 1rem; }
-
-  .sim-control { display: flex; flex-direction: column; gap: 0.3rem; }
-  .sim-control label {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--gray-600);
-    display: flex;
-    justify-content: space-between;
-  }
-  .sim-control .val { color: var(--gray-900); font-weight: 600; }
-
-  input[type="range"] { accent-color: var(--blue-600); width: 100%; }
-
-  .sim-buttons { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
-
-  .sim-stats { margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .sim-stats .stat {
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.8rem;
-    color: var(--gray-500);
-    background: var(--gray-50);
-  }
-  .sim-stats .stat b { color: var(--gray-900); font-weight: 600; float: right; }
-
-  .info-list { margin-top: 1.5rem; }
-  .info-list p { margin: 0.3rem 0; color: var(--gray-600); font-size: 0.92rem; }
-  .info-list code { font-family: monospace; font-size: 0.85em; background: var(--gray-100); padding: 0.1rem 0.35rem; border-radius: 4px; }
-
-  @media (max-width: 768px) {
-    .sim-grid { grid-template-columns: 1fr; }
-    .sim-stats { grid-template-columns: 1fr; }
-  }
-</style>
 </head>
 <body>
 
@@ -81,65 +19,90 @@
     </a>
     <ul class="nav-links">
       <li><a href="../#math">Math</a></li>
-      <li><a href="../physics/" class="active">Physics</a></li>
-      <li><a href="../games/">Games</a></li>
-      <li><a href="../mini-projects/">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../#physics">Physics</a></li>
+      <li><a href="../#games">Games</a></li>
+      <li><a href="../#projects">Projects</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 900px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to CS Hub</a>
+  <div class="container">
+    <a class="back-link" href="../">← Back to CS Hub</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/physics</p>
+      <span class="section-tag">Section 02</span>
       <h1>Projectile Motion Simulator</h1>
-      <p>Adjust the sliders, launch, and check whether the numbers in the textbook actually match reality.</p>
-      <span class="pill live"><span class="pill-dot"></span> Formulas double-checked against the textbook</span>
+      <p>Set the launch angle, initial velocity, and gravity — then watch the projectile fly. The math runs in real time on a canvas.</p>
+      <span class="status-pill ok mt-4">working</span>
     </div>
 
-    <div class="sim-grid">
-      <div class="sim-canvas">
-        <canvas id="canvas" width="520" height="420"></canvas>
-      </div>
-
+    <!-- Controls -->
+    <div class="panel mb-6">
       <div class="sim-controls">
-        <div class="sim-control">
-          <label for="angle">Launch angle <span class="val" id="angle-value">45°</span></label>
-          <input type="range" id="angle" min="0" max="90" value="45" step="1">
-        </div>
-        <div class="sim-control">
-          <label for="velocity">Initial velocity <span class="val" id="velocity-value">20 m/s</span></label>
-          <input type="range" id="velocity" min="5" max="50" value="20" step="1">
-        </div>
-        <div class="sim-control">
-          <label for="gravity">Gravity <span class="val" id="gravity-value">9.8 m/s²</span></label>
-          <input type="range" id="gravity" min="1" max="20" value="9.8" step="0.1">
-        </div>
-
-        <div class="sim-buttons">
-          <button class="btn btn-primary" style="flex: 1;" onclick="launchProjectile()">Launch</button>
-          <button class="btn btn-outline" style="flex: 1;" onclick="resetSimulation()">Reset</button>
-        </div>
-
-        <div class="sim-stats">
-          <div class="stat">max height <b id="max-height">0 m</b></div>
-          <div class="stat">range <b id="range">0 m</b></div>
-          <div class="stat">flight time <b id="flight-time">0 s</b></div>
-          <div class="stat">impact velocity <b id="impact-velocity">0 m/s</b></div>
+        <label>
+          <span>Angle: <span class="sim-value" id="angle-val">45°</span></span>
+          <input type="range" id="angle" min="5" max="85" value="45" oninput="updateLabels()">
+        </label>
+        <label>
+          <span>Velocity: <span class="sim-value" id="vel-val">50 m/s</span></span>
+          <input type="range" id="velocity" min="10" max="100" value="50" oninput="updateLabels()">
+        </label>
+        <label>
+          <span>Gravity: <span class="sim-value" id="grav-val">9.8 m/s²</span></span>
+          <input type="range" id="gravity" min="1" max="25" value="9.8" step="0.1" oninput="updateLabels()">
+        </label>
+        <div style="display:flex; align-items:flex-end; gap:.75rem;">
+          <button class="btn btn-primary" onclick="launch()" style="white-space:nowrap;">Launch 🚀</button>
+          <button class="btn btn-outline" onclick="resetSim()" style="white-space:nowrap;">Reset</button>
         </div>
       </div>
     </div>
 
-    <div class="info-list">
-      <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;">The formulas</h3>
-      <p>• Max height: <code>h = (v₀² sin²θ) / (2g)</code></p>
-      <p>• Range: <code>R = (v₀² sin(2θ)) / g</code></p>
-      <p>• Flight time: <code>t = (2 v₀ sinθ) / g</code></p>
-      <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--gray-400);">Note: the canvas uses a 10 px = 1 m scale, so very long trajectories clip off the edge. Auto-scaling is on the roadmap.</p>
+    <!-- Canvas -->
+    <div class="sim-canvas-wrap">
+      <canvas id="sim" width="800" height="400"></canvas>
     </div>
+
+    <!-- Stats -->
+    <div class="panel mt-6">
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-label">Max Height</div>
+          <div class="stat-value" id="stat-height">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Range</div>
+          <div class="stat-value" id="stat-range">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Flight Time</div>
+          <div class="stat-value" id="stat-time">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Status</div>
+          <div class="stat-value" id="stat-status" style="font-size:1rem;">Ready</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explanation -->
+    <section class="section">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="section-tag">The math</span>
+          <h2>How projectile motion works</h2>
+          <p>We break the initial velocity into horizontal (v₀ cos θ) and vertical (v₀ sin θ) components. The horizontal velocity stays constant (ignoring air resistance), while gravity pulls the vertical velocity down at 9.8 m/s².</p>
+          <p class="mt-4">The projectile reaches max height when vertical velocity hits zero, and lands when vertical position returns to zero. We verified our results against the textbook formulas.</p>
+        </div>
+        <div class="feature-visual" style="font-size:1rem; padding:1.5rem; font-family:var(--mono); color:var(--text-dim); text-align:left; line-height:2;">
+          <div>x(t) = v₀ · cos(θ) · t</div>
+          <div>y(t) = v₀ · sin(θ) · t − ½gt²</div>
+          <div style="margin-top:1rem; color:var(--accent); font-weight:600;">T = 2v₀sin(θ) / g</div>
+          <div style="color:var(--accent); font-weight:600;">R = v₀²sin(2θ) / g</div>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -150,127 +113,210 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
-      <a href="../#math">Math</a>
-      <a href="../physics/">Physics</a>
-      <a href="../games/">Games</a>
-      <a href="../mini-projects/">Projects</a>
+      <a href="../">Home</a>
+      <a href="../#physics">Physics</a>
     </div>
   </div>
 </footer>
 
 <script>
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  const angleInput = document.getElementById('angle');
-  const velocityInput = document.getElementById('velocity');
-  const gravityInput = document.getElementById('gravity');
+(function() {
+  var canvas = document.getElementById('sim');
+  var ctx = canvas.getContext('2d');
+  var animId = null;
+  var trajectory = [];
+  var animIndex = 0;
+  var isAnimating = false;
 
-  let trajectory = [];
-  let isLaunched = false;
+  // Scale: 1 meter = 3 pixels, with origin at bottom-left with padding
+  var PADDING = 40;
+  var GROUND_Y = canvas.height - PADDING;
+  var SCALE = 3;
 
-  angleInput.addEventListener('input', (e) => {
-    document.getElementById('angle-value').textContent = e.target.value + '°';
-  });
-  velocityInput.addEventListener('input', (e) => {
-    document.getElementById('velocity-value').textContent = e.target.value + ' m/s';
-  });
-  gravityInput.addEventListener('input', (e) => {
-    document.getElementById('gravity-value').textContent = e.target.value + ' m/s²';
-  });
+  function toCanvasX(m) { return PADDING + m * SCALE; }
+  function toCanvasY(m) { return GROUND_Y - m * SCALE; }
 
-  function drawCanvas() {
+  // Draw the ground, grid, axes
+  function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Background
+    ctx.fillStyle = '#1e1e2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     // Ground
-    ctx.strokeStyle = '#d1d5db';
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#45475a';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height - 20);
-    ctx.lineTo(canvas.width, canvas.height - 20);
+    ctx.moveTo(0, GROUND_Y);
+    ctx.lineTo(canvas.width, GROUND_Y);
     ctx.stroke();
 
-    // Grid
-    ctx.strokeStyle = '#f3f4f6';
+    // Grid lines
+    ctx.strokeStyle = 'rgba(69, 71, 90, 0.3)';
     ctx.lineWidth = 1;
-    for (let i = 0; i < canvas.width; i += 50) {
-      ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
-    }
-    for (let i = 0; i < canvas.height; i += 50) {
-      ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
-    }
-
-    // Trajectory
-    if (trajectory.length > 0) {
-      ctx.strokeStyle = '#3b82f6';
-      ctx.lineWidth = 2;
+    // Vertical
+    for (var x = PADDING; x < canvas.width; x += 50) {
       ctx.beginPath();
-      ctx.moveTo(trajectory[0].x, trajectory[0].y);
-      for (let i = 1; i < trajectory.length; i++) ctx.lineTo(trajectory[i].x, trajectory[i].y);
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, GROUND_Y);
       ctx.stroke();
-
-      ctx.fillStyle = '#ef4444';
+    }
+    // Horizontal
+    for (var y = GROUND_Y; y > 0; y -= 50) {
       ctx.beginPath();
-      ctx.arc(trajectory[trajectory.length - 1].x, trajectory[trajectory.length - 1].y, 6, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(PADDING, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
     }
 
-    // Launch point
-    ctx.fillStyle = '#22c55e';
+    // Axis labels
+    ctx.fillStyle = '#6c7086';
+    ctx.font = '11px JetBrains Mono, monospace';
+    // Distance markers (every ~50px = ~16.7m)
+    for (var mx = 0; mx <= 250; mx += 50) {
+      var px = toCanvasX(mx);
+      if (px < canvas.width - 10) {
+        ctx.fillText(mx + 'm', px - 10, GROUND_Y + 18);
+      }
+    }
+    // Height markers
+    for (var my = 0; my <= 120; my += 50) {
+      if (my > 0) {
+        var py = toCanvasY(my);
+        if (py > 10) {
+          ctx.fillText(my + 'm', 5, py + 4);
+        }
+      }
+    }
+
+    // Origin dot
+    ctx.fillStyle = '#a6e3a1';
     ctx.beginPath();
-    ctx.arc(50, canvas.height - 30, 5, 0, Math.PI * 2);
+    ctx.arc(toCanvasX(0), GROUND_Y, 4, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  function launchProjectile() {
-    if (isLaunched) return;
-    const angle = parseFloat(angleInput.value) * Math.PI / 180;
-    const velocity = parseFloat(velocityInput.value);
-    const gravity = parseFloat(gravityInput.value);
-    trajectory = [];
-    const scale = 10;
-    const startX = 50, startY = canvas.height - 30;
-    const vx = velocity * Math.cos(angle), vy = velocity * Math.sin(angle);
-    let t = 0, dt = 0.05, flightTime = 0;
+  // Compute trajectory points
+  function computeTrajectory(v0, angleDeg, g) {
+    var angleRad = angleDeg * Math.PI / 180;
+    var vx = v0 * Math.cos(angleRad);
+    var vy = v0 * Math.sin(angleRad);
+    var totalTime = (2 * vy) / g;
+    var dt = totalTime / 300; // 300 steps
+    var points = [];
 
-    while (true) {
-      const x = startX + vx * t * scale;
-      const y = startY - (vy * t * scale - 0.5 * gravity * t * t * scale);
-      if (y >= canvas.height - 20) { flightTime = t; break; }
-      trajectory.push({ x, y });
-      t += dt;
+    for (var t = 0; t <= totalTime; t += dt) {
+      var x = vx * t;
+      var y = vy * t - 0.5 * g * t * t;
+      if (y < 0) { y = 0; points.push({x: x, y: y}); break; }
+      points.push({x: x, y: y});
     }
 
-    const range = (velocity * velocity * Math.sin(2 * angle)) / gravity;
-    const maxHeight = (velocity * velocity * Math.sin(angle) * Math.sin(angle)) / (2 * gravity);
-    const impactV = Math.sqrt(vx * vx + (vy - gravity * flightTime) * (vy - gravity * flightTime));
-
-    document.getElementById('max-height').textContent = maxHeight.toFixed(2) + ' m';
-    document.getElementById('range').textContent = range.toFixed(2) + ' m';
-    document.getElementById('flight-time').textContent = flightTime.toFixed(2) + ' s';
-    document.getElementById('impact-velocity').textContent = impactV.toFixed(2) + ' m/s';
-
-    isLaunched = true;
-    angleInput.disabled = true;
-    velocityInput.disabled = true;
-    gravityInput.disabled = true;
-    drawCanvas();
+    return points;
   }
 
-  function resetSimulation() {
+  function drawTrail(pts, upTo) {
+    if (upTo < 1) return;
+    ctx.strokeStyle = '#a6e3a1';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(pts[0].x), toCanvasY(pts[0].y));
+    for (var i = 1; i <= Math.min(upTo, pts.length - 1); i++) {
+      ctx.lineTo(toCanvasX(pts[i].x), toCanvasY(pts[i].y));
+    }
+    ctx.stroke();
+  }
+
+  function drawProjectile(pt) {
+    // Glow
+    ctx.shadowColor = '#a6e3a1';
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = '#a6e3a1';
+    ctx.beginPath();
+    ctx.arc(toCanvasX(pt.x), toCanvasY(pt.y), 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  function animate() {
+    if (animIndex >= trajectory.length) {
+      isAnimating = false;
+      document.getElementById('stat-status').textContent = 'Done';
+      return;
+    }
+
+    drawScene();
+    drawTrail(trajectory, animIndex);
+    drawProjectile(trajectory[animIndex]);
+
+    animIndex += 2;
+    animId = requestAnimationFrame(animate);
+  }
+
+  // Update label displays
+  window.updateLabels = function() {
+    document.getElementById('angle-val').textContent = document.getElementById('angle').value + '°';
+    document.getElementById('vel-val').textContent = document.getElementById('velocity').value + ' m/s';
+    var g = parseFloat(document.getElementById('gravity').value);
+    document.getElementById('grav-val').textContent = g + ' m/s²';
+  };
+
+  // Launch!
+  window.launch = function() {
+    if (isAnimating) {
+      cancelAnimationFrame(animId);
+    }
+
+    var angleDeg = parseFloat(document.getElementById('angle').value);
+    var v0 = parseFloat(document.getElementById('velocity').value);
+    var g = parseFloat(document.getElementById('gravity').value);
+    var angleRad = angleDeg * Math.PI / 180;
+
+    // Compute analytically
+    var totalTime = (2 * v0 * Math.sin(angleRad)) / g;
+    var maxH = (v0 * Math.sin(angleRad)) * (v0 * Math.sin(angleRad)) / (2 * g);
+    var range = (v0 * v0 * Math.sin(2 * angleRad)) / g;
+
+    document.getElementById('stat-height').textContent = maxH.toFixed(1) + ' m';
+    document.getElementById('stat-range').textContent = range.toFixed(1) + ' m';
+    document.getElementById('stat-time').textContent = totalTime.toFixed(2) + ' s';
+    document.getElementById('stat-status').textContent = 'Flying...';
+
+    // Auto-scale canvas if needed
+    var neededWidth = PADDING + range * SCALE + 20;
+    var neededHeight = PADDING + maxH * SCALE + 40;
+    if (neededWidth > canvas.width) {
+      SCALE = (canvas.width - PADDING - 20) / range;
+    }
+    if (toCanvasY(maxH) < 20) {
+      SCALE = (GROUND_Y - 40) / maxH;
+    }
+
+    trajectory = computeTrajectory(v0, angleDeg, g);
+    animIndex = 0;
+    isAnimating = true;
+    animate();
+  };
+
+  window.resetSim = function() {
+    if (isAnimating) {
+      cancelAnimationFrame(animId);
+      isAnimating = false;
+    }
+    SCALE = 3;
     trajectory = [];
-    isLaunched = false;
-    angleInput.disabled = false;
-    velocityInput.disabled = false;
-    gravityInput.disabled = false;
-    document.getElementById('max-height').textContent = '0 m';
-    document.getElementById('range').textContent = '0 m';
-    document.getElementById('flight-time').textContent = '0 s';
-    document.getElementById('impact-velocity').textContent = '0 m/s';
-    drawCanvas();
-  }
+    animIndex = 0;
+    drawScene();
+    document.getElementById('stat-height').textContent = '—';
+    document.getElementById('stat-range').textContent = '—';
+    document.getElementById('stat-time').textContent = '—';
+    document.getElementById('stat-status').textContent = 'Ready';
+  };
 
-  drawCanvas();
+  // Initial draw
+  drawScene();
+})();
 </script>
 
 </body>

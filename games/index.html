@@ -6,7 +6,7 @@
 <title>Games — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -19,51 +19,48 @@
     </a>
     <ul class="nav-links">
       <li><a href="../#math">Math</a></li>
-      <li><a href="../physics/">Physics</a></li>
-      <li><a href="../games/" class="active">Games</a></li>
-      <li><a href="../mini-projects/">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../#physics">Physics</a></li>
+      <li><a href="../#games">Games</a></li>
+      <li><a href="../#projects">Projects</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 760px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to CS Hub</a>
+  <div class="container">
+    <a class="back-link" href="../">← Back to CS Hub</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/games</p>
+      <span class="section-tag">Section 03</span>
       <h1>Games</h1>
-      <p>Small games we wrote to practice programming logic while pretending to take a break. The original Guess It was a terminal game — we ported it to the browser.</p>
-      <span class="pill live"><span class="pill-dot"></span> 1 game, 2 versions</span>
+      <p>Small games built to practice logic and DOM manipulation. No game engine, no canvas library — just JavaScript and a bit of luck.</p>
+      <span class="status-pill mt-4">more games coming eventually</span>
     </div>
 
-    <hr class="divider" style="margin: 2rem 0;">
-
-    <div class="grid grid-2" style="margin-top: 1.5rem;">
+    <div class="grid grid-3 mt-8">
       <a class="card" href="./guessgame/">
-        <div class="card-icon">🎮</div>
+        <div class="card-icon">🎲</div>
         <h3>Guess It</h3>
-        <p>Eight random digits hidden. Guess one — if it's among them, you win. Scores saved in your browser.</p>
-        <span class="card-link">Play now →</span>
+        <p>The computer picks 8 random digits. You guess one. If it's in the set, you win. Sounds simple, but try winning consistently.</p>
+        <span class="card-meta">Play →</span>
       </a>
-      <a class="card" href="https://github.com/lewiseinstein15-Tech/learn-js/tree/main/games/guessgame" target="_blank" rel="noopener">
-        <div class="card-icon">💻</div>
-        <h3>Guess It (terminal)</h3>
-        <p>The original readline version. Scores persist to a local scores.json file.</p>
-        <span class="card-link">View source →</span>
-      </a>
-    </div>
-
-    <div style="margin-top: 2rem;">
-      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Run the CLI version</p>
-      <div class="code-block">
-<span class="comment"># from the repo root</span>
-<span class="green">node</span> games/guessgame/guessgame.js
+      <div class="card" style="opacity: 0.5; cursor: default;">
+        <div class="card-icon">🖊️</div>
+        <h3>Hangman</h3>
+        <p>Somebody needs to build this one. If you want to volunteer, open a PR.</p>
+        <span class="status-pill mt-4">not built yet</span>
+      </div>
+      <div class="card" style="opacity: 0.5; cursor: default;">
+        <div class="card-icon">🧩</div>
+        <h3>Tic Tac Toe</h3>
+        <p>Another one on the list. If you want to build it, the repo is open.</p>
+        <span class="status-pill mt-4">not built yet</span>
       </div>
     </div>
 
-    <p class="todo-note" style="margin-top: 1.5rem;">Roadmap: we want a hangman next, but nobody has volunteered yet. Pull requests welcome.</p>
+    <div class="note mt-8">
+      <strong>Want to add a game?</strong> Fork the repo, create a folder under <code>games/</code>, and link it from this page. We use <code>assets/style.css</code> for everything — don't add a second stylesheet. The terminal version of Guess It saves scores to <code>scores.json</code>; the browser version uses localStorage.
+    </div>
   </div>
 </main>
 
@@ -74,11 +71,11 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../">Home</a>
       <a href="../#math">Math</a>
-      <a href="../physics/">Physics</a>
-      <a href="../games/">Games</a>
-      <a href="../mini-projects/">Projects</a>
+      <a href="../#physics">Physics</a>
+      <a href="../#games">Games</a>
+      <a href="../#projects">Projects</a>
     </div>
   </div>
 </footer>

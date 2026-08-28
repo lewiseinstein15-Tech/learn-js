@@ -6,7 +6,7 @@
 <title>Math — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -18,76 +18,53 @@
       CS Hub
     </a>
     <ul class="nav-links">
-      <li><a href="../#math" class="active">Math</a></li>
-      <li><a href="../physics/">Physics</a></li>
-      <li><a href="../games/">Games</a></li>
-      <li><a href="../mini-projects/">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../#math">Math</a></li>
+      <li><a href="../#physics">Physics</a></li>
+      <li><a href="../#games">Games</a></li>
+      <li><a href="../#projects">Projects</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 760px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to CS Hub</a>
+  <div class="container">
+    <a class="back-link" href="../">← Back to CS Hub</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/math</p>
+      <span class="section-tag">Section 01</span>
       <h1>Math</h1>
-      <p>Discrete structures and small algorithms, worked through step by step. Right now this section is mostly CLI scripts we wrote while cramming — the browser version of the permutation counter is below.</p>
-      <span class="pill live"><span class="pill-dot"></span> 2 CLI tools + 1 browser tool</span>
+      <p>Factorials, permutations, and a calculator we built for a discrete structures class. Every function here came from a homework problem.</p>
+      <span class="status-pill ok mt-4">working</span>
     </div>
 
-    <hr class="divider" style="margin: 2rem 0;">
-
-    <div class="grid grid-3" style="margin-top: 1.5rem;">
-      <a class="card" href="#perm-tool">
-        <div class="card-icon">π</div>
-        <h3>Distinct permutations</h3>
-        <p>Count unique letter arrangements. Ported from our permutation.js.</p>
-        <span class="card-link">Try it below ↓</span>
+    <div class="grid grid-2 mt-8">
+      <a class="card" href="./calculator/">
+        <div class="card-icon">🧮</div>
+        <h3>Web Calculator</h3>
+        <p>A clean, keyboard-friendly calculator that does basic arithmetic. Built because we needed one that actually worked in the browser.</p>
+        <span class="card-meta">Try it →</span>
       </a>
-      <a class="card" href="https://github.com/lewiseinstein15-Tech/learn-js/tree/main/math/calculator" target="_blank" rel="noopener">
-        <div class="card-icon">🔢</div>
-        <h3>Terminal calculator</h3>
-        <p>Add, subtract, multiply, divide and gcd — with a running counter.</p>
-        <span class="card-link">View source →</span>
-      </a>
-      <a class="card" href="https://github.com/lewiseinstein15-Tech/learn-js/tree/main/math/permutation" target="_blank" rel="noopener">
-        <div class="card-icon">📝</div>
-        <h3>Permutation counter (CLI)</h3>
-        <p>The original terminal version. Same logic, zero styling.</p>
-        <span class="card-link">View source →</span>
+      <a class="card" href="./permutation/">
+        <div class="card-icon">🔑</div>
+        <h3>Permutation Counter</h3>
+        <p>Type any word and see how many distinct permutations exist. Uses factorials under the hood — the same formula from the textbook.</p>
+        <span class="card-meta">Try it →</span>
       </a>
     </div>
 
-    <div style="margin-top: 2rem;">
-      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Run the CLI tools</p>
-      <div class="code-block">
-<span class="comment"># from the repo root</span>
-<span class="green">node</span> math/calculator/calculator.js
-<span class="green">node</span> math/permutation/permutation.js
-      </div>
-    </div>
-
-    <hr class="divider" style="margin: 2.5rem 0;">
-
-    <section id="perm-tool">
-      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Browser tool</p>
-      <h2>Distinct permutations</h2>
-      <p style="margin-top: 0.5rem; margin-bottom: 1.25rem;">Type a word and we'll count how many unique ways its letters can be arranged. The formula: <code style="font-family: monospace; font-size: 0.9em; background: var(--gray-100); padding: 0.15rem 0.4rem; border-radius: 4px;">n! / (count₁! × count₂! × …)</code></p>
-
-      <div class="todo-box">
-        <h3 style="margin-bottom: 0.75rem;">Try it</h3>
-        <div class="game-input">
-          <input type="text" id="perm-word" value="banana" maxlength="12" spellcheck="false" style="width: 160px;">
-          <button onclick="runPermutation()">Count it</button>
+    <!-- Background section -->
+    <section class="section">
+      <div class="feature">
+        <div class="feature-text">
+          <span class="section-tag">Why this exists</span>
+          <h2>Homework turned into code</h2>
+          <p>Our discrete structures class had us computing permutations by hand. It was tedious and we kept making mistakes. So we wrote a script to check our work — and then turned it into a web app. That's basically the theme of this whole project: if something is boring to do by hand, build a tool for it.</p>
+          <p class="mt-4">The calculator started as a quick exercise but we ended up adding keyboard support, proper operator handling, and a history display. It's not fancy, but it works exactly how you'd expect a calculator to work.</p>
         </div>
-        <p id="perm-output" style="margin-top: 1rem; font-size: 1rem;">banana → <strong>60</strong> distinct arrangements</p>
-        <p id="perm-breakdown" style="font-size: 0.82rem; color: var(--gray-500); margin-top: 0.25rem;"></p>
+        <div class="feature-visual">
+          <span class="placeholder">π</span>
+        </div>
       </div>
-
-      <p class="todo-note">Note: the original script printed every intermediate array to the console. We kept the maths, dropped the debugging. — perm.js</p>
     </section>
   </div>
 </main>
@@ -99,54 +76,14 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
+      <a href="../">Home</a>
       <a href="../#math">Math</a>
-      <a href="../physics/">Physics</a>
-      <a href="../games/">Games</a>
-      <a href="../mini-projects/">Projects</a>
+      <a href="../#physics">Physics</a>
+      <a href="../#games">Games</a>
+      <a href="../#projects">Projects</a>
     </div>
   </div>
 </footer>
-
-<script>
-  function factorial(n) {
-    let answer = 1;
-    for (let i = 2; i <= n; i++) answer *= i;
-    return answer;
-  }
-
-  function runPermutation() {
-    const word = document.getElementById('perm-word').value.trim().toLowerCase();
-    const out = document.getElementById('perm-output');
-    const breakdown = document.getElementById('perm-breakdown');
-
-    if (!word || !/^[a-z]+$/.test(word)) {
-      out.textContent = 'Letters only, please.';
-      breakdown.textContent = '';
-      return;
-    }
-
-    const counts = {};
-    for (const ch of word) counts[ch] = (counts[ch] || 0) + 1;
-
-    let denominator = 1;
-    const repeated = [];
-    for (const ch in counts) {
-      if (counts[ch] > 1) {
-        denominator *= factorial(counts[ch]);
-        repeated.push(`${ch}×${counts[ch]}`);
-      }
-    }
-
-    const result = factorial(word.length) / denominator;
-    out.innerHTML = `${word} → <strong>${result.toLocaleString()}</strong> distinct arrangements`;
-    breakdown.textContent = repeated.length
-      ? `Formula: ${word.length}! / (${repeated.join(' × ')})`
-      : `No repeated letters, so it's just ${word.length}!`;
-  }
-
-  runPermutation();
-</script>
 
 </body>
 </html>

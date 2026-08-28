@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todo List — CS Hub</title>
+<title>Todo List — Mini Projects — CS Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
@@ -18,68 +18,59 @@
       CS Hub
     </a>
     <ul class="nav-links">
+      <li><a href="../">Projects</a></li>
       <li><a href="../../#math">Math</a></li>
-      <li><a href="../../physics/">Physics</a></li>
-      <li><a href="../../games/">Games</a></li>
-      <li><a href="../../mini-projects/" class="active">Projects</a></li>
-      <li><a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="../../#physics">Physics</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <div class="container" style="max-width: 600px; padding-top: 3rem; padding-bottom: 4rem;">
-    <a class="back" href="../">← Back to projects</a>
+  <div class="container">
+    <a class="back-link" href="../">← Back to Projects</a>
 
     <div class="page-header">
-      <p class="eyebrow">~/learn-js/mini-projects/todo</p>
       <h1>Todo List</h1>
-      <p>A weekly task tracker. Tasks are stored per weekday by the Node/Express backend in data.json — so unlike the rest of this site, this one actually has a database. Sort of.</p>
-      <span class="pill wip"><span class="pill-dot"></span> Needs the backend running on localhost:5000</span>
+      <p>A simple task manager. Add what you need to do, check it off when it's done. Right now it saves to your browser — when the backend is live it'll sync across devices.</p>
+      <span class="status-pill mt-4">backend offline</span>
     </div>
 
-    <div class="todo-box">
-      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Add a task</p>
-      <form>
-        <input list="days" id="day" placeholder="pick day (mon–sun)">
-        <datalist id="days">
-          <option value="mon"></option>
-          <option value="tue"></option>
-          <option value="wed"></option>
-          <option value="thur"></option>
-          <option value="fri"></option>
-          <option value="sat"></option>
-          <option value="sun"></option>
-        </datalist>
-        <input type="text" id="task" placeholder="new task...">
-        <button type="submit" onclick="addtask()">Send</button>
-      </form>
+    <div class="app-layout">
+      <div>
+        <div class="panel">
+          <div class="todo-input-row">
+            <input type="text" id="todo-input" placeholder="What do you need to do?" autocomplete="off">
+            <button class="btn btn-primary" onclick="addTodo()">Add</button>
+          </div>
 
-      <hr class="divider" style="margin: 1rem 0;">
+          <div class="todo-count" id="todo-count"></div>
 
-      <p style="font-size: 0.8rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">View / manage a day</p>
-      <form>
-        <input list="days2" id="ShowSingleDayList" placeholder="pick day (mon–sun)">
-        <datalist id="days2">
-          <option value="mon"></option>
-          <option value="tue"></option>
-          <option value="wed"></option>
-          <option value="thur"></option>
-          <option value="fri"></option>
-          <option value="sat"></option>
-          <option value="sun"></option>
-        </datalist>
-        <button type="button" onclick="loadtasks()">Load</button>
-        <button type="reset" onclick="reload()">Clear</button>
-      </form>
-      <div id="errorday" style="font-size: 0.85rem; color: var(--gray-500); min-height: 1.4em; margin: 0.4rem 0;"></div>
+          <ul class="todo-list" id="todo-list"></ul>
 
-      <ul id="daytasks"></ul>
+          <div class="todo-empty" id="todo-empty">
+            No tasks yet. Add one above to get started.
+          </div>
+        </div>
+      </div>
 
-      <div id="showlist" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+      <div class="panel">
+        <h3>About this app</h3>
+        <p style="font-size:.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:1rem;">
+          This is our first full-stack project. The frontend is vanilla JS talking to a Node.js/Express API. Tasks are stored in a JSON file on the server.
+        </p>
+        <p style="font-size:.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:1rem;">
+          Right now the backend runs on <span class="inline-code">localhost:5000</span>. We're working on deploying it to Vercel so it works everywhere.
+        </p>
+        <div class="code-block" style="font-size:.75rem; padding:1rem;">
+<span class="comment"># to run locally</span>
+<span class="green">cd mini-projects/todo</span>
+<span class="blue">node server.js</span>
+        </div>
+        <p class="mt-4" style="font-size:.8rem; color:var(--text-dim);">
+          Without the backend, the app uses localStorage so you can still use it right now.
+        </p>
+      </div>
     </div>
-
-    <p class="todo-note" style="margin-top: 1.25rem;">Backend: <code style="font-family: monospace; font-size: 0.85em; background: var(--gray-100); padding: 0.1rem 0.35rem; border-radius: 4px;">node server.js</code> inside mini-projects/todo/ — listens on port 5000. The frontend talks to localhost:5000 directly, so it only works locally.</p>
   </div>
 </main>
 
@@ -90,16 +81,153 @@
       CS Hub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub</a>
-      <a href="../../#math">Math</a>
-      <a href="../../physics/">Physics</a>
-      <a href="../../games/">Games</a>
-      <a href="../../mini-projects/">Projects</a>
+      <a href="../../">Home</a>
+      <a href="../">Projects</a>
     </div>
   </div>
 </footer>
 
-<script src="./toindex.js"></script>
+<script>
+(function() {
+  var API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000'
+    : window.location.origin;
+  var todos = [];
+  var useLocalStorage = true; // default until backend is confirmed
+
+  // Try to reach the backend
+  fetch(API_URL + '/api/todos', { method: 'GET' })
+    .then(function(res) {
+      if (res.ok) {
+        useLocalStorage = false;
+        return res.json();
+      }
+      throw new Error('not ok');
+    })
+    .then(function(data) {
+      todos = data || [];
+      render();
+    })
+    .catch(function() {
+      // Backend not available — use localStorage
+      todos = loadLocal();
+      render();
+    });
+
+  function loadLocal() {
+    try {
+      return JSON.parse(localStorage.getItem('cs-hub-todos')) || [];
+    } catch(e) { return []; }
+  }
+
+  function saveLocal() {
+    localStorage.setItem('cs-hub-todos', JSON.stringify(todos));
+  }
+
+  function render() {
+    var list = document.getElementById('todo-list');
+    var empty = document.getElementById('todo-empty');
+    var countEl = document.getElementById('todo-count');
+
+    if (todos.length === 0) {
+      list.innerHTML = '';
+      empty.style.display = '';
+      countEl.textContent = '';
+      return;
+    }
+
+    empty.style.display = 'none';
+    var doneCount = todos.filter(function(t) { return t.done; }).length;
+    countEl.textContent = doneCount + ' of ' + todos.length + ' complete';
+
+    list.innerHTML = todos.map(function(todo, i) {
+      return '<li class="todo-item' + (todo.done ? ' done' : '') + '">' +
+        '<div class="todo-check' + (todo.done ? ' checked' : '') + '" onclick="toggleTodo(' + i + ')">' +
+          (todo.done ? '✓' : '') +
+        '</div>' +
+        '<span class="todo-text">' + escapeHtml(todo.text) + '</span>' +
+        '<button class="todo-delete" onclick="deleteTodo(' + i + ')" title="Delete">×</button>' +
+      '</li>';
+    }).join('');
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  window.addTodo = function() {
+    var input = document.getElementById('todo-input');
+    var text = input.value.trim();
+    if (!text) return;
+
+    var todo = { text: text, done: false };
+
+    if (!useLocalStorage) {
+      fetch(API_URL + '/api/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(todo)
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(created) {
+        todos.push(created);
+        render();
+      })
+      .catch(function() {
+        // Fallback to local
+        useLocalStorage = true;
+        todos.push(todo);
+        saveLocal();
+        render();
+      });
+    } else {
+      todo.id = Date.now();
+      todos.push(todo);
+      saveLocal();
+      render();
+    }
+
+    input.value = '';
+    input.focus();
+  };
+
+  window.toggleTodo = function(i) {
+    todos[i].done = !todos[i].done;
+
+    if (!useLocalStorage && todos[i].id) {
+      fetch(API_URL + '/api/todos/' + todos[i].id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(todos[i])
+      }).catch(function() { useLocalStorage = true; });
+    }
+
+    saveLocal();
+    render();
+  };
+
+  window.deleteTodo = function(i) {
+    if (!useLocalStorage && todos[i].id) {
+      fetch(API_URL + '/api/todos/' + todos[i].id, {
+        method: 'DELETE'
+      }).catch(function() { useLocalStorage = true; });
+    }
+
+    todos.splice(i, 1);
+    saveLocal();
+    render();
+  };
+
+  // Enter key to add
+  document.getElementById('todo-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') addTodo();
+  });
+
+  render();
+})();
+</script>
 
 </body>
 </html>

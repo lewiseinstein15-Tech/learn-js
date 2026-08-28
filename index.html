@@ -7,7 +7,7 @@
 <meta name="description" content="A student-built collection of CS tools, games and interactive projects. Learn JavaScript by building real things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -18,6 +18,9 @@
       <span class="nav-brand-icon">&lt;/&gt;</span>
       CS Hub
     </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#math">Math</a></li>
       <li><a href="#physics">Physics</a></li>
@@ -33,43 +36,48 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <span class="label">A group project by students</span>
-      <h1>Learn JavaScript<br>by <span>building things</span></h1>
-      <p>Tools, games and interactive projects built while learning CS. No frameworks, no libraries — just HTML, CSS and JavaScript.</p>
+      <span class="eyebrow">student project · open source</span>
+      <h1>We learned JavaScript<br>by <em>building stuff</em></h1>
+      <p class="subtitle">No frameworks, no libraries, no tutorials that hold your hand. Just vanilla HTML, CSS and JavaScript — built step by step while actually studying CS.</p>
       <div class="hero-buttons">
-        <a class="btn btn-primary" href="#math">Explore projects →</a>
-        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn btn-primary" href="#projects">See what we built →</a>
+        <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">GitHub repo</a>
       </div>
     </div>
   </section>
 
-  <!-- What's inside -->
+  <!-- Overview cards -->
   <section class="section">
     <div class="container">
-      <div class="grid grid-4">
+      <div class="section-header">
+        <span class="section-tag">What's here</span>
+        <h2>Four sections, all built from scratch</h2>
+        <p>Each one started as homework and turned into something we actually wanted to finish.</p>
+      </div>
+      <div class="grid grid-4 mt-6">
         <a class="card" href="./math/">
           <div class="card-icon">π</div>
           <h3>Math</h3>
-          <p>Permutation counter, CLI calculator, discrete structures — with live browser tools.</p>
-          <span class="card-link">Explore →</span>
+          <p>Factorials, permutations, and a web calculator. The kind of stuff that makes more sense when you code it yourself.</p>
+          <span class="card-meta">Explore →</span>
         </a>
         <a class="card" href="./physics/">
           <div class="card-icon">⚡</div>
           <h3>Physics</h3>
-          <p>Projectile motion simulator with adjustable angle, velocity and gravity.</p>
-          <span class="card-link">Launch →</span>
+          <p>A projectile motion simulator — adjust angle, velocity and gravity, then watch it fly across a canvas.</p>
+          <span class="card-meta">Launch →</span>
         </a>
-        <a class="card" href="./games/">
-          <div class="card-icon">🎮</div>
+        <a class="card" href="./games/guessgame/">
+          <div class="card-icon">🎲</div>
           <h3>Games</h3>
-          <p>Guess It — a number guessing game with saved scores, browser and terminal.</p>
-          <span class="card-link">Play →</span>
+          <p>Guess It — eight random digits, one guess per round. Sounds easy until you play five rounds in a row.</p>
+          <span class="card-meta">Play →</span>
         </a>
         <a class="card" href="./mini-projects/">
           <div class="card-icon">📦</div>
           <h3>Projects</h3>
-          <p>Browser calculator and a full-stack todo app with a Node.js backend.</p>
-          <span class="card-link">Open →</span>
+          <p>A keyboard calculator and a full-stack todo list with a Node.js backend. The real deal.</p>
+          <span class="card-meta">Open →</span>
         </a>
       </div>
     </div>
@@ -82,10 +90,13 @@
     <div class="container">
       <div class="feature">
         <div class="feature-text">
-          <span class="label">01 — Math</span>
+          <span class="section-tag">01 — Math</span>
           <h2>Discrete structures &amp; algorithms</h2>
-          <p>Permutations, factorials and a terminal calculator — built step by step while studying. A live browser version of the permutation counter is included.</p>
-          <a class="btn btn-primary" href="./math/">Explore math →</a>
+          <p>We had to compute permutations for a homework assignment, so we wrote the whole thing ourselves — factorial function, distinct-permutation counter, the works. Then we put a browser version on top so you don't need the terminal.</p>
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="./math/">Math section →</a>
+            <a class="btn btn-outline" href="./math/calculator/">Try the calculator</a>
+          </div>
         </div>
         <div class="feature-visual">
           <span class="placeholder">π</span>
@@ -97,14 +108,14 @@
   <!-- Physics -->
   <section id="physics" class="section">
     <div class="container">
-      <div class="feature">
-        <div class="feature-text">
-          <span class="label">02 — Physics</span>
+      <div class="feature" style="direction: rtl;">
+        <div class="feature-text" style="direction: ltr;">
+          <span class="section-tag">02 — Physics</span>
           <h2>Interactive simulations</h2>
-          <p>Projectile motion simulator — adjust launch angle, velocity and gravity, then watch the physics play out with computed max height, range and flight time.</p>
+          <p>Projectile motion — the classic. You set the angle, the velocity, and gravity, then hit launch. The math runs in real time and you can see max height, range, and flight time update. Checked against the textbook.</p>
           <a class="btn btn-primary" href="./physics/">Launch simulator →</a>
         </div>
-        <div class="feature-visual">
+        <div class="feature-visual" style="direction: ltr;">
           <span class="placeholder">⚡</span>
         </div>
       </div>
@@ -116,13 +127,13 @@
     <div class="container">
       <div class="feature">
         <div class="feature-text">
-          <span class="label">03 — Games</span>
+          <span class="section-tag">03 — Games</span>
           <h2>Small games, real logic</h2>
-          <p>Guess It — eight random digits are hidden, you guess one number per round. Works in the browser with saved scores and as a terminal game.</p>
-          <a class="btn btn-primary" href="./games/">Play now →</a>
+          <p>Guess It is simple — eight random digits between 0 and 9, you guess one number. If it's hiding in the set, you win the round. Sounds easy until you play five rounds in a row and lose most of them. Scores save to localStorage.</p>
+          <a class="btn btn-primary" href="./games/guessgame/">Play now →</a>
         </div>
         <div class="feature-visual">
-          <span class="placeholder">🎮</span>
+          <span class="placeholder">🎲</span>
         </div>
       </div>
     </div>
@@ -131,14 +142,14 @@
   <!-- Projects -->
   <section id="projects" class="section">
     <div class="container">
-      <div class="feature">
-        <div class="feature-text">
-          <span class="label">04 — Projects</span>
+      <div class="feature" style="direction: rtl;">
+        <div class="feature-text" style="direction: ltr;">
+          <span class="section-tag">04 — Projects</span>
           <h2>Bigger things</h2>
-          <p>A keyboard-friendly browser calculator and a daily todo list backed by Node.js and Express — the one part of this site that has a real backend.</p>
+          <p>A proper keyboard-friendly calculator — just like the one on your phone but built from scratch. And a daily todo list backed by Node.js and Express, the one part of this site that has a real backend.</p>
           <a class="btn btn-primary" href="./mini-projects/">Open projects →</a>
         </div>
-        <div class="feature-visual">
+        <div class="feature-visual" style="direction: ltr;">
           <span class="placeholder">📦</span>
         </div>
       </div>
@@ -149,11 +160,11 @@
   <section class="section" style="padding-bottom: 3rem;">
     <div class="container">
       <div class="section-header">
-        <span class="label">About</span>
+        <span class="section-tag">About</span>
         <h2>Built by students, for students</h2>
-        <p>This repo started as our way to learn JavaScript by building instead of just reading tutorials. Everyone adds a page, a tool or a game, and we review each other's pull requests.</p>
+        <p>This repo started as our way to learn JavaScript by building instead of just reading tutorials. Everyone picks a page, a tool or a game, builds it, and we review each other's pull requests. That's basically it.</p>
       </div>
-      <div class="code-block" style="margin-top: 1.5rem;">
+      <div class="code-block mt-6">
 <span class="comment"># what's inside</span>
 <span class="green">learn-js/</span>
 ├── <span class="green">math/</span>            <span class="comment"># calculator + permutation counter</span>
@@ -161,7 +172,7 @@
 ├── <span class="green">games/</span>           <span class="comment"># guess it (web + CLI)</span>
 └── <span class="green">mini-projects/</span>   <span class="comment"># browser calculator + todo app</span>
       </div>
-      <div style="margin-top: 1.5rem;">
+      <div class="mt-6" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
         <a class="btn btn-outline" href="https://github.com/lewiseinstein15-Tech/learn-js" target="_blank" rel="noopener">Read the README →</a>
       </div>
     </div>
