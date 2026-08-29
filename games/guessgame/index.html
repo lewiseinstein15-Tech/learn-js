@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guess It — Games — CS Hub</title>
+    <meta name="description" content="Guess It - eight random digits appear, pick one number. If it's in the set, you score. Simple rules, harder than it looks.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -59,7 +60,7 @@
 
           <!-- Guess input -->
           <div id="guess-area" style="margin-top:1.5rem;">
-            <p style="font-size:.9rem; color:var(--text-dim); margin-bottom:.75rem;">Pick a digit (0–9):</p>
+            <p style="font-size:.9rem; color:var(--text-dim); margin-bottom:.75rem;">Pick a digit (0–9) — click or press a number key:</p>
             <div style="display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap;">
               <button type="button" class="calc-btn" onclick="guess(0)" aria-label="Guess 0">0</button>
               <button type="button" class="calc-btn" onclick="guess(1)" aria-label="Guess 1">1</button>
@@ -74,7 +75,7 @@
             </div>
           </div>
 
-          <div id="round-result" style="margin-top:1.5rem; font-size:1.1rem; font-weight:600; min-height:1.5rem;" aria-live="polite"></div>
+          <div id="round-result" aria-live="polite" style="margin-top:1.5rem; font-size:1.1rem; font-weight:600; min-height:1.5rem;"></div>
 
           <button type="button" class="btn btn-primary mt-4" id="new-round-btn" onclick="newRound()" style="display:none;" aria-label="Start new round">New round →</button>
         </div>
@@ -218,6 +219,18 @@
     saveScores();
     updateScoreboard();
   };
+
+  // Keyboard support: press 0-9 to guess
+  document.addEventListener('keydown', function(e) {
+    var searchOpen = document.getElementById('search-overlay') && document.getElementById('search-overlay').classList.contains('open');
+    if (searchOpen) return;
+    if (e.key >= '0' && e.key <= '9') {
+      guess(parseInt(e.key, 10));
+    }
+    if (e.key === 'Enter' || e.key === 'n' || e.key === 'N') {
+      if (!roundActive) newRound();
+    }
+  });
 
   // Start first round
   updateScoreboard();

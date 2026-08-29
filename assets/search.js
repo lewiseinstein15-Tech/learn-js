@@ -138,6 +138,16 @@
     if (overlay) overlay.classList.remove('open');
   }
 
+  // Close mobile nav when any nav link is clicked
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      var navLinks = document.querySelector('.nav-links');
+      if (navLinks && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+
   // Global keyboard shortcut: Ctrl+K or Cmd+K
   document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {

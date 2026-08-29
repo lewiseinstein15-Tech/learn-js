@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculator — Mini Projects — CS Hub</title>
+    <meta name="description" content="A keyboard-driven calculator app. Supports basic operations, parentheses, and keeps a history of your calculations.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -50,7 +51,7 @@
     </div>
 
     <div class="calc-app mx-auto" style="margin: 0 auto;">
-      <div class="result-box" id="display">0</div>
+      <div class="result-box" id="display" aria-live="polite">0</div>
 
       <div class="calc-grid mt-4" role="grid" aria-label="Calculator buttons">
         <button type="button" class="calc-btn clear" onclick="clearCalc()" aria-label="Clear">C</button>

@@ -7,11 +7,15 @@ const dist = path.join(root, "dist");
 // Everything the site needs (excluding node_modules, git, and build output).
 const entries = [
   "index.html",
+  "robots.txt",
+  "sitemap.xml",
   "assets",
   "games",
   "math",
   "mini-projects",
   "physics",
+  "api",
+  "scripts",
   "utilities",
 ];
 

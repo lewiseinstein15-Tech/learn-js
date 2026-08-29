@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Todo List — Mini Projects — CS Hub</title>
+    <meta name="description" content="A simple task manager with a Node.js/Express backend. Add tasks, check them off, delete what you don't need.">
+    <meta name="description" content="A simple calculator app that works with clicks and your keyboard. Supports basic operations, parentheses, and calculation history.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -119,7 +121,7 @@
     .catch(function() {
       // Backend not available — try localhost for local dev
       if (window.location.hostname === 'localhost') {
-        API_URL = 'http://localhost:5000';
+        API_URL = 'http://localhost:8080';
         return fetch(API_URL + '/api/todos', { method: 'GET' })
           .then(function(res) {
             if (res.ok) {

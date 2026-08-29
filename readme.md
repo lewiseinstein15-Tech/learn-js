@@ -4,9 +4,9 @@ A group project for learning JavaScript by building things. Everything here is v
 HTML, CSS and JS (plus one small Node/Express backend for the todo app) — no frameworks,
 no build step, no magic.
 
-> **Status:** work in progress. Some pages are finished, some tools still live in the
-> terminal, and the todo app needs its server running. That's the point — it's a living
-> record of what we're learning.
+> **Status:** the site is live at https://learn-js-rho.vercel.app with all sections
+> working. The todo backend is deployed on Vercel. CLI tools still live in the terminal
+> and are a separate entry point.
 
 ---
 
@@ -37,16 +37,17 @@ npm install        # installs express (used by the todo backend)
 npm start          # serves the whole site at http://localhost:8080
 ```
 
-### Todo app (needs its backend)
+### Todo app
 
-The todo list is the one full-stack piece. From a separate terminal:
+The todo list connects to a Vercel-deployed API at `/api/todos`. When deployed on Vercel,
+the backend is live. For local development, start the Express server:
 
 ```bash
-cd mini-projects/todo
-node server.js     # backend on http://localhost:5000
+node server.js     # backend on http://localhost:8080
 ```
 
-Then open `mini-projects/todo/` in a browser. Tasks are stored in `mini-projects/todo/data.json`.
+Then open `mini-projects/todo/` in a browser. Tasks are stored server-side (Vercel KV in
+production, JSON file locally).
 
 ### CLI tools
 
@@ -77,10 +78,10 @@ We use the standard GitHub workflow — fork, branch, PR, review.
 ## Roadmap / known gaps
 
 - [ ] Operator precedence in the calculator (it currently evaluates left to right)
-- [ ] Auto-scaling canvas in the projectile simulator (long trajectories clip off the edge)
+- [x] Auto-scaling canvas in the projectile simulator
 - [ ] A second game (hangman? nobody has volunteered yet)
-- [ ] Host the todo backend somewhere so it works outside localhost
-- [ ] Web version of the CLI calculator
+- [x] Host the todo backend — deployed on Vercel at `/api/todos`
+- [x] Web version of the CLI calculator
 
 ## Team
 

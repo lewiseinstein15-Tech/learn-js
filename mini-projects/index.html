@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — CS Hub</title>
+    <meta name="description" content="Bigger builds that bring together everything we learned. A proper calculator app and a full-stack todo list.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -59,7 +60,7 @@
 
     <!-- About -->
     <section class="section">
-      <div class="feature">
+      <div class="feature reveal">
         <div class="feature-text">
           <span class="section-tag">Why projects?</span>
           <h2>Where theory meets practice</h2>
@@ -90,6 +91,18 @@
   </div>
 </footer>
 
+<script>
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  if (!reveals.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
 <script src="../assets/security.js"></script>
 <script src="../assets/search.js"></script>
 </body>

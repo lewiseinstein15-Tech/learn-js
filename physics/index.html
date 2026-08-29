@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projectile Motion Simulator — Physics — CS Hub</title>
+    <meta name="description" content="An interactive projectile motion simulator. Set angle, velocity and gravity, then watch the projectile fly across a canvas.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -288,7 +289,8 @@
     document.getElementById('stat-time').textContent = totalTime.toFixed(2) + ' s';
     document.getElementById('stat-status').textContent = 'Flying...';
 
-    // Auto-scale canvas if needed
+    // Reset scale before auto-scaling to prevent compounding
+    SCALE = 3;
     var neededWidth = PADDING + range * SCALE + 20;
     var neededHeight = PADDING + maxH * SCALE + 40;
     if (neededWidth > canvas.width) {
@@ -309,7 +311,7 @@
       cancelAnimationFrame(animId);
       isAnimating = false;
     }
-    SCALE = 3;
+    SCALE = 3; // Reset auto-scale
     trajectory = [];
     animIndex = 0;
     drawScene();
@@ -318,6 +320,9 @@
     document.getElementById('stat-time').textContent = '—';
     document.getElementById('stat-status').textContent = 'Ready';
   };
+
+  // Reset SCALE before each launch so auto-scale doesn't compound
+  // (SCALE is set in launch() based on current params)
 
   // Initial draw
   drawScene();
